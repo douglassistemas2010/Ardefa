@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário ARDEFA - 1º Semestre 2026</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
+<style>
+
         :root {
             --primary: #2E7D32;
             --secondary: #0288D1;
@@ -305,70 +301,540 @@
             .container { padding: 0 10px; }
             .logo-img { height: 50px; width: auto; }
         }
-    /* FOOTER */
+    
+
+/* ===== EXTENSÕES HEADER / FOOTER ===== */
+
+/* === HEADER BACK HOME (VALIDADO) === */
+.header-back-home a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0288D1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.header-back-home a i::before {
+    display: inline-block;
+    animation: pulseArrow 2s infinite;
+}
+
+@keyframes pulseArrow {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* === FOOTER PADRÃO === */
 footer {
-    background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
-    color: #aaa;
-    padding: 4rem 10% 1rem;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-col h3 { 
-    color: var(--white); 
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
-}
-
-.footer-col ul { 
-    list-style: none; 
-}
-
-.footer-col li { 
-    margin-bottom: 0.8rem;
-}
-
-.footer-col i { 
-    margin-right: 10px; 
-    color: var(--secondary);
-}
-
-.copyright {
-    text-align: center;
-    border-top: 1px solid #333;
-    padding-top: 2rem;
-    font-size: 0.9rem;
+    background: #000;
+    color: #fff;
 }
 
 
 
-/* === CORREÇÃO FINAL: REMOVER ESPAÇO EM BRANCO APÓS RODAPÉ === */
+/* === AJUSTE FINAL: REMOVER ESPAÇO EM BRANCO APÓS RODAPÉ === */
 html, body {
     margin: 0;
     padding: 0;
 }
 
-body {
-    min-height: 100vh;
+footer {
+    margin-bottom: 0;
 }
 
-footer {
-    margin-bottom: 0 !important;
+
+/* === TAMANHO DAS LOGOS DO RODAPÉ (IGUAL HISTÓRIA) === */
+
+
+
+/* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
+            color: #aaa;
+            padding: 4rem 10% 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 { 
+            color: var(--white); 
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col ul { 
+            list-style: none; 
+        }
+
+        .footer-col li { 
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i { 
+            margin-right: 10px; 
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        
+
+/* === CORREÇÃO: HEADER NÃO DEVE CORTAR SCROLL === */
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    padding-top: 0;
+}
+
+header {
+    position: relative;
 }
 
 </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário ARDEFA - 1º Semestre 2026</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
 </head>
 <body>
     <header>
-        <img src="imagens/logo-ardefa.png" alt="ARDEFA" class="logo-unified">
-        <img src="imagens/inpev-logo.png" alt="INPEV" class="logo-unified">
-        <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" class="logo-unified">
-    </header>
+<style>
+
+        :root {
+            --primary: #2E7D32;
+            --secondary: #0288D1;
+            --dark: #1a1a1a;
+            --light: #f4f7f6;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px; /* Espaço entre as logos */
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .logo-img { height: 50px; width: auto; }
+
+        .logo-secondary {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-unified {
+            height: 50px;
+            width: auto;
+        }
+
+        /* keep existing */
+        .logo-secondary {
+            height: 50px; /* Um pouco menor para equilíbrio visual */
+            width: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .page-title p {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title p::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .table-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary), #1B5E20);
+            color: var(--white);
+        }
+
+        th {
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        tr:hover {
+            background-color: #FFF3E0 !important; /* Laranja bem claro */
+            border-left: 4px solid #FF9800; /* Borda laranja */
+            transition: var(--transition);
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .badge-equipe1 { background: #E8F5E9; color: #2E7D32; border: 1px solid #2E7D32; }
+        .badge-equipe2 { background: #E3F2FD; color: #0288D1; border: 1px solid #0288D1; }
+
+        /* Floating Buttons */
+        .floating-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 2000;
+        }
+
+        .float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-back { background: linear-gradient(135deg, var(--primary), #1B5E20); }
+        .btn-share { background: linear-gradient(135deg, var(--secondary), #0277BD); }
+
+        .float-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Tooltip Styles */
+        .float-btn {
+            position: relative;
+        }
+
+        .float-btn::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 75px;
+            background: var(--dark);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            pointer-events: none;
+        }
+
+        .float-btn::after {
+            content: '';
+            position: absolute;
+            right: 65px;
+            border: 8px solid transparent;
+            border-left-color: var(--dark);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .float-btn:hover::before,
+        .float-btn:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-5px);
+        }
+
+        /* Highlight and Pulse Animation */
+        .row-highlight {
+            background-color: rgba(46, 125, 50, 0.1) !important;
+            border-left: 5px solid var(--primary);
+            animation: pulseHighlight 2s infinite;
+        }
+
+        @keyframes pulseHighlight {
+            0% { background-color: rgba(46, 125, 50, 0.1); }
+            50% { background-color: rgba(46, 125, 50, 0.25); }
+            100% { background-color: rgba(46, 125, 50, 0.1); }
+        }
+
+        .row-highlight td {
+            font-weight: 600;
+        }
+
+        /* Print/PDF Optimization */
+        @media print {
+            .floating-container, header {
+                display: none !important;
+            }
+            body {
+                padding: 0 !important;
+                background: white;
+            }
+            .container {
+                margin: 0 !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            .table-wrapper {
+                box-shadow: none !important;
+                border: none !important;
+            }
+            table {
+                min-width: auto !important;
+            }
+            th, td {
+                padding: 8px !important;
+                font-size: 10px !important;
+            }
+            .badge {
+                border: 1px solid #ccc !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title h1 { font-size: 2rem; }
+            .page-title p { font-size: 1rem; letter-spacing: 2px; }
+            .container { padding: 0 10px; }
+            .logo-img { height: 50px; width: auto; }
+        }
+    
+
+/* ===== EXTENSÕES HEADER / FOOTER ===== */
+
+/* === HEADER BACK HOME (VALIDADO) === */
+.header-back-home a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0288D1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.header-back-home a i::before {
+    display: inline-block;
+    animation: pulseArrow 2s infinite;
+}
+
+@keyframes pulseArrow {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* === FOOTER PADRÃO === */
+footer {
+    background: #000;
+    color: #fff;
+}
+
+
+
+/* === AJUSTE FINAL: REMOVER ESPAÇO EM BRANCO APÓS RODAPÉ === */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    margin-bottom: 0;
+}
+
+
+/* === TAMANHO DAS LOGOS DO RODAPÉ (IGUAL HISTÓRIA) === */
+
+
+
+/* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
+            color: #aaa;
+            padding: 4rem 10% 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 { 
+            color: var(--white); 
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col ul { 
+            list-style: none; 
+        }
+
+        .footer-col li { 
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i { 
+            margin-right: 10px; 
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        
+
+/* === CORREÇÃO: HEADER NÃO DEVE CORTAR SCROLL === */
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    padding-top: 0;
+}
+
+header {
+    position: relative;
+}
+
+</style>
+
+<div class="header-inner" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+  <div class="header-left" style="display:flex;align-items:center;gap:1.5rem;">
+    <img src="imagens/logo-ardefa.png" alt="ARDEFA" style="max-height:55px;width:auto;">
+    <img src="imagens/inpev-logo.png" alt="inpEV" style="max-height:45px;width:auto;">
+    <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" style="max-height:45px;width:auto;">
+  </div>
+
+  <div class="header-back-home">
+    <a href="index.html" title="Voltar para a página inicial">
+      <i class="fas fa-arrow-left"></i>
+      <span>Início</span>
+    </a>
+  </div>
+</div>
+
+</header>
 
     <div class="container">
         <div class="page-title">
@@ -2114,7 +2580,7 @@ footer {
 
         window.addEventListener('DOMContentLoaded', highlightNearestDate);
     </script>
-<footer id="contato">
+<footer>
 <div class="footer-grid">
 <div class="footer-col">
 <h3>ARDEFA</h3>
@@ -2133,30 +2599,15 @@ footer {
 <div class="footer-col">
 <h3>Links Rápidos</h3>
 <ul>
-<li><a href="#associacao" style="color:#aaa; text-decoration:none;">Sobre a ARDEFA</a></li>
-<li><a href="#processo" style="color:#aaa; text-decoration:none;">O Processo</a></li>
-<li><a href="#associados" style="color:#aaa; text-decoration:none;">Associados</a></li>
+<li><a href="index.html" style="color:#aaa; text-decoration:none;">Página Inicial</a></li>
+<li><a href="historia.html" style="color:#aaa; text-decoration:none;">Nossa História</a></li>
+<li><a href="index.html#calendario" style="color:#aaa; text-decoration:none;">Calendário</a></li>
 </ul>
 </div>
 </div>
 <div class="copyright">
-
-</div>
-
-
-<div class="footer-logos" style="display:flex;justify-content:center;align-items:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap;">
-  <img src="imagens/logo-ardefa.png" alt="ARDEFA" style="max-height:60px;width:auto;">
-  <img src="imagens/inpev-logo.png" alt="inpEV" style="max-height:60px;width:auto;">
-  <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" style="max-height:60px;width:auto;">
-</div>
-
-<div class="footer-copyright" style="margin-top:1.5rem;font-size:0.9rem;color:#666;text-align:center;">
-  © <span id="year"></span> ARDEFA – Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas. Todos os direitos reservados.
-</div>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
+            © 2025 ARDEFA. Todos os direitos reservados.
+        </div>
 </footer>
 </body>
 </html>
