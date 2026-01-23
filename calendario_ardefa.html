@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário ARDEFA - 1º Semestre 2026</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #0288D1;
+            --dark: #1a1a1a;
+            --light: #f4f7f6;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .page-title p {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title p::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .table-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary), #1B5E20);
+            color: var(--white);
+        }
+
+        th {
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .badge-equipe1 { background: #E8F5E9; color: #2E7D32; border: 1px solid #2E7D32; }
+        .badge-equipe2 { background: #E3F2FD; color: #0288D1; border: 1px solid #0288D1; }
+
+        /* Floating Buttons */
+        .floating-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 2000;
+        }
+
+        .float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-back { background: linear-gradient(135deg, var(--primary), #1B5E20); }
+        .btn-share { background: linear-gradient(135deg, var(--secondary), #0277BD); }
+
+        .float-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .page-title h1 { font-size: 2rem; }
+            .page-title p { font-size: 1rem; letter-spacing: 2px; }
+            .container { padding: 0 10px; }
+            .logo-img { height: 45px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="imagens/logo-ardefa.png" alt="ARDEFA" class="logo-img">
+    </header>
+
+    <div class="container">
+        <div class="page-title">
+            <h1>Calendário de Recebimento</h1>
+            <p>1º Semestre - 2026</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Data</th>
+                        <th>Equipe</th>
+                        <th>Saída</th>
+                        <th>Início</th>
+                        <th>Local de Recebimento</th>
+                        <th>Encerramento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td><strong>DIA</strong></td>
+                        <td>DATA</td>
+                        <td><span class="badge badge-equipe2">EQUIPE</span></td>
+                        <td>SAIDA</td>
+                        <td>INICIO</td>
+                        <td><strong>LOCAL DE RECEBIMENTO</strong></td>
+                        <td>ENCERRAMENTO</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>02/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>02/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TUPASSI - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>03/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>03/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C VALE/AGROPAR</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>04/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>04/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>05/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ENCANTADO - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>05/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ENCANTADO - I.RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>06/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NICE  - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>06/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BARREIRO - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>09/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>09/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ITAIPULANDIA - I.RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>10/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>10/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO PEDRO DO IGUAÇU - COOATOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>11/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>11/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO LUIZ DO OESTE - COOATOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>12/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TOLEDO - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>12/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TOLEDO - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>13/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>13/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>VILA NOVA - COOATOL/CVALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>16/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>S J DAS PALMEIRAS - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>16/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>17/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SUB-SEDE STA HEL - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>17/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SUB-SEDE STA HEL - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>18/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PORTO MENDES - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>18/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PORTO MENDES - SOUZA CRUZ</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>19/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>19/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARGARIDA - A. HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>20/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>IGUIPORÃ - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>20/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>IGUIPORÃ - AGRICOLA HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>23/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BELA VISTA - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>23/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BELA VISTA - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>24/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BELA VISTA - INTEGRADA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>24/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - INTEGRADA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>25/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>25/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARACAJU - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>26/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>26/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>27/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>27/03/2027</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>30/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>30/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO CLEMENTE - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>31/03/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ENTRE RIOS - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>31/03/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CONCORDIA OESTE - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>01/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>01/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>02/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>02/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - INTEGRADA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>EQUIPE 1</strong></td>
+                        <td>06/04/2026</td>
+                        <td><span class="badge badge-equipe2">SEGUNDA</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PAULISTANEA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>EQUIPE 1</strong></td>
+                        <td>07/04/2026</td>
+                        <td><span class="badge badge-equipe2">TERÇA</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ALTO PIQUiRI - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>EQUIPE 1</strong></td>
+                        <td>08/04/2026</td>
+                        <td><span class="badge badge-equipe2">QUARTA</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BRASILANDIA - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>EQUIPE 1</strong></td>
+                        <td>09/04/2026</td>
+                        <td><span class="badge badge-equipe2">QUINTA</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO FRANCISCO - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>EQUIPE 1</strong></td>
+                        <td>10/04/2026</td>
+                        <td><span class="badge badge-equipe2">SEXTA</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BRAGANTINA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>13/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>06:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COLETA ESPECIAL  - GOIERÊ</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>13/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>06:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COLETA ESPECIAL  - GOIERÊ</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>14/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>14/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TUPASSI - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>15/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>15/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BRASILANDIA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>16/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>16/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>17/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>17/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>20/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>JESUITAS - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>22/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ENCANTADO - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>22/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ENCANTADO - I.RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>23/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NICE  - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>23/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BARREIRO - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>24/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COMUM. STO ANT. - PAV. COMUNITARIO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>24/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>VILA FLORESTA - PAV. COMUNITARIO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>27/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TOLEDO - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>27/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CANDEIA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>nan</strong></td>
+                        <td>28/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PEROLA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>28/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PEROLA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>29/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARIPA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>29/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARIPA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>30/04/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVA STA ROSA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>30/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SANTA FÉ - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>04/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PALMITOLANDIA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>04/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PALMITOPOLIS - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>05/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>JOTAESSE - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>05/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>UNIVERSO - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>06/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>06/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CARAJAS - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>07/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>IRACEMA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>07/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>IRACEMA - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>11/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PATO BRAGADO - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>11/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>12/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>QUATRO PONTES - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>12/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>QUATRO PONTES - AGRIC. HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>13/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVO SARANDI - AGRIC. HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>13/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BOM JARDIM - AGRIC. HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>14/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO ROQUE - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>14/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CURVADO - PAVILH. COMUNITARIO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>15/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVO HORIZONTE - PAVILH. COMUNITARIO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>15/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVO TRÊS PASSOS - PAVILH. COMUNITARIO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>18/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PAULISTANEA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>19/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ALTO PIQUiRI - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>20/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BRASILANDIA - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>21/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>21/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>22/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>22/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>25/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>JESUITAS - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>26/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CAMPINA - CAFELAND. - SALÃO DA IGREJA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>26/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COM.S.JOSE/CAFELANDIA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>27/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COMUNID. STO ANTONIO - SALÃO DA IGREJA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>27/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>FORMOSA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>28/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>JOTAESSE - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>28/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>UNIVERSO - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>29/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TERRA NOVA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>29/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BRASILANDIA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>01/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVO SOBRADINHO - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>01/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>02/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>M.C.RONDON - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>02/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>03/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TERRA ROXA - C.VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>03/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TERRA ROXA - I.RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>05/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SANTA RITA/T. ROXA - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>05/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SANTA RITA/T. ROXA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>08/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BELA VISTA - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>08/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BELA VISTA - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>09/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BELA VISTA - INTEGRADA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>09/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - INTEGRADA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>10/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>10/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARACAJU - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>11/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>11/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>12/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>GUAIRA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>12/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>15/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>15/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:45</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TOLEDO - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>16/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>16/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>TOLEDO - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>17/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>17/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO PEDRO DO IGUAÇU - COOATOL/ C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>18/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>18/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SÃO LUIZ DO OESTE - COOATOL/C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>19/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>VILA NOVA - COOATOL/CVALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>19/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CANDEIA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>22/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COMUNID. STO ANTONIO - SALÃO DA IGREJA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>22/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>COM.S.JOSE/CAFELANDIA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>23/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CAMPINA - CAFELAND. - SALÃO DA IGREJA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>23/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>24/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>CARAJAS - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>24/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>FORMOSA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>25/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>IRACEMA - COPACOL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>25/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>IRACEMA - I RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>26/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>26/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>29/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - COPAGRIL</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>29/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:00</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>30/06/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>30/06/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>07:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MERCEDES - INTEGRADA</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>01/07/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PEROLA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>01/07/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:20</td>
+                        <td>09:00Hs</td>
+                        <td><strong>PEROLA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>02/07/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARIPA - C. VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>QUINTA</strong></td>
+                        <td>02/07/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:30</td>
+                        <td>09:00Hs</td>
+                        <td><strong>MARIPA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>03/07/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>NOVA STA ROSA - I. RIEDI</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>03/07/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td>08:15</td>
+                        <td>09:00Hs</td>
+                        <td><strong>SANTA FÉ - C VALE</strong></td>
+                        <td></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="floating-container">
+        <button class="float-btn btn-share" onclick="sharePage()" title="Compartilhar">
+            <i class="fas fa-share-alt"></i>
+        </button>
+        <a href="index.html" class="float-btn btn-back" title="Voltar ao Início">
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <script>
+        async function sharePage() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Calendário ARDEFA 2026',
+                        text: 'Confira o calendário de recebimento da ARDEFA para o 1º semestre de 2026.',
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Erro ao compartilhar:', err);
+                }
+            } else {
+                const el = document.createElement('textarea');
+                el.value = window.location.href;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                alert('Link copiado para a área de transferência!');
+            }
+        }
+    </script>
+</body>
+</html>
