@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Sitemap ARDEFA
+Desenvolvedor: Douglas Araujo Gomes - (44) 99918-6911
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página Principal -->
+  <url>
+    <loc>https://www.ardefa.com.br/</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.ardefa.com.br/imagens/logo-ardefa.png</image:loc>
+      <image:title>ARDEFA Logo</image:title>
+      <image:caption>Logística Reversa de Embalagens Agrícolas</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Página História -->
+  <url>
+    <loc>https://www.ardefa.com.br/historia.html</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.ardefa.com.br/imagens/ardefabrasao.png</image:loc>
+      <image:title>Brasão ARDEFA</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Seção Sobre -->
+  <url>
+    <loc>https://www.ardefa.com.br/#associacao</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Seção Processo -->
+  <url>
+    <loc>https://www.ardefa.com.br/#processo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Seção Calendário -->
+  <url>
+    <loc>https://www.ardefa.com.br/#calendario</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Seção Localização -->
+  <url>
+    <loc>https://www.ardefa.com.br/#mapa</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Seção Contato -->
+  <url>
+    <loc>https://www.ardefa.com.br/#contato</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>

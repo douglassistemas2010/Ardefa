@@ -1,0 +1,35 @@
+# robots.txt para ARDEFA
+# Desenvolvedor: Douglas Araujo Gomes - (44) 99918-6911
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /historia.html
+Allow: /imagens/
+
+# Bloquear arquivos desnecessários
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /admin/
+
+# Permitir todos os bots principais
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /imagens/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Sitemap
+Sitemap: https://www.ardefa.com.br/sitemap.xml
