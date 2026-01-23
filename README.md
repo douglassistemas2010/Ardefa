@@ -2,7 +2,9 @@
 
 Site institucional da **ARDEFA**, desenvolvido em **HTML, CSS e JavaScript** e hospedado via **GitHub Pages**, com foco em sustentabilidade, logística reversa de embalagens agrícolas e educação ambiental no Oeste do Paraná.
 
-🌐 **Hospedagem:** GitHub Pages  
+🌐 **Site publicado em:**  
+https://SEU-USUARIO.github.io/Ardefa/
+
 📍 **Localização:** Palotina – PR
 
 ---
@@ -28,7 +30,7 @@ O site apresenta:
 ├── index.html              # Página principal
 ├── historia.html           # Página institucional (história)
 ├── calendario_ardefa.html  # Calendário completo de recolhimento
-├── imagens/                # Imagens do site (logos, fundos, associados)
+├── imagens/                # Imagens do site
 │   └── associados/
 └── README.md
 ```
@@ -43,67 +45,62 @@ O site apresenta:
 - Font Awesome (ícones)  
 - Google Maps Embed  
 
-⚠️ **Observação:** O site é estático e não utiliza backend.
+⚠️ Site totalmente estático, sem backend.
 
 ---
 
-## 🌐 GitHub Pages (Hospedagem)
+## 🌐 Hospedagem – GitHub Pages
 
-Este site está preparado para hospedagem direta no **GitHub Pages**.
+Este projeto utiliza **GitHub Pages** para hospedagem.
 
-### Como publicar:
+### Configuração:
 
-1. Crie um repositório no GitHub (ex: `ardefa`)
-2. Envie todos os arquivos para a branch `main`
-3. Acesse:
-   - **Settings > Pages**
-4. Em **Source**, selecione:
-   - Branch: `main`
-   - Folder: `/ (root)`
-5. Salve as configurações
+1. Repositório: **Ardefa**
+2. Branch: `main`
+3. Pasta: `/ (root)`
+4. Caminho:
+   ```
+   https://SEU-USUARIO.github.io/Ardefa/
+   ```
 
-Após alguns segundos, o site estará disponível em:
-
-```
-https://SEU-USUARIO.github.io/ardefa/
-```
+Após o primeiro commit, o deploy é automático.
 
 ---
 
 ## 🚀 Execução Local
 
-Não é necessário servidor.
+Nenhuma instalação é necessária.
 
-Basta abrir o arquivo abaixo no navegador:
-
-```plaintext
+Basta abrir:
+```
 index.html
 ```
+diretamente no navegador.
 
 ---
 
 ## ♿ Boas Práticas Aplicadas
 
-- Design responsivo
-- Animações leves (CSS + JS)
-- Navegação suave (scroll behavior)
-- Código organizado e comentado
-- Compatível com ambientes corporativos
+- Design responsivo  
+- Animações leves (CSS + JS)  
+- Scroll suave  
+- Código organizado  
+- Compatível com GitHub Pages  
 
 ---
 
 ## 🤝 Manutenção
 
-Qualquer alteração em HTML, CSS ou JS:
-- Basta realizar commit na branch `main`
-- O GitHub Pages fará o deploy automaticamente
+Qualquer alteração:
+- Commit na branch `main`
+- Publicação automática no GitHub Pages
 
 ---
 
 ## 📄 Licença
 
 Projeto institucional da **ARDEFA**.  
-Uso, reprodução ou modificação sujeitos à autorização da associação.
+Uso condicionado à autorização da associação.
 
 ---
 
