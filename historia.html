@@ -840,6 +840,37 @@ header.scrolled {
 .lightbox-prev{left:20px}.lightbox-next{right:20px}
 .galeria-img{cursor:pointer}
 .galeria-img:hover{transform:scale(1.06)}
+
+/* === ANIMAÇÃO SUAVE: ÍCONE VOLTAR AO INÍCIO === */
+.header-back-home a i {
+    animation: pulseArrow 2s infinite;
+}
+
+@keyframes pulseArrow {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-4px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* === AJUSTE DE TAMANHO: ÍCONE E TEXTO VOLTAR AO INÍCIO === */
+.header-back-home a {
+    font-size: 1.25rem;
+}
+
+.header-back-home a i {
+    font-size: 1.35rem;
+}
+
 </style>
 </head>
 <body>
@@ -854,17 +885,15 @@ header.scrolled {
 <a class="logo" href="index.html">
 <img alt="ARDEFA" class="logo-img" src="imagens/logo-ardefa.png"/><img alt="inpEV" class="inpev-logo" src="imagens/inpev-logo.png"/><img alt="Sistema Campo Limpo" class="camposlimpo-header-logo" src="imagens/campolimpo.png"/>
 </a>
-<nav>
-<ul>
-<li><a href="index.html">Início</a></li>
-<li><a href="#associacao">Nossa História</a></li>
-<li><a href="#processo">O Processo</a></li>
-<li><a href="#associados">Associados</a></li>
-<li><a href="#calendario">Calendário</a></li>
-<li><a href="#mapa">Localização</a></li>
-<li><a href="#inpev">inpEV</a></li>
-</ul>
+
+<nav class="header-back-home" style="display:flex;justify-content:flex-end;align-items:center;">
+  <a href="index.html" title="Voltar para a página inicial" 
+     style="display:inline-flex;align-items:center;gap:0.5rem;color:#0288D1;font-size:1.1rem;text-decoration:none;">
+    <i class="fas fa-arrow-left"></i>
+    <span style="font-weight:600;">Início</span>
+  </a>
 </nav>
+
 </header>
 <section class="hero-interno">
 <div>
@@ -975,21 +1004,9 @@ header.scrolled {
 </ul>
 </div>
 </div>
-
-<div class="footer-logos" style="display:flex;justify-content:center;align-items:center;gap:2rem;margin-bottom:1.2rem;flex-wrap:wrap;">
-  <img src="imagens/logo-ardefa.png" alt="ARDEFA" style="max-height:60px;width:auto;">
-  <img src="imagens/inpev-logo.png" alt="inpEV" style="max-height:60px;width:auto;">
-  <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" style="max-height:60px;width:auto;">
-</div>
-
-
-<div class="copyright" style="text-align:center;border-top:1px solid #333;padding-top:2rem;font-size:0.9rem;">
-  © <span id="year"></span> ARDEFA – Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas. Todos os direitos reservados.
-</div>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
+<div class="copyright">
+            © 2025 ARDEFA. Todos os direitos reservados.
+        </div>
 </footer>
 <div class="lightbox" id="lightbox">
 <span class="lightbox-close">×</span>
