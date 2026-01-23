@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário ARDEFA - 1º Semestre 2026</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
             --primary: #2E7D32;
@@ -42,12 +43,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 30px; /* Espaço entre as logos */
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.3);
         }
 
         .logo-img {
             height: 60px;
+            width: auto;
+        }
+
+        .logo-secondary {
+            height: 50px; /* Um pouco menor para equilíbrio visual */
             width: auto;
         }
 
@@ -141,7 +148,9 @@
         tr:last-child td { border-bottom: none; }
 
         tr:hover {
-            background-color: #f8fafc;
+            background-color: #FFF3E0 !important; /* Laranja bem claro */
+            border-left: 4px solid #FF9800; /* Borda laranja */
+            transition: var(--transition);
         }
 
         .badge {
@@ -191,6 +200,97 @@
             box-shadow: 0 12px 30px rgba(0,0,0,0.3);
         }
 
+        /* Tooltip Styles */
+        .float-btn {
+            position: relative;
+        }
+
+        .float-btn::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 75px;
+            background: var(--dark);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            pointer-events: none;
+        }
+
+        .float-btn::after {
+            content: '';
+            position: absolute;
+            right: 65px;
+            border: 8px solid transparent;
+            border-left-color: var(--dark);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .float-btn:hover::before,
+        .float-btn:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-5px);
+        }
+
+        /* Highlight and Pulse Animation */
+        .row-highlight {
+            background-color: rgba(46, 125, 50, 0.1) !important;
+            border-left: 5px solid var(--primary);
+            animation: pulseHighlight 2s infinite;
+        }
+
+        @keyframes pulseHighlight {
+            0% { background-color: rgba(46, 125, 50, 0.1); }
+            50% { background-color: rgba(46, 125, 50, 0.25); }
+            100% { background-color: rgba(46, 125, 50, 0.1); }
+        }
+
+        .row-highlight td {
+            font-weight: 600;
+        }
+
+        /* Print/PDF Optimization */
+        @media print {
+            .floating-container, header {
+                display: none !important;
+            }
+            body {
+                padding: 0 !important;
+                background: white;
+            }
+            .container {
+                margin: 0 !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            .table-wrapper {
+                box-shadow: none !important;
+                border: none !important;
+            }
+            table {
+                min-width: auto !important;
+            }
+            th, td {
+                padding: 8px !important;
+                font-size: 10px !important;
+            }
+            .badge {
+                border: 1px solid #ccc !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
         @media (max-width: 768px) {
             .page-title h1 { font-size: 2rem; }
             .page-title p { font-size: 1rem; letter-spacing: 2px; }
@@ -202,6 +302,7 @@
 <body>
     <header>
         <img src="imagens/logo-ardefa.png" alt="ARDEFA" class="logo-img">
+        <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" class="logo-secondary">
     </header>
 
     <div class="container">
@@ -224,17 +325,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    <tr>
-                        <td><strong>DIA</strong></td>
-                        <td>DATA</td>
-                        <td><span class="badge badge-equipe2">EQUIPE</span></td>
-                        <td>SAIDA</td>
-                        <td>INICIO</td>
-                        <td><strong>LOCAL DE RECEBIMENTO</strong></td>
-                        <td>ENCERRAMENTO</td>
-                    </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>02/03/2026</td>
@@ -242,9 +333,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>02/03/2026</td>
@@ -252,9 +343,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>TUPASSI - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>03/03/2026</td>
@@ -262,9 +353,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>03/03/2026</td>
@@ -272,9 +363,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C VALE/AGROPAR</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>04/03/2026</td>
@@ -282,9 +373,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>04/03/2026</td>
@@ -292,9 +383,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>05/03/2026</td>
@@ -302,9 +393,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>ENCANTADO - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>05/03/2026</td>
@@ -312,9 +403,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>ENCANTADO - I.RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>06/03/2026</td>
@@ -322,9 +413,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>NICE  - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>06/03/2026</td>
@@ -332,9 +423,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>BARREIRO - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>09/03/2026</td>
@@ -342,9 +433,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>09/03/2026</td>
@@ -352,9 +443,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ITAIPULANDIA - I.RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>10/03/2026</td>
@@ -362,9 +453,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>10/03/2026</td>
@@ -372,9 +463,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO PEDRO DO IGUAÇU - COOATOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>11/03/2026</td>
@@ -382,9 +473,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>11/03/2026</td>
@@ -392,9 +483,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO LUIZ DO OESTE - COOATOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>12/03/2026</td>
@@ -402,9 +493,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>TOLEDO - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>12/03/2026</td>
@@ -412,9 +503,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>TOLEDO - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>13/03/2026</td>
@@ -422,9 +513,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>13/03/2026</td>
@@ -432,9 +523,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>VILA NOVA - COOATOL/CVALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>16/03/2026</td>
@@ -442,9 +533,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>S J DAS PALMEIRAS - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>16/03/2026</td>
@@ -452,9 +543,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>17/03/2026</td>
@@ -462,9 +553,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SUB-SEDE STA HEL - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>17/03/2026</td>
@@ -472,9 +563,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SUB-SEDE STA HEL - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>18/03/2026</td>
@@ -482,9 +573,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>PORTO MENDES - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>18/03/2026</td>
@@ -492,9 +583,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>PORTO MENDES - SOUZA CRUZ</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>19/03/2026</td>
@@ -502,9 +593,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>19/03/2026</td>
@@ -512,9 +603,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARGARIDA - A. HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>20/03/2026</td>
@@ -522,9 +613,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>IGUIPORÃ - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>20/03/2026</td>
@@ -532,9 +623,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>IGUIPORÃ - AGRICOLA HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>23/03/2026</td>
@@ -542,9 +633,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BELA VISTA - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>23/03/2026</td>
@@ -552,9 +643,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BELA VISTA - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>24/03/2026</td>
@@ -562,9 +653,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BELA VISTA - INTEGRADA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>24/03/2026</td>
@@ -572,9 +663,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - INTEGRADA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>25/03/2026</td>
@@ -582,9 +673,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>25/03/2026</td>
@@ -592,9 +683,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARACAJU - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>26/03/2026</td>
@@ -602,9 +693,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>26/03/2026</td>
@@ -612,9 +703,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>27/03/2026</td>
@@ -622,9 +713,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>27/03/2027</td>
@@ -632,9 +723,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>30/03/2026</td>
@@ -642,9 +733,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>30/03/2026</td>
@@ -652,9 +743,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO CLEMENTE - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>31/03/2026</td>
@@ -662,9 +753,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ENTRE RIOS - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>31/03/2026</td>
@@ -672,9 +763,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>CONCORDIA OESTE - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>01/04/2026</td>
@@ -682,9 +773,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>01/04/2026</td>
@@ -692,9 +783,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>02/04/2026</td>
@@ -702,9 +793,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>02/04/2026</td>
@@ -712,9 +803,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - INTEGRADA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>EQUIPE 1</strong></td>
                         <td>06/04/2026</td>
@@ -722,9 +813,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>PAULISTANEA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>EQUIPE 1</strong></td>
                         <td>07/04/2026</td>
@@ -732,9 +823,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>ALTO PIQUiRI - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>EQUIPE 1</strong></td>
                         <td>08/04/2026</td>
@@ -742,9 +833,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BRASILANDIA - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>EQUIPE 1</strong></td>
                         <td>09/04/2026</td>
@@ -752,9 +843,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO FRANCISCO - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>EQUIPE 1</strong></td>
                         <td>10/04/2026</td>
@@ -762,9 +853,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>BRAGANTINA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>13/04/2026</td>
@@ -772,9 +863,9 @@
                         <td>06:30</td>
                         <td>09:00Hs</td>
                         <td><strong>COLETA ESPECIAL  - GOIERÊ</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>13/04/2026</td>
@@ -782,9 +873,9 @@
                         <td>06:30</td>
                         <td>09:00Hs</td>
                         <td><strong>COLETA ESPECIAL  - GOIERÊ</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>14/04/2026</td>
@@ -792,9 +883,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>14/04/2026</td>
@@ -802,9 +893,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>TUPASSI - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>15/04/2026</td>
@@ -812,9 +903,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>15/04/2026</td>
@@ -822,9 +913,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BRASILANDIA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>16/04/2026</td>
@@ -832,9 +923,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>16/04/2026</td>
@@ -842,9 +933,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>17/04/2026</td>
@@ -852,9 +943,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>17/04/2026</td>
@@ -862,9 +953,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>20/04/2026</td>
@@ -872,9 +963,19 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>JESUITAS - COPACOL</strong></td>
+                        <td>16:30</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>20/04/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td></td>
+                        <td>nan</td>
+                        <td><strong>nan</strong></td>
                         <td></td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>22/04/2026</td>
@@ -882,9 +983,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>ENCANTADO - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>22/04/2026</td>
@@ -892,9 +993,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>ENCANTADO - I.RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>23/04/2026</td>
@@ -902,9 +1003,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>NICE  - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>23/04/2026</td>
@@ -912,9 +1013,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>BARREIRO - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>24/04/2026</td>
@@ -922,9 +1023,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>COMUM. STO ANT. - PAV. COMUNITARIO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>24/04/2026</td>
@@ -932,9 +1033,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>VILA FLORESTA - PAV. COMUNITARIO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>27/04/2026</td>
@@ -942,9 +1043,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>TOLEDO - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>27/04/2026</td>
@@ -952,19 +1053,19 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>CANDEIA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
-                        <td><strong>nan</strong></td>
+                        <td><strong>NAN</strong></td>
                         <td>28/04/2026</td>
                         <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
                         <td>08:20</td>
                         <td>09:00Hs</td>
                         <td><strong>PEROLA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>28/04/2026</td>
@@ -972,9 +1073,9 @@
                         <td>08:20</td>
                         <td>09:00Hs</td>
                         <td><strong>PEROLA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>29/04/2026</td>
@@ -982,9 +1083,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARIPA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>29/04/2026</td>
@@ -992,9 +1093,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARIPA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>30/04/2026</td>
@@ -1002,9 +1103,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVA STA ROSA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>30/04/2026</td>
@@ -1012,9 +1113,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>SANTA FÉ - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>04/05/2026</td>
@@ -1022,9 +1123,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>PALMITOLANDIA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>04/05/2026</td>
@@ -1032,9 +1133,9 @@
                         <td>07:20</td>
                         <td>09:00Hs</td>
                         <td><strong>PALMITOPOLIS - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>05/05/2026</td>
@@ -1042,9 +1143,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>JOTAESSE - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>05/05/2026</td>
@@ -1052,9 +1153,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>UNIVERSO - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>06/05/2026</td>
@@ -1062,9 +1163,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>06/05/2026</td>
@@ -1072,9 +1173,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>CARAJAS - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>07/05/2026</td>
@@ -1082,9 +1183,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>IRACEMA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>07/05/2026</td>
@@ -1092,9 +1193,29 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>IRACEMA - I RIEDI</strong></td>
+                        <td>16:30</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>08/05/2026</td>
+                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td></td>
+                        <td>nan</td>
+                        <td><strong>nan</strong></td>
                         <td></td>
                     </tr>
-                    
+
+                    <tr>
+                        <td><strong>SEXTA</strong></td>
+                        <td>08/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td></td>
+                        <td>nan</td>
+                        <td><strong>nan</strong></td>
+                        <td></td>
+                    </tr>
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>11/05/2026</td>
@@ -1102,9 +1223,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>PATO BRAGADO - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>11/05/2026</td>
@@ -1112,9 +1233,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>12/05/2026</td>
@@ -1122,9 +1243,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>QUATRO PONTES - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>12/05/2026</td>
@@ -1132,9 +1253,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>QUATRO PONTES - AGRIC. HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>13/05/2026</td>
@@ -1142,9 +1263,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVO SARANDI - AGRIC. HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>13/05/2026</td>
@@ -1152,9 +1273,9 @@
                         <td>07:20</td>
                         <td>09:00Hs</td>
                         <td><strong>BOM JARDIM - AGRIC. HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>14/05/2026</td>
@@ -1162,9 +1283,9 @@
                         <td>07:20</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO ROQUE - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>14/05/2026</td>
@@ -1172,9 +1293,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>CURVADO - PAVILH. COMUNITARIO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>15/05/2026</td>
@@ -1182,9 +1303,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVO HORIZONTE - PAVILH. COMUNITARIO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>15/05/2026</td>
@@ -1192,9 +1313,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVO TRÊS PASSOS - PAVILH. COMUNITARIO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>18/05/2026</td>
@@ -1202,9 +1323,19 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>PAULISTANEA - C. VALE</strong></td>
+                        <td>16:30</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>SEGUNDA</strong></td>
+                        <td>18/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td></td>
+                        <td>nan</td>
+                        <td><strong>nan</strong></td>
                         <td></td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>19/05/2026</td>
@@ -1212,9 +1343,19 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>ALTO PIQUiRI - C. VALE</strong></td>
+                        <td>16:30</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>TERÇA</strong></td>
+                        <td>19/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td></td>
+                        <td>nan</td>
+                        <td><strong>nan</strong></td>
                         <td></td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>20/05/2026</td>
@@ -1222,9 +1363,19 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BRASILANDIA - C VALE</strong></td>
+                        <td>16:30</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>QUARTA</strong></td>
+                        <td>20/05/2026</td>
+                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td></td>
+                        <td>nan</td>
+                        <td><strong>nan</strong></td>
                         <td></td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>21/05/2026</td>
@@ -1232,9 +1383,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>21/05/2026</td>
@@ -1242,9 +1393,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>22/05/2026</td>
@@ -1252,9 +1403,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>22/05/2026</td>
@@ -1262,9 +1413,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>25/05/2026</td>
@@ -1272,39 +1423,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>JESUITAS - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
-                    <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>26/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CAMPINA - CAFELAND. - SALÃO DA IGREJA</strong></td>
-                        <td></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>26/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COM.S.JOSE/CAFELANDIA - COPACOL</strong></td>
-                        <td></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>27/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COMUNID. STO ANTONIO - SALÃO DA IGREJA</strong></td>
-                        <td></td>
-                    </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>27/05/2026</td>
@@ -1312,9 +1433,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>FORMOSA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>28/05/2026</td>
@@ -1322,19 +1443,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>JOTAESSE - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
-                    <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>28/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>UNIVERSO - COPACOL</strong></td>
-                        <td></td>
-                    </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>29/05/2026</td>
@@ -1342,9 +1453,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>TERRA NOVA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>29/05/2026</td>
@@ -1352,9 +1463,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BRASILANDIA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>01/06/2026</td>
@@ -1362,9 +1473,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVO SOBRADINHO - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>01/06/2026</td>
@@ -1372,9 +1483,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>02/06/2026</td>
@@ -1382,9 +1493,9 @@
                         <td>07:20</td>
                         <td>09:00Hs</td>
                         <td><strong>M.C.RONDON - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>02/06/2026</td>
@@ -1392,9 +1503,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>03/06/2026</td>
@@ -1402,9 +1513,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>TERRA ROXA - C.VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>03/06/2026</td>
@@ -1412,9 +1523,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>TERRA ROXA - I.RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>05/06/2026</td>
@@ -1422,9 +1533,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SANTA RITA/T. ROXA - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>05/06/2026</td>
@@ -1432,9 +1543,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SANTA RITA/T. ROXA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>08/06/2026</td>
@@ -1442,9 +1553,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BELA VISTA - C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>08/06/2026</td>
@@ -1452,9 +1563,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BELA VISTA - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>09/06/2026</td>
@@ -1462,9 +1573,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>BELA VISTA - INTEGRADA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>09/06/2026</td>
@@ -1472,9 +1583,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - INTEGRADA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>10/06/2026</td>
@@ -1482,9 +1593,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>10/06/2026</td>
@@ -1492,9 +1603,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARACAJU - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>11/06/2026</td>
@@ -1502,9 +1613,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>11/06/2026</td>
@@ -1512,9 +1623,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>12/06/2026</td>
@@ -1522,9 +1633,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>GUAIRA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>12/06/2026</td>
@@ -1532,9 +1643,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>15/06/2026</td>
@@ -1542,9 +1653,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>15/06/2026</td>
@@ -1552,9 +1663,9 @@
                         <td>07:45</td>
                         <td>09:00Hs</td>
                         <td><strong>TOLEDO - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>16/06/2026</td>
@@ -1562,9 +1673,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>16/06/2026</td>
@@ -1572,9 +1683,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>TOLEDO - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>17/06/2026</td>
@@ -1582,9 +1693,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>17/06/2026</td>
@@ -1592,9 +1703,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO PEDRO DO IGUAÇU - COOATOL/ C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>18/06/2026</td>
@@ -1602,9 +1713,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>18/06/2026</td>
@@ -1612,9 +1723,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>SÃO LUIZ DO OESTE - COOATOL/C VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>19/06/2026</td>
@@ -1622,9 +1733,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>VILA NOVA - COOATOL/CVALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>19/06/2026</td>
@@ -1632,9 +1743,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>CANDEIA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>22/06/2026</td>
@@ -1642,9 +1753,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>COMUNID. STO ANTONIO - SALÃO DA IGREJA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>22/06/2026</td>
@@ -1652,9 +1763,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>COM.S.JOSE/CAFELANDIA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>23/06/2026</td>
@@ -1662,9 +1773,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>CAMPINA - CAFELAND. - SALÃO DA IGREJA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>23/06/2026</td>
@@ -1672,9 +1783,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>24/06/2026</td>
@@ -1682,9 +1793,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>CARAJAS - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>24/06/2026</td>
@@ -1692,9 +1803,9 @@
                         <td>07:15</td>
                         <td>09:00Hs</td>
                         <td><strong>FORMOSA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>25/06/2026</td>
@@ -1702,9 +1813,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>IRACEMA - COPACOL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>25/06/2026</td>
@@ -1712,9 +1823,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>IRACEMA - I RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>26/06/2026</td>
@@ -1722,9 +1833,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>26/06/2026</td>
@@ -1732,9 +1843,9 @@
                         <td>08:00</td>
                         <td>09:00Hs</td>
                         <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>29/06/2026</td>
@@ -1742,9 +1853,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - COPAGRIL</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEGUNDA</strong></td>
                         <td>29/06/2026</td>
@@ -1752,9 +1863,9 @@
                         <td>07:00</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>30/06/2026</td>
@@ -1762,9 +1873,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>TERÇA</strong></td>
                         <td>30/06/2026</td>
@@ -1772,9 +1883,9 @@
                         <td>07:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MERCEDES - INTEGRADA</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>01/07/2026</td>
@@ -1782,9 +1893,9 @@
                         <td>08:20</td>
                         <td>09:00Hs</td>
                         <td><strong>PEROLA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUARTA</strong></td>
                         <td>01/07/2026</td>
@@ -1792,9 +1903,9 @@
                         <td>08:20</td>
                         <td>09:00Hs</td>
                         <td><strong>PEROLA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>02/07/2026</td>
@@ -1802,9 +1913,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARIPA - C. VALE</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>QUINTA</strong></td>
                         <td>02/07/2026</td>
@@ -1812,9 +1923,9 @@
                         <td>08:30</td>
                         <td>09:00Hs</td>
                         <td><strong>MARIPA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>03/07/2026</td>
@@ -1822,9 +1933,9 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>NOVA STA ROSA - I. RIEDI</strong></td>
-                        <td></td>
+                        <td>16:30</td>
                     </tr>
-                    
+
                     <tr>
                         <td><strong>SEXTA</strong></td>
                         <td>03/07/2026</td>
@@ -1832,45 +1943,111 @@
                         <td>08:15</td>
                         <td>09:00Hs</td>
                         <td><strong>SANTA FÉ - C VALE</strong></td>
-                        <td></td>
-                    </tr>
-                    
-                </tbody>
+                        <td>16:30</td>
+                    </tr>                </tbody>
             </table>
         </div>
     </div>
 
     <div class="floating-container">
-        <button class="float-btn btn-share" onclick="sharePage()" title="Compartilhar">
+        <button class="float-btn btn-share" onclick="sharePage()" data-tooltip="Compartilhar Calendário">
             <i class="fas fa-share-alt"></i>
         </button>
-        <a href="index.html" class="float-btn btn-back" title="Voltar ao Início">
+        <a href="index.html" class="float-btn btn-back" data-tooltip="Voltar ao Início">
             <i class="fas fa-home"></i>
         </a>
     </div>
 
     <script>
         async function sharePage() {
-            if (navigator.share) {
-                try {
+            const element = document.querySelector('.container');
+            
+            // Feedback visual de carregamento
+            const btn = document.querySelector('.btn-share');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            try {
+                const opt = {
+                    margin: [10, 10],
+                    filename: 'Calendario_ARDEFA_2026.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true, logging: false },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Gerar o PDF
+                const worker = html2pdf().set(opt).from(element);
+                const pdfBlob = await worker.output('blob');
+                
+                const file = new File([pdfBlob], 'Calendario_ARDEFA_2026.pdf', { type: 'application/pdf' });
+
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
+                        files: [file],
                         title: 'Calendário ARDEFA 2026',
-                        text: 'Confira o calendário de recebimento da ARDEFA para o 1º semestre de 2026.',
-                        url: window.location.href
+                        text: 'Confira o calendário de recebimento da ARDEFA para o 1º semestre de 2026.'
                     });
-                } catch (err) {
-                    console.log('Erro ao compartilhar:', err);
+                } else {
+                    // Fallback: Download direto
+                    const url = URL.createObjectURL(pdfBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Calendario_ARDEFA_2026.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    if (!navigator.share) {
+                        alert('PDF gerado com sucesso! O compartilhamento direto não é suportado neste navegador, por isso o arquivo foi baixado.');
+                    } else {
+                        alert('PDF gerado! O compartilhamento de arquivos foi bloqueado ou não é suportado, o download foi iniciado.');
+                    }
                 }
-            } else {
-                const el = document.createElement('textarea');
-                el.value = window.location.href;
-                document.body.appendChild(el);
-                el.select();
-                document.execCommand('copy');
-                document.body.removeChild(el);
-                alert('Link copiado para a área de transferência!');
+            } catch (error) {
+                console.error('Erro detalhado:', error);
+                alert('Erro ao gerar PDF. O arquivo será baixado no formato padrão.');
+                // Fallback final caso o blob falhe
+                html2pdf().set({ margin: 10, filename: 'Calendario_ARDEFA.pdf' }).from(element).save();
+            } finally {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
             }
         }
+
+        function highlightNearestDate() {
+            const rows = document.querySelectorAll('tbody tr');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let nearestRow = null;
+            let minDiff = Infinity;
+
+            rows.forEach(row => {
+                const dateCell = row.cells[1];
+                if (dateCell) {
+                    const dateStr = dateCell.textContent.trim();
+                    const [day, month, year] = dateStr.split('/').map(Number);
+                    const rowDate = new Date(year, month - 1, day);
+                    
+                    const diff = Math.abs(rowDate - today);
+                    
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        nearestRow = row;
+                    }
+                }
+            });
+
+            if (nearestRow) {
+                nearestRow.classList.add('row-highlight');
+                // Removido scrollIntoView para manter a página no topo ao carregar
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', highlightNearestDate);
     </script>
 </body>
 </html>
