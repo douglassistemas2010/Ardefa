@@ -5,8 +5,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="Douglas Araujo Gomes" name="developer"/>
 <meta content="44999186911" name="developer-contact"/>
-<title>ARDEFA - Sustentabilidade e Campo Limpo</title>
+<title>ARDEFA - Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
 <style>
 :root {
     --primary: #2E7D32;
@@ -1661,8 +1662,23 @@ Acessar Calendário Completo
 </div>
 </div>
 <div class="copyright">
-© 2026 ARDEFA. Todos os direitos reservados.
+
 </div>
+
+
+<div class="footer-logos" style="display:flex;justify-content:center;align-items:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap;">
+  <img src="imagens/logo-ardefa.png" alt="ARDEFA" style="max-height:60px;width:auto;">
+  <img src="imagens/inpev-logo.png" alt="inpEV" style="max-height:60px;width:auto;">
+  <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" style="max-height:60px;width:auto;">
+</div>
+
+<div class="footer-copyright" style="margin-top:1.5rem;font-size:0.9rem;color:#666;text-align:center;">
+  © <span id="year"></span> ARDEFA – Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas. Todos os direitos reservados.
+</div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </footer>
 
 <script>

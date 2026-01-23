@@ -975,9 +975,21 @@ header.scrolled {
 </ul>
 </div>
 </div>
-<div class="copyright">
-            © 2025 ARDEFA. Todos os direitos reservados.
-        </div>
+
+<div class="footer-logos" style="display:flex;justify-content:center;align-items:center;gap:2rem;margin-bottom:1.2rem;flex-wrap:wrap;">
+  <img src="imagens/logo-ardefa.png" alt="ARDEFA" style="max-height:60px;width:auto;">
+  <img src="imagens/inpev-logo.png" alt="inpEV" style="max-height:60px;width:auto;">
+  <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" style="max-height:60px;width:auto;">
+</div>
+
+
+<div class="copyright" style="text-align:center;border-top:1px solid #333;padding-top:2rem;font-size:0.9rem;">
+  © <span id="year"></span> ARDEFA – Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas. Todos os direitos reservados.
+</div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </footer>
 <div class="lightbox" id="lightbox">
 <span class="lightbox-close">×</span>
