@@ -3,7 +3,7 @@
 Site institucional da **ARDEFA**, desenvolvido em **HTML, CSS e JavaScript** e hospedado via **GitHub Pages**, com foco em sustentabilidade, logística reversa de embalagens agrícolas e educação ambiental no Oeste do Paraná.
 
 🌐 **Site publicado em:**  
-https://SEU-USUARIO.github.io/Ardefa/
+https://douglassistemas2010.github.io/Ardefa/
 
 📍 **Localização:** Palotina – PR
 
