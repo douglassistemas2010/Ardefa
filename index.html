@@ -1007,6 +1007,16 @@ nav a:hover::after {
     background: linear-gradient(135deg, var(--secondary), #0277BD);
 }
 
+.facebook-btn {
+    background: linear-gradient(135deg, #1877F2, #0D47A1);
+}
+
+.facebook-btn:hover {
+    background: linear-gradient(135deg, #0D47A1, #08306B);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(24,119,242,0.55);
+}
+
 .email-btn:hover {
     background: linear-gradient(135deg, #0277BD, #01579B);
     transform: translateY(-5px) scale(1.1);
@@ -1277,6 +1287,237 @@ footer {
     margin-bottom: 0.6rem;
 }
 
+
+/* ================== CAMPO LIMPO – LINHA DO TEMPO ================== */
+.campo-limpo {
+    background: linear-gradient(135deg, #ffffff 0%, #E8F5E9 100%);
+    padding: 5rem 10%;
+}
+
+.campo-limpo-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+.cl-step {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.cl-step.reverse {
+    flex-direction: row-reverse;
+}
+
+.cl-image {
+    flex: 1;
+}
+
+.cl-image img {
+    width: 100%;
+    height: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.cl-text {
+    flex: 1;
+}
+
+.cl-number {
+    display: inline-block;
+    background: linear-gradient(135deg, #2E7D32, #66BB6A);
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1.4rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 46px;
+    margin-bottom: 1rem;
+}
+
+.cl-text h3 {
+    font-size: 1.9rem;
+    margin-bottom: 0.6rem;
+    color: #1B5E20;
+}
+
+.cl-text p {
+    font-size: 1.05rem;
+    color: #2f2f2f;
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+@media (max-width: 900px) {
+    .cl-step,
+    .cl-step.reverse {
+        flex-direction: column;
+    }
+    .cl-text p {
+        max-width: 100%;
+    }
+}
+
+
+/* ================== CAMPO LIMPO – VERSÃO COMPACTA ================== */
+.campo-limpo-compact {
+    background: linear-gradient(135deg, #ffffff 0%, #E8F5E9 100%);
+    padding: 4.5rem 10%;
+}
+
+.cl-steps-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 3rem 0 2.5rem;
+    flex-wrap: wrap;
+}
+
+.cl-step-btn {
+    background: #cfe9d8;
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    font-weight: 900;
+    color: #1B5E20;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1.1;
+}
+
+.cl-step-btn span {
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: block;
+}
+
+.cl-step-btn.active {
+    background: linear-gradient(135deg, #2E7D32, #66BB6A);
+    color: #ffffff;
+    transform: scale(1.15);
+    box-shadow: 0 10px 25px rgba(46,125,50,0.35);
+}
+
+.cl-step-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.cl-step-content img {
+    width: 50%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.cl-step-content .cl-text {
+    width: 50%;
+}
+
+.cl-step-content h3 {
+    font-size: 1.9rem;
+    margin-bottom: 0.8rem;
+    color: #1B5E20;
+}
+
+.cl-step-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #2f2f2f;
+}
+
+@media (max-width: 900px) {
+    .cl-step-content {
+        flex-direction: column;
+    }
+    .cl-step-content img,
+    .cl-step-content .cl-text {
+        width: 100%;
+    }
+}
+
+
+/* === AJUSTES FINOS – CAMPO LIMPO (V2) === */
+.cl-step-btn{
+    width: 96px;
+    height: 96px;
+    padding: 6px;
+}
+
+.cl-step-btn span{
+    font-size: 0.75rem;
+    line-height: 1.1;
+}
+
+.cl-step-btn.active{
+    background: linear-gradient(135deg, #FF9800, #F57C00) !important;
+    box-shadow: 0 10px 25px rgba(255,152,0,0.45);
+}
+
+
+/* === AJUSTE FINAL BOTÕES 1 A 5 (TEXTO + HIERARQUIA) === */
+.cl-step-btn{
+    width: 104px;
+    height: 104px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    word-break: break-word;
+}
+
+.cl-step-btn{
+    font-size: 1.35rem; /* número */
+}
+
+.cl-step-btn span{
+    font-size: 0.7rem;  /* texto */
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 4px;
+    display: block;
+    max-width: 90px;
+}
+
+.cl-step-btn.active{
+    background: linear-gradient(135deg, #FF9800, #F57C00) !important;
+    box-shadow: 0 10px 25px rgba(255,152,0,0.45);
+}
+
+
+
+.cl-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.cl-lightbox.active { display: flex; }
+
+.cl-lightbox img {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -1356,6 +1597,40 @@ footer {
 </div>
 </div>
 </section>
+
+
+
+<!-- ================== SESSÃO CAMPO LIMPO (COMPACTA) ================== -->
+<section class="campo-limpo-compact reveal" id="campo-limpo">
+  <div class="section-header">
+    <h2 class="section-heading">Sistema Campo Limpo</h2>
+    <p style="max-width:900px;margin:1rem auto 0;color:#2f2f2f;font-weight:600;">
+      O <strong>Sistema Campo Limpo</strong> garante a destinação correta das embalagens vazias de defensivos agrícolas,
+      promovendo segurança, sustentabilidade e conformidade ambiental.
+    </p>
+  </div>
+
+  <div class="cl-steps-bar">
+    <button class="cl-step-btn active" data-step="1">1<br><span>Entrega</span></button>
+    <button class="cl-step-btn" data-step="2">2<br><span>Triagem</span></button>
+    <button class="cl-step-btn" data-step="3">3<br><span>Separação</span></button>
+    <button class="cl-step-btn" data-step="4">4<br><span>Armazenamento</span></button>
+    <button class="cl-step-btn" data-step="5">5<br><span>Destinação</span></button>
+  </div>
+
+  <div class="cl-step-content">
+    <img src="imagens/campolimpo1.jpg" id="cl-image" alt="Sistema Campo Limpo">
+    <div class="cl-text">
+      <h3 id="cl-title">Entrega nas unidades autorizadas</h3>
+      <p id="cl-desc">
+        O agricultor devolve as embalagens vazias nas centrais ou postos credenciados,
+        cumprindo a legislação ambiental vigente.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
 <section class="impact-section reveal">
   <div class="section-header">
@@ -1622,9 +1897,9 @@ Acessar Calendário Completo
 <span class="float-btn-tooltip">Fale Conosco</span>
 <i class="fab fa-whatsapp"></i>
 </a>
-<a class="float-btn email-btn" href="mailto:palotina@embalagensvazias.org.br">
-<span class="float-btn-tooltip">Enviar E-mail</span>
-<i class="fas fa-envelope"></i>
+<a class="float-btn facebook-btn" href="https://www.facebook.com/ardefa.centralderecebimento?locale=pt_BR" rel="noopener noreferrer" target="_blank">
+    <span class="float-btn-tooltip">Facebook</span>
+    <i class="fab fa-facebook-f"></i>
 </a>
 <a class="float-btn instagram-btn" href="https://instagram.com/ardefa_embalagensvazias" rel="noopener noreferrer" target="_blank">
 <span class="float-btn-tooltip">Siga no Instagram</span>
@@ -1727,6 +2002,97 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 
+
+
+<script>
+const steps = {
+  1: {
+    img: 'imagens/campolimpo1.jpg',
+    title: 'Entrega nas unidades autorizadas',
+    desc: 'O agricultor devolve as embalagens vazias nas centrais ou postos credenciados, cumprindo a legislação ambiental vigente.'
+  },
+  2: {
+    img: 'imagens/campolimpo2.jpg',
+    title: 'Triagem e conferência',
+    desc: 'As embalagens são inspecionadas e separadas conforme tipo e estado de conservação.'
+  },
+  3: {
+    img: 'imagens/campolimpo3.jpg',
+    title: 'Separação e preparação',
+    desc: 'Os materiais são organizados para garantir eficiência logística e segurança.'
+  },
+  4: {
+    img: 'imagens/campolimpo4.jpg',
+    title: 'Armazenamento seguro',
+    desc: 'As embalagens ficam armazenadas de forma correta até a destinação final.'
+  },
+  5: {
+    img: 'imagens/campolimpo5.jpg',
+    title: 'Destinação ambientalmente correta',
+    desc: 'As embalagens seguem para reciclagem ou incineração controlada, fechando o ciclo da logística reversa.'
+  }
+};
+
+document.querySelectorAll('.cl-step-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cl-step-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const step = steps[btn.dataset.step];
+    document.getElementById('cl-image').src = step.img;
+    document.getElementById('cl-title').innerText = step.title;
+    document.getElementById('cl-desc').innerText = step.desc;
+  });
+});
+</script>
+
+
+<script>
+(function(){
+    const steps = {
+      1:{img:'imagens/campolimpo1.jpg',title:'Entrega nas unidades autorizadas',desc:'O agricultor devolve as embalagens vazias nas centrais ou postos credenciados, cumprindo a legislação ambiental vigente.'},
+      2:{img:'imagens/campolimpo2.jpg',title:'Triagem e conferência',desc:'As embalagens são inspecionadas e separadas conforme tipo e estado de conservação.'},
+      3:{img:'imagens/campolimpo3.jpg',title:'Separação e preparação',desc:'Os materiais são organizados para garantir eficiência logística e segurança.'},
+      4:{img:'imagens/campolimpo4.jpg',title:'Armazenamento seguro',desc:'As embalagens ficam armazenadas de forma correta até a destinação final.'},
+      5:{img:'imagens/campolimpo5.jpg',title:'Destinação ambientalmente correta',desc:'As embalagens seguem para reciclagem ou incineração controlada, fechando o ciclo da logística reversa.'}
+    };
+
+    let current = 1;
+    let timer = null;
+
+    function render(step){
+        const data = steps[step];
+        document.getElementById('cl-image').src = data.img;
+        document.getElementById('cl-title').innerText = data.title;
+        document.getElementById('cl-desc').innerText = data.desc;
+
+        document.querySelectorAll('.cl-step-btn').forEach(b=>b.classList.remove('active'));
+        const btn = document.querySelector('.cl-step-btn[data-step="'+step+'"]');
+        if(btn) btn.classList.add('active');
+
+        current = step;
+    }
+
+    function start(){
+        timer = setInterval(()=>{
+            let next = current + 1;
+            if(next > 5) next = 1;
+            render(next);
+        },4000);
+    }
+
+    document.querySelectorAll('.cl-step-btn').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+            clearInterval(timer);
+            render(parseInt(btn.dataset.step));
+            start();
+        });
+    });
+
+    render(1);
+    start();
+})();
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const ctx = document.getElementById('impactChart');
@@ -1774,6 +2140,37 @@ new Chart(ctx, {
   }
 });
 </script>
+
+
+
+
+<script>
+(function(){
+  const lightbox = document.getElementById('clLightbox');
+  const lightboxImg = document.getElementById('clLightboxImg');
+
+  // Abrir ao clicar na imagem atual do Campo Limpo
+  document.addEventListener('click', function(e){
+    const img = e.target.closest('.cl-image img');
+    if(img){
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+    }
+    if(e.target === lightbox){
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+  });
+})();
+</script>
+
 </body>
 
 </html>
