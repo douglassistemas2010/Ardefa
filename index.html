@@ -129,6 +129,28 @@ nav a:hover::after {
     width: 100%; 
 }
 
+
+/* ===== MENU HAMBÚRGUER - PRIORIDADE ALTA ===== */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--dark);
+    cursor: pointer;
+    padding: 10px;
+    transition: var(--transition);
+}
+
+.menu-toggle:hover {
+    color: var(--primary);
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
+}
+
+
 /* HERO */
 .hero {
     height: 100vh;
@@ -826,6 +848,47 @@ nav a:hover::after {
 }
 
 /* MAP */
+
+
+/* ===== AJUSTE DO GRÁFICO - RESPONSIVIDADE ===== */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        padding: 0 10px;
+        max-width: 100%;
+    }
+
+    .chart-container canvas {
+        max-height: 300px;
+    }
+
+    /* Ajuste específico iOS - título menor */
+    .chart-container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-container canvas {
+        max-height: 250px;
+    }
+}
+
 .map-section {
     background: var(--white);
     padding: 5rem 10%;
@@ -967,6 +1030,14 @@ nav a:hover::after {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+/* iOS Safe Area - Prioridade Alta */
+@supports (padding: max(0px)) {
+    .float-buttons {
+        bottom: max(30px, env(safe-area-inset-bottom, 30px));
+        right: max(30px, env(safe-area-inset-right, 30px));
+    }
 }
 
 .float-btn {
@@ -1120,71 +1191,6 @@ footer {
     transform: translateY(0);
 }
 
-/* RESPONSIVE */
-@media (max-width: 1200px) {
-    .videos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-}
-
-@media (max-width: 1100px) {
-    .inpev-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    .map-content-wrapper {
-        flex-direction: column;
-    }
-    .map-container, .map-side-image {
-        flex: auto;
-        width: 100%;
-        height: 350px;
-    }
-}
-
-@media (max-width: 768px) {
-    nav { display: none; }
-    .hero-content h1 { 
-        font-size: 3.5rem;
-        letter-spacing: 1px;
-    }
-    .hero-content p {
-        font-size: 1.1rem;
-    }
-    .about-text h2 { 
-        font-size: 2rem; 
-    }
-    .section-heading {
-        font-size: 2rem;
-    }
-    header { 
-        padding: 1rem 5%; 
-    }
-    .float-buttons {
-        bottom: 20px;
-        right: 20px;
-    }
-    .float-btn {
-        width: 55px;
-        height: 55px;
-    }
-    .float-btn i {
-        font-size: 22px;
-    }
-    .inpev-logo-big,
-    .campolimpo-logo-big {
-        height: 88px;
-    }
-}
-
-@media (max-width: 600px) {
-    .inpev-cards {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* === ÊNFASE ESCURA PARA TEXTO DO HERO === */
 .hero-content h1,
 .hero-content p {
@@ -1193,15 +1199,12 @@ footer {
         0 0 35px rgba(0,0,0,0.65);
 }
 
-
-/* === DESTAQUE ESCURO ATRÁS DAS LOGOS INPEV / CAMPO LIMPO === */
 /* === DESTAQUE ESCURO DIRETO NAS LOGOS (SEM FUNDO) === */
 .inpev-logo-big,
 .campolimpo-logo-big {
     filter: drop-shadow(0 6px 18px rgba(255,255,255,0.75))
             drop-shadow(0 0 28px rgba(255,255,255,0.55));
 }
-
 
 /* === AJUSTE FINO: CARDS DE TIPOS DE EMBALAGEM === */
 .impact-grid-pack .impact-card {
@@ -1222,8 +1225,6 @@ footer {
     margin-bottom: 0.6rem;
 }
 
-
-
 .impact-grid-pack .impact-card {
     height: 190px;
     display: flex;
@@ -1236,7 +1237,6 @@ footer {
     margin-top: 0.4rem;
 }
 
-
 /* === AJUSTE DEFINITIVO: LARGURA PADRONIZADA DOS CARDS === */
 .impact-grid-pack {
     display: grid;
@@ -1248,16 +1248,13 @@ footer {
     width: 100%;
 }
 
-
-
 .impact-section .impact-grid-pack .impact-card {
     width: 100%;
     max-width: 100%;
 }
 
-
 /* ==========================================================================
-   IMPACTO EM NÚMEROS – GRID EXCLUSIVO (SEM CONFLITO GLOBAL)
+   IMPACTO EM NÚMEROS – GRID EXCLUSIVO
    ========================================================================== */
 
 .impact-pack-grid {
@@ -1286,7 +1283,6 @@ footer {
     font-size: 2.1rem;
     margin-bottom: 0.6rem;
 }
-
 
 /* ================== CAMPO LIMPO – LINHA DO TEMPO ================== */
 .campo-limpo {
@@ -1355,17 +1351,6 @@ footer {
     max-width: 520px;
 }
 
-@media (max-width: 900px) {
-    .cl-step,
-    .cl-step.reverse {
-        flex-direction: column;
-    }
-    .cl-text p {
-        max-width: 100%;
-    }
-}
-
-
 /* ================== CAMPO LIMPO – VERSÃO COMPACTA ================== */
 .campo-limpo-compact {
     background: linear-gradient(135deg, #ffffff 0%, #E8F5E9 100%);
@@ -1384,26 +1369,38 @@ footer {
     background: #cfe9d8;
     border: none;
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
     font-weight: 900;
     color: #1B5E20;
     cursor: pointer;
     transition: all 0.3s ease;
     line-height: 1.1;
+    /* Styles merged from your snippets */
+    width: 104px;
+    height: 104px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    word-break: break-word;
+    font-size: 1.35rem; /* número */
 }
 
 .cl-step-btn span {
-    font-size: 0.7rem;
+    font-size: 0.7rem;  /* texto */
     font-weight: 700;
+    line-height: 1.1;
+    margin-top: 4px;
     display: block;
+    max-width: 90px;
 }
 
 .cl-step-btn.active {
-    background: linear-gradient(135deg, #2E7D32, #66BB6A);
+    background: linear-gradient(135deg, #FF9800, #F57C00) !important;
     color: #ffffff;
     transform: scale(1.15);
-    box-shadow: 0 10px 25px rgba(46,125,50,0.35);
+    box-shadow: 0 10px 25px rgba(255,152,0,0.45);
 }
 
 .cl-step-content {
@@ -1438,68 +1435,6 @@ footer {
     color: #2f2f2f;
 }
 
-@media (max-width: 900px) {
-    .cl-step-content {
-        flex-direction: column;
-    }
-    .cl-step-content img,
-    .cl-step-content .cl-text {
-        width: 100%;
-    }
-}
-
-
-/* === AJUSTES FINOS – CAMPO LIMPO (V2) === */
-.cl-step-btn{
-    width: 96px;
-    height: 96px;
-    padding: 6px;
-}
-
-.cl-step-btn span{
-    font-size: 0.75rem;
-    line-height: 1.1;
-}
-
-.cl-step-btn.active{
-    background: linear-gradient(135deg, #FF9800, #F57C00) !important;
-    box-shadow: 0 10px 25px rgba(255,152,0,0.45);
-}
-
-
-/* === AJUSTE FINAL BOTÕES 1 A 5 (TEXTO + HIERARQUIA) === */
-.cl-step-btn{
-    width: 104px;
-    height: 104px;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    word-break: break-word;
-}
-
-.cl-step-btn{
-    font-size: 1.35rem; /* número */
-}
-
-.cl-step-btn span{
-    font-size: 0.7rem;  /* texto */
-    font-weight: 700;
-    line-height: 1.1;
-    margin-top: 4px;
-    display: block;
-    max-width: 90px;
-}
-
-.cl-step-btn.active{
-    background: linear-gradient(135deg, #FF9800, #F57C00) !important;
-    box-shadow: 0 10px 25px rgba(255,152,0,0.45);
-}
-
-
-
 .cl-lightbox {
   position: fixed;
   inset: 0;
@@ -1516,6 +1451,264 @@ footer {
   max-width: 95%;
   max-height: 95%;
   border-radius: 10px;
+}
+
+
+/* ============================================================
+   === AJUSTES RESPONSIVOS (MOBILE) - DOUGLAS ARAUJO GOMES ===
+   ============================================================ 
+   Estas regras sobrescrevem as anteriores apenas quando a tela
+   for menor que 768px (Tablets e Celulares).
+*/
+
+@media (max-width: 1200px) {
+    .videos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 1100px) {
+    .inpev-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .map-content-wrapper {
+        flex-direction: column;
+    }
+    .map-container, .map-side-image {
+        flex: auto;
+        width: 100%;
+        height: 350px;
+    }
+    .cl-step,
+    .cl-step.reverse {
+        flex-direction: column;
+    }
+    .cl-text p {
+        max-width: 100%;
+    }
+    .cl-step-content {
+        flex-direction: column;
+    }
+    .cl-step-content img,
+    .cl-step-content .cl-text {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 1. Ajuste Geral de Espaçamento */
+    section {
+        padding: 3rem 5%; /* Reduz o padding lateral excessivo */
+    }
+
+    /* Background Fixed - Correção iOS */
+    .hero,
+    .process,
+    .calendar,
+    .inpev-section {
+        background-attachment: scroll; /* iOS não suporta fixed */
+    }
+
+    /* 2. Menu de Navegação - Hambúrguer Funcional */
+    .menu-toggle {
+        display: block;
+        order: 2;
+        margin-left: auto;
+    }
+
+    nav { 
+        display: none;
+        width: 100%;
+        order: 3;
+        margin-top: 15px;
+    }
+
+    nav.active {
+        display: flex !important;
+    }
+    
+    header {
+        flex-wrap: wrap; /* Permite quebrar linha */
+        padding: 1rem 5%;
+        justify-content: center; /* Centraliza tudo */
+    }
+    
+    .logo {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    nav ul {
+        flex-direction: column; /* Pilha os links verticalmente */
+        gap: 0.8rem;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+    }
+    
+    nav a {
+        font-size: 1.1rem;
+        display: block;
+        padding: 5px;
+    }
+
+    /* 3. Hero (Capa) */
+    .hero {
+        height: auto; /* Remove altura fixa */
+        min-height: 100vh; /* Garante que cubra a tela */
+        padding-top: 180px; /* Espaço para o cabeçalho expandido */
+        padding-bottom: 50px;
+    }
+
+    .hero-content h1 { 
+        font-size: 2.5rem; /* Reduz fonte gigante */
+        letter-spacing: 0;
+        line-height: 1.2;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    /* 4. Títulos das Seções */
+    .section-heading {
+        font-size: 2rem;
+    }
+
+    .about-text h2 { 
+        font-size: 2rem; 
+    }
+
+    /* 5. Grids e Cards */
+    .videos-grid {
+        grid-template-columns: 1fr; /* 1 coluna de vídeo */
+    }
+
+    .inpev-cards {
+        grid-template-columns: 1fr; /* 1 card por linha */
+    }
+
+    /* Otimização cards inpEV mobile */
+    .inpev-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .inpev-card i {
+        font-size: 2.8rem;
+    }
+
+    .inpev-card h3 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+    .inpev-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .inpev-ribbon {
+        font-size: 0.7rem;
+        width: 140px;
+    }
+
+    /* Correção do Grid de Impacto (Pack) */
+    .impact-pack-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 colunas no celular */
+        gap: 1rem;
+    }
+
+    /* 6. Ajustes de Imagens e Logos */
+    .inpev-logo-big,
+    .campolimpo-logo-big {
+        height: 70px; /* Diminui logos grandes */
+    }
+    
+    .about-img, .calendar-image {
+        margin-bottom: 2rem;
+    }
+
+    /* 7. Botões Flutuantes - iOS Safe Area */
+    .float-buttons {
+        bottom: 80px; /* Aumenta para não sobrepor barra iOS */
+        right: 15px;
+    }
+
+    /* iOS Safari específico */
+    @supports (padding: max(0px)) {
+        .float-buttons {
+            bottom: max(80px, calc(env(safe-area-inset-bottom) + 20px));
+        }
+    }
+    
+    .float-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .float-btn i {
+        font-size: 22px;
+    }
+
+    /* 8. Campo Limpo Compacto - Botões */
+    .cl-steps-bar {
+        gap: 0.5rem;
+    }
+    
+    .cl-step-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1rem;
+    }
+    
+    .cl-step-btn span {
+        display: none; /* Esconde o texto dos botões redondos no celular para caber */
+    }
+
+    /* Área de toque mínima (Apple/Google Guidelines) */
+    .cta-button,
+    .calendar-btn,
+    .about-history-btn,
+    .map-directions-btn {
+        min-height: 48px;
+        padding: 1rem 2.2rem;
+    }
+
+    .cl-step-btn {
+        width: 65px;
+        height: 65px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .float-btn {
+        width: 56px;
+        height: 56px;
+    }
+
+    .float-btn i {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes para telas muito pequenas (celulares estreitos) */
+    .impact-pack-grid {
+        grid-template-columns: 1fr !important; /* 1 coluna apenas */
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .map-container, .map-side-image {
+        height: 250px;
+    }
 }
 
 </style>
@@ -1600,7 +1793,6 @@ footer {
 
 
 
-<!-- ================== SESSÃO CAMPO LIMPO (COMPACTA) ================== -->
 <section class="campo-limpo-compact reveal" id="campo-limpo">
   <div class="section-header">
     <h2 class="section-heading">Sistema Campo Limpo</h2>
@@ -1640,13 +1832,13 @@ footer {
     </p>
   </div>
 
-  <div style="max-width:1100px;margin:3rem auto;">
-    <canvas id="impactChart" height="120"></canvas>
+  <div class="chart-container">
+    <canvas id="impactChart"></canvas>
   </div>
 
   
 <div style="max-width:1100px;margin:3rem auto 0;">
-<div class="impact-pack-grid" style="grid-template-columns:repeat(6,1fr);gap:1.2rem;">
+<div class="impact-pack-grid">
   <div class="impact-card">
     <i class="fas fa-wine-bottle" style="font-size:2.5rem;color:#0288D1;"></i>
     <span class="impact-number">2.401.107 kg</span>
@@ -1855,7 +2047,7 @@ Acessar Calendário Completo
 </div>
 <div class="map-content-wrapper">
 <div class="map-container">
-<iframe allowfullscreen="" loading="lazy" src="https://maps.google.com/maps?q=ARDEFA+Palotina+PR&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" title="Localização ARDEFA - Palotina PR"></iframe>
+<iframe allowfullscreen="" loading="lazy" src="https://maps.google.com/maps?q=ARDEFA+Palotina+PR&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Localização ARDEFA - Palotina PR"></iframe>
 </div>
 <div class="map-side-image">
 <img alt="Fachada Central ARDEFA" src="imagens/localizacao.jpg"/>
@@ -1893,7 +2085,7 @@ Acessar Calendário Completo
 </section>
 
 <div class="float-buttons">
-<a class="float-btn whatsapp-btn" href="https://api.whatsapp.com/send?phone=5544984191123&amp;text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20ARDEFA." rel="noopener noreferrer" target="_blank">
+<a class="float-btn whatsapp-btn" href="https://api.whatsapp.com/send?phone=5544984191123&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20ARDEFA." rel="noopener noreferrer" target="_blank">
 <span class="float-btn-tooltip">Fale Conosco</span>
 <i class="fab fa-whatsapp"></i>
 </a>
@@ -2115,6 +2307,8 @@ new Chart(ctx, {
   },
   options: {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.5,
     plugins: {
       legend: { display: false },
       title: {
@@ -2131,8 +2325,20 @@ new Chart(ctx, {
       }
     },
     scales: {
+      x: {
+        ticks: {
+          maxRotation: 45,
+          minRotation: 0,
+          font: {
+            size: 11
+          }
+        }
+      },
       y: {
         ticks: {
+          font: {
+            size: 11
+          },
           callback: value => value.toLocaleString('pt-BR')
         }
       }
@@ -2168,6 +2374,47 @@ new Chart(ctx, {
       lightboxImg.src = '';
     }
   });
+})();
+</script>
+
+
+<script>
+// ===== MENU MOBILE HAMBÚRGUER - PRIORIDADE ALTA =====
+(function() {
+    const menuToggle = document.createElement('button');
+    menuToggle.className = 'menu-toggle';
+    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+
+    const header = document.getElementById('header');
+    const nav = header.querySelector('nav');
+    const logo = header.querySelector('.logo');
+
+    // Insere botão após a logo
+    logo.after(menuToggle);
+
+    // Toggle do menu
+    menuToggle.addEventListener('click', function() {
+        nav.classList.toggle('active');
+        const icon = this.querySelector('i');
+
+        if (nav.classList.contains('active')) {
+            icon.className = 'fas fa-times';
+            this.setAttribute('aria-label', 'Fechar menu');
+        } else {
+            icon.className = 'fas fa-bars';
+            this.setAttribute('aria-label', 'Abrir menu');
+        }
+    });
+
+    // Fecha menu ao clicar em link
+    nav.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            nav.classList.remove('active');
+            menuToggle.querySelector('i').className = 'fas fa-bars';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+        });
+    });
 })();
 </script>
 
