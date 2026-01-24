@@ -1,12 +1,21 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#2E7D32">
-    <title>História ARDEFA - Nossa Trajetória</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- 
+    ====================================
+    Desenvolvedor: Douglas Araujo Gomes
+    Contato: (44) 99918-6911
+    Data de Desenvolvimento: Janeiro 2026
+    ====================================
+    -->
+<meta content="Douglas Araujo Gomes" name="developer"/>
+<meta content="44999186911" name="developer-contact"/>
+<title>História ARDEFA - Nossa Trajetória</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<style>
         :root {
             --primary: #2E7D32;
             --secondary: #0288D1;
@@ -21,28 +30,425 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
-            width: 100%;
             overflow-x: hidden;
-            padding-top: clamp(60px, 10vw, 80px);
-            padding-bottom: clamp(2rem, 5vw, 4rem);
         }
 
-        /* ========== HEADER RESPONSIVO ========== */
-        header {
+        /* HEADER */
+        
+
+        
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
+        nav a:hover::after { 
+            width: 100%; 
+        }
+
+        .btn-contact {
+            background: linear-gradient(135deg, var(--primary), #1B5E20);
+            color: var(--white);
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        /* HERO INTERNO */
+        .hero-interno {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, #1B5E20 100%);
+            margin-top: 70px;
+        }
+
+        .hero-interno h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideUp 1s ease;
+        }
+
+        .hero-interno p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: slideUp 1.2s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SEÇÃO HISTÓRIA */
+        .historia-section {
+            background: var(--white);
+            padding: 5rem 10%;
+        }
+
+        .historia-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .brasao-container {
+            position: sticky;
+            top: 100px;
+            background: linear-gradient(135deg, #E8F5E9, var(--white));
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(46, 125, 50, 0.15);
+            text-align: center;
+        }
+
+        .brasao-container img {
+            width: 100%;
+            max-width: 280px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+        }
+
+        .brasao-info {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--primary);
+        }
+
+        .brasao-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .brasao-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .conteudo-historia {
+            background: var(--white);
+        }
+
+        .conteudo-historia h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .texto-historia {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #444;
+            text-align: justify;
+        }
+
+        .texto-historia p {
+            margin-bottom: 1.5rem;
+        }
+
+        .texto-historia strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ESTATÍSTICAS */
+        .stats-box {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        
+
+        
+
+        /* EMPRESAS ASSOCIADAS */
+        .empresas-box {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .empresas-box h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .empresas-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .empresas-list li {
+            list-style: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .empresas-list li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* IMAGEM OPERAÇÃO */
+        .operacao-img {
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .operacao-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .operacao-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .operacao-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* LEI BOX */
+        .lei-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid #FF9800;
+        }
+
+        .lei-box h3 {
+            color: #E65100;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lei-box p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* BOTÕES FLUTUANTES */
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, var(--primary), #1B5E20);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
+            color: #aaa;
+            padding: 4rem 10% 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 { 
+            color: var(--white); 
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col ul { 
+            list-style: none; 
+        }
+
+        .footer-col li { 
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col i { 
+            margin-right: 10px; 
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 992px) {
+            .historia-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .brasao-container {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            
+            .hero-interno h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-interno p {
+                font-size: 1.1rem;
+            }
+            
+            .conteudo-historia h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .empresas-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+
+/* === AJUSTE LOGOS CABEÇALHO (IGUAL AO INDEX) === */
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.inpev-logo {
+    height: 52px;
+}
+
+.camposlimpo-header-logo {
+    height: 48px;
+}
+
+header.scrolled .inpev-logo {
+    height: 44px;
+}
+
+header.scrolled .camposlimpo-header-logo {
+    height: 40px;
+}
+
+
+/* === LOGO CONTAINER IGUAL AO INDEX (COPIADO 1:1) === */
+.logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+/* === HEADER IGUAL AO INDEX (COPIADO 1:1) === */
+header {
             background: linear-gradient(180deg, #f0f0f0 0%, #eaeaea 100%);
-            padding: clamp(0.7rem, 1.5vw, 1rem) clamp(1rem, 5vw, 2.5rem);
+            padding: 1rem 5%;
             position: fixed;
             width: 100%;
             top: 0;
@@ -51,456 +457,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: clamp(1rem, 3vw, 2rem);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
             transition: var(--transition);
         }
-
-        header.scrolled {
+header.scrolled {
             background: rgba(255, 255, 255, 0.95);
-            padding: 0.7rem clamp(1rem, 5vw, 2.5rem);
+            padding: 0.7rem 5%;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: clamp(0.75rem, 2vw, 1.5rem);
-            transition: var(--transition);
-            flex-wrap: wrap;
-        }
-
-        .logo-img, .inpev-logo, .camposlimpo-header-logo {
-            height: clamp(40px, 6vw, 55px);
-            width: auto;
-            object-fit: contain;
-            transition: var(--transition);
-        }
-
-        header.scrolled .inpev-logo,
-        header.scrolled .camposlimpo-header-logo {
-            height: clamp(35px, 5vw, 44px);
-        }
-
-        .header-back-home {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .header-back-home a {
-            display: inline-flex;
-            align-items: center;
-            gap: clamp(0.5rem, 1vw, 0.75rem);
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: clamp(13px, 2vw, 16px);
-            transition: var(--transition);
-        }
-
-        .header-back-home a:hover {
-            color: var(--primary);
-            transform: translateX(-3px);
-        }
-
-        .header-back-home a i {
-            font-size: clamp(14px, 2.5vw, 18px);
-            animation: pulseArrow 2s infinite;
-        }
-
-        @keyframes pulseArrow {
-            0%, 100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(-4px);
-                opacity: 0.7;
-            }
-        }
-
-        /* ========== HERO INTERNO ========== */
-        .hero-interno {
-            height: clamp(40vh, 60vw, 60vh);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 3vw, 2rem);
-            position: relative;
-            background: linear-gradient(135deg, var(--primary) 0%, #1B5E20 100%);
-            margin-top: clamp(60px, 10vw, 80px);
-            overflow: hidden;
-        }
-
-        .hero-interno::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(46, 125, 50, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(2, 136, 209, 0.15) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .hero-interno h1 {
-            font-size: clamp(28px, 7vw, 48px);
-            margin-bottom: clamp(1rem, 2vw, 2rem);
-            font-weight: 900;
-            letter-spacing: clamp(1px, 0.5vw, 2px);
-            line-height: 1.2;
-            position: relative;
-            z-index: 2;
-            animation: slideUp 1s ease;
-        }
-
-        .hero-interno p {
-            font-size: clamp(14px, 2.5vw, 20px);
-            max-width: clamp(280px, 90vw, 700px);
-            margin: 0 auto clamp(1rem, 2vw, 2rem);
-            opacity: 0.95;
-            position: relative;
-            z-index: 2;
-            animation: slideUp 1.2s ease;
-            line-height: 1.6;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ========== HISTORIA GRID RESPONSIVO ========== */
-        .historia-section {
-            background: var(--white);
-            padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2.5rem);
-        }
-
-        .historia-grid {
-            display: grid;
-            grid-template-columns: clamp(250px, 30vw, 350px) 1fr;
-            gap: clamp(1.5rem, 4vw, 4rem);
-            align-items: start;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .brasao-container {
-            position: sticky;
-            top: clamp(70px, 12vw, 100px);
-            background: linear-gradient(135deg, #E8F5E9, var(--white));
-            padding: clamp(1.2rem, 2vw, 2rem);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(46, 125, 50, 0.15);
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .brasao-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(46, 125, 50, 0.25);
-        }
-
-        .brasao-container img {
-            width: 100%;
-            max-width: clamp(180px, 25vw, 280px);
-            margin-bottom: clamp(0.8rem, 1.5vw, 1.5rem);
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
-        }
-
-        .brasao-info {
-            margin-top: clamp(0.8rem, 1.5vw, 1.5rem);
-            padding-top: clamp(0.8rem, 1.5vw, 1.5rem);
-            border-top: 2px solid var(--primary);
-        }
-
-        .brasao-info h3 {
-            color: var(--primary);
-            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
-            font-size: clamp(16px, 2.5vw, 20px);
-        }
-
-        .brasao-info p {
-            color: #666;
-            font-size: clamp(12px, 1.5vw, 14px);
-            line-height: 1.6;
-        }
-
-        /* ========== CONTEUDO HISTORIA ========== */
-        .conteudo-historia {
-            background: var(--white);
-        }
-
-        .conteudo-historia h2 {
-            font-size: clamp(20px, 4vw, 32px);
-            color: #333;
-            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
-            padding-bottom: clamp(0.6rem, 1vw, 1rem);
-            border-bottom: 3px solid var(--secondary);
-            line-height: 1.3;
-        }
-
-        .texto-historia {
-            font-size: clamp(14px, 1.8vw, 17px);
-            line-height: 1.9;
-            color: #444;
-            text-align: justify;
-        }
-
-        .texto-historia p {
-            margin-bottom: clamp(1rem, 2vw, 1.5rem);
-        }
-
-        .texto-historia strong {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* ========== STATS BOX VIDRO ========== */
-        .stats-box {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1.5rem, 3vw, 2rem);
-            margin: clamp(1.5rem, 3vw, 2rem) 0;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.4);
-            transition: var(--transition);
-        }
-
-        .stats-box:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.6);
-        }
-
-        .stats-box h3 {
-            color: var(--primary);
-            font-size: clamp(18px, 2.5vw, 22px);
-            margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
-        }
-
-        /* ========== STATS GRID ========== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 20vw, 200px), 1fr));
-            gap: clamp(1rem, 2vw, 2rem);
-            margin-top: clamp(1rem, 1.5vw, 1.5rem);
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .stat-icon {
-            display: block;
-            font-size: clamp(24px, 4vw, 32px);
-            color: var(--secondary);
-            margin-bottom: clamp(0.4rem, 0.8vw, 0.6rem);
-        }
-
-        .stat-number {
-            font-size: clamp(20px, 4vw, 32px);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
-            min-height: clamp(24px, 5vw, 38px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-label {
-            font-weight: 700;
-            color: #0D2A4A;
-            font-size: clamp(11px, 1.5vw, 13px);
-            line-height: 1.4;
-        }
-
-        /* ========== EMPRESAS ASSOCIADAS ========== */
-        .empresas-box {
-            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
-            padding: clamp(1.2rem, 2vw, 2rem);
-            border-radius: 15px;
-            margin: clamp(1.5rem, 3vw, 2rem) 0;
-            border-left: 5px solid var(--secondary);
-            transition: var(--transition);
-        }
-
-        .empresas-box:hover {
-            box-shadow: 0 10px 30px rgba(2, 136, 209, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .empresas-box h3 {
-            color: var(--secondary);
-            font-size: clamp(16px, 2.5vw, 20px);
-            margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
-        }
-
-        .empresas-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 25vw, 220px), 1fr));
-            gap: clamp(0.6rem, 1vw, 0.8rem);
-            list-style: none;
-        }
-
-        .empresas-list li {
-            padding: clamp(0.4rem, 0.8vw, 0.5rem) clamp(0.75rem, 1.2vw, 1rem);
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            font-weight: 600;
-            color: #333;
-            font-size: clamp(12px, 1.5vw, 14px);
-            transition: var(--transition);
-        }
-
-        .empresas-list li:hover {
-            background: rgba(2, 136, 209, 0.15);
-            color: var(--secondary);
-            transform: translateX(4px);
-        }
-
-        /* ========== LEI BOX ========== */
-        .lei-box {
-            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-            padding: clamp(1.2rem, 2vw, 2rem);
-            border-radius: 15px;
-            margin: clamp(1.5rem, 3vw, 2rem) 0;
-            border-left: 5px solid #FF9800;
-            transition: var(--transition);
-        }
-
-        .lei-box:hover {
-            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .lei-box h3 {
-            color: #E65100;
-            font-size: clamp(16px, 2.5vw, 20px);
-            margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
-        }
-
-        .lei-box p {
-            color: #555;
-            line-height: 1.8;
-            font-size: clamp(13px, 1.5vw, 15px);
-        }
-
-        /* ========== GALERIA RESPONSIVA ========== */
-        .galeria-ardefa {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 25vw, 240px), 1fr));
-            gap: clamp(0.8rem, 1.5vw, 1.2rem);
-            margin-top: clamp(1.5rem, 2vw, 2rem);
-        }
-
-        .galeria-img {
-            width: 100%;
-            height: clamp(150px, 25vw, 200px);
-            object-fit: cover;
-            border-radius: clamp(10px, 1.5vw, 14px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .galeria-img:hover {
-            transform: scale(1.04);
-            box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-        }
-
-        /* ========== FOOTER RESPONSIVO ========== */
-        footer {
-            background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
-            color: #aaa;
-            padding: clamp(2rem, 4vw, 4rem) clamp(1rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.5rem);
-            margin-top: clamp(2rem, 5vw, 4rem);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 30vw, 280px), 1fr));
-            gap: clamp(1.5rem, 3vw, 3rem);
-            margin-bottom: 3rem;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .footer-col h3 {
-            color: var(--white);
-            margin-bottom: clamp(0.8rem, 1.5vw, 1.5rem);
-            font-size: clamp(15px, 2vw, 18px);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col li {
-            margin-bottom: clamp(0.5rem, 0.8vw, 0.8rem);
-            font-size: clamp(12px, 1.3vw, 14px);
-            transition: var(--transition);
-        }
-
-        .footer-col li:hover {
-            color: var(--secondary);
-            transform: translateX(4px);
-        }
-
-        .footer-col i {
-            margin-right: clamp(0.6rem, 1vw, 0.8rem);
-            color: var(--secondary);
-        }
-
-        .copyright {
-            text-align: center;
-            border-top: 1px solid #333;
-            padding-top: clamp(1rem, 2vw, 2rem);
-            font-size: clamp(11px, 1.2vw, 13px);
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ========== BOTÃO FLUTUANTE ========== */
-        .float-buttons {
+/* === FLOAT BUTTONS IGUAIS AO INDEX === */
+.float-buttons {
             position: fixed;
-            bottom: clamp(1rem, 2vw, 2rem);
-            right: clamp(1rem, 2vw, 2rem);
+            bottom: 30px;
+            right: 30px;
             z-index: 999;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-
-        .float-btn {
-            width: clamp(44px, 8vw, 60px);
-            height: clamp(44px, 8vw, 60px);
+.float-btn {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -510,297 +489,651 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             transition: var(--transition);
             position: relative;
-            min-height: 44px;
-            min-width: 44px;
-            font-size: clamp(18px, 3vw, 24px);
+        }
+.float-btn-tooltip {
+            position: absolute;
+            right: 75px;
+            background: var(--dark);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+.float-btn-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 8px solid transparent;
+            border-left-color: var(--dark);
+        }
+.float-btn:hover .float-btn-tooltip {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .home-btn {
-            background: linear-gradient(135deg, var(--primary), #1B5E20);
-        }
 
-        .float-btn:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-        }
+    50%{ filter: brightness(1.25); }
+}
 
-        .float-btn:active {
-            transform: scale(0.98);
-        }
 
-        /* ========== MEDIA QUERIES MOBILE ========== */
-        @media (max-width: 768px) {
-            body {
-                padding-top: clamp(50px, 8vw, 70px);
-                padding-bottom: clamp(1.5rem, 4vw, 3rem);
-            }
 
-            header {
-                flex-wrap: wrap;
-                padding: 0.5rem clamp(0.5rem, 2vw, 1rem);
-            }
 
-            .logo-img, .inpev-logo, .camposlimpo-header-logo {
-                height: clamp(35px, 5vw, 45px);
-            }
+.hero-interno > *{
+    position: relative;
+    z-index: 2;
+}
 
-            .historia-grid {
-                grid-template-columns: 1fr;
-                gap: clamp(1rem, 2vw, 2rem);
-            }
 
-            .brasao-container {
-                position: relative;
-                top: 0;
-            }
 
-            .historia-section {
-                padding: clamp(1.5rem, 3vw, 2rem);
-            }
 
-            .conteudo-historia h2 {
-                font-size: clamp(18px, 3vw, 24px);
-            }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: clamp(0.8rem, 1.5vw, 1.2rem);
-            }
+/* === ÊNFASE FRASE HERO HISTÓRIA – TEXTO BRANCO SIMPLES === */
+.hero-emphasis{
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #ffffff;
+    text-shadow:
+        0 4px 20px rgba(0,0,0,0.75),
+        0 0 35px rgba(0,0,0,0.55);
+}
 
-            .galeria-ardefa {
-                grid-template-columns: repeat(2, 1fr);
-            }
 
-            .float-buttons {
-                bottom: 1rem;
-                right: 1rem;
-            }
+/* === FUNDO HERO HISTÓRIA COM IMAGEM (REAPLICADO) === */
+.hero-interno{
+    position: relative;
+    background: url('imagens/historia_fundo.jpeg') center center / cover no-repeat;
+}
 
-            .float-btn {
-                width: 44px;
-                height: 44px;
-                font-size: 18px;
-            }
-        }
+.hero-interno::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.15) 40%,
+        rgba(0,0,0,0.35) 100%
+    );
+    z-index: 1;
+}
 
-        @media (max-width: 480px) {
-            body {
-                padding-top: 50px;
-            }
+.hero-interno > *{
+    position: relative;
+    z-index: 2;
+}
 
-            .hero-interno {
-                margin-top: 50px;
-            }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
+/* === NÚMEROS QUE TRANSFORMAM – EFEITO VIDRO === */
+.stats-box{
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.45);
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    transition: all 0.4s ease;
+}
 
-            .galeria-ardefa {
-                grid-template-columns: 1fr;
-            }
+.stats-box:hover{
+    transform: translateY(-6px);
+    box-shadow:
+        0 35px 70px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+}
 
-            .empresas-list {
-                grid-template-columns: 1fr;
-            }
+/* Números em destaque */
 
-            header {
-                padding: 0.5rem 0.75rem;
-                gap: 0.5rem;
-            }
-        }
 
-        /* ========== LANDSCAPE ========== */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .hero-interno {
-                height: 40vh;
-                margin-top: 50px;
-            }
+/* Hover individual nos números */
+.stat-item:hover 
 
-            .hero-interno h1 {
-                font-size: clamp(20px, 4vw, 32px);
-            }
-        }
-    </style>
+
+
+
+/* === AJUSTE LAYOUT NÚMEROS – HORIZONTAL E CARD MAIS BAIXO === */
+.stats-grid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.stat-item{
+    flex: 1;
+    text-align: center;
+}
+
+.stats-box{
+    padding: 1.8rem 2rem; /* reduz altura do card */
+}
+
+
+
+
+
+
+/* === ÍCONES ACIMA DOS NÚMEROS === */
+.stat-icon{
+    display: block;
+    font-size: 2rem;
+    color: #0288D1;
+    margin-bottom: 0.4rem;
+}
+
+
+/* === PADRONIZAÇÃO DOS NÚMEROS === */
+.stat-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+}
+
+
+
+
+
+
+
+
+
+/* === CARD NÚMEROS – VIDRO LIMPO (SEM IMAGEM) === */
+.stats-box{
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.45);
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+
+/* === NÚMEROS E TEXTOS LIMPOS (SEM SOMBRA) === */
+.stat-number{
+    font-size: 2.6rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #2E7D32, #0288D1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.stat-label{
+    font-weight: 700;
+    color: #0D2A4A;
+}
+
+
+/* === IMAGEM EQUIPE ARDEFA NO CARD === */
+.card-equipe-img{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+    margin-bottom: 1.2rem;
+    object-fit: cover;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+
+/* === TÍTULO EQUIPE ARDEFA – FONTE MAIOR === */
+
+
+
+/* === CORREÇÃO ALINHAMENTO NÚMEROS === */
+.stats-grid{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+.stat-item{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-box{
+    padding: 1.8rem 2rem;
+}
+
+
+/* === AJUSTE TÍTULO EQUIPE ARDEFA === */
+.equipe-titulo{
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-top: 0.5rem;
+}
+
+
+/* === ALINHAMENTO HORIZONTAL PERFEITO DOS NÚMEROS === */
+.stats-grid{
+    display: flex;
+    align-items: stretch;
+}
+
+.stat-item{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-number{
+    min-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* === GALERIA ARDEFA === */
+.card-galeria-ardefa{
+    margin-top: 2.5rem;
+}
+
+.galeria-ardefa{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.galeria-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.galeria-img:hover{
+    transform: scale(1.04);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+}
+
+
+/* === LIGHTBOX GALERIA === */
+.lightbox{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+
+.lightbox.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-img{
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+.lightbox-close{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.lightbox-prev,
+.lightbox-next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    padding: 0 15px;
+    user-select: none;
+}
+
+.lightbox-prev{ left: 20px; }
+.lightbox-next{ right: 20px; }
+
+/* Hover nas imagens */
+.galeria-img{
+    cursor: pointer;
+}
+
+.galeria-img:hover{
+    transform: scale(1.06);
+}
+
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.3s;z-index:9999}
+.lightbox.active{opacity:1;visibility:visible}
+.lightbox-img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 25px 60px rgba(0,0,0,.6)}
+.lightbox-close{position:absolute;top:20px;right:30px;font-size:2.5rem;color:#fff;cursor:pointer}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);font-size:3rem;color:#fff;cursor:pointer;padding:0 15px;user-select:none}
+.lightbox-prev{left:20px}.lightbox-next{right:20px}
+.galeria-img{cursor:pointer}
+.galeria-img:hover{transform:scale(1.06)}
+
+/* === ANIMAÇÃO SUAVE: ÍCONE VOLTAR AO INÍCIO === */
+.header-back-home a i {
+    animation: pulseArrow 2s infinite;
+}
+
+@keyframes pulseArrow {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-4px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* === AJUSTE DE TAMANHO: ÍCONE E TEXTO VOLTAR AO INÍCIO === */
+.header-back-home a {
+    font-size: 1.25rem;
+}
+
+.header-back-home a i {
+    font-size: 1.35rem;
+}
+
+
+/* === GALERIA ARDEFA – LEGENDAS === */
+.galeria-item{position:relative}
+.galeria-item figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:10px 14px;
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.75));
+  color:#fff;font-size:.9rem;font-weight:600;
+  border-radius:0 0 14px 14px;
+  opacity:0;transition:.3s
+}
+.galeria-item:hover figcaption{opacity:1}
+
+/* === LIGHTBOX === */
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.9);
+  display:none;align-items:center;justify-content:center;
+  z-index:9999
+}
+.lightbox.active{display:flex}
+.lightbox-content{position:relative;max-width:95%;max-height:95%}
+.lightbox-img{max-width:100%;max-height:100%;display:block;border-radius:8px}
+.lightbox-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.85);
+  color:#fff;padding:14px 20px;
+  font-size:1rem;font-weight:600;
+  text-align:center;
+  border-radius:0 0 8px 8px
+}
+
+
+/* === FIX LEGENDA HOVER DENTRO DA IMAGEM === */
+.galeria-item{
+  position: relative;
+  overflow: hidden; /* garante que legenda não saia da imagem */
+}
+
+.galeria-item figcaption{
+  box-sizing: border-box;
+}
+
+
+/* === FIX LEGENDA LIGHTBOX VISÍVEL === */
+.lightbox-content{
+  position: relative;
+}
+
+.lightbox-img{
+  display: block;
+}
+
+.lightbox-caption{
+  display: block;
+  z-index: 2;
+}
+
+
+/* === GARANTIA DE CLIQUE NAS IMAGENS DA GALERIA === */
+.galeria-img {
+    cursor: pointer;
+}
+
+</style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header id="header">
-        <div class="logo">
-            <a href="index.html" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
-                <img src="https://via.placeholder.com/150x50/2E7D32/ffffff?text=ARDEFA" alt="ARDEFA" class="logo-img">
-                <img src="https://via.placeholder.com/150x50/0288D1/ffffff?text=inpEV" alt="inpEV" class="inpev-logo">
-                <img src="https://via.placeholder.com/150x50/1a1a1a/ffffff?text=Campo+Limpo" alt="Sistema Campo Limpo" class="camposlimpo-header-logo">
-            </a>
+<!-- 
+    ==============================================
+    ARDEFA - Associação Regional Oeste Paranaense
+    Desenvolvido por: Douglas Araujo Gomes
+    WhatsApp: (44) 99918-6911
+    ==============================================
+    -->
+<header>
+<a class="logo" href="index.html">
+<img alt="ARDEFA" class="logo-img" src="imagens/logo-ardefa.png"/><img alt="inpEV" class="inpev-logo" src="imagens/inpev-logo.png"/><img alt="Sistema Campo Limpo" class="camposlimpo-header-logo" src="imagens/campolimpo.png"/>
+</a>
+
+<nav class="header-back-home" style="display:flex;justify-content:flex-end;align-items:center;">
+  <a href="index.html" title="Voltar para a página inicial" 
+     style="display:inline-flex;align-items:center;gap:0.5rem;color:#0288D1;font-size:1.1rem;text-decoration:none;">
+    <i class="fas fa-arrow-left"></i>
+    <span style="font-weight:600;">Início</span>
+  </a>
+</nav>
+
+</header>
+<section class="hero-interno">
+<div>
+<h1>Nossa História</h1>
+<p><span class="hero-emphasis">Há mais de duas décadas, a ARDEFA atua na preservação ambiental e na sustentabilidade do campo, em parceria com o inpEV, integrando o Sistema Campo Limpo.</span></p>
+</div>
+</section>
+<section class="historia-section">
+<div class="historia-grid">
+<!-- BRASÃO LATERAL -->
+<div class="brasao-container">
+<img alt="Brasão ARDEFA" src="imagens/ardefabrasao.png"/>
+<div class="brasao-info">
+<h3>Fundação</h3>
+<p><strong>10 de Outubro de 2001</strong></p>
+<p>Palotina - Paraná</p>
+</div>
+</div>
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="conteudo-historia">
+<h2 style="color:#333333;">Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas</h2>
+<div class="texto-historia">
+<p>A <strong>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas – ARDEFA</strong>, foi fundada em <strong>10 de outubro de 2001</strong> é uma entidade sem fins lucrativos que representa as empresas Associadas em suas obrigações e responsabilidades na destinação final às embalagens de agrotóxicos devolvidas pelos seus clientes.</p>
+<p>O processo congrega no <strong>Sistema Campo Limpo</strong> que reúne todas as partes do segmento agrícola, canais de distribuição, indústria produtora de defensivos, agricultores e o setor público, coordenados pelo <strong>Instituto Nacional de Processamento de Embalagens Vazias (InpEV)</strong>.</p>
+<p>Juntos buscam destinar as embalagens de defensivos agrícolas, visando a preservação do meio ambiente e a saúde humana. Cada elo tem suas responsabilidades definidas pela <strong>Lei 9.974/00</strong>. De 2002 até o período atual, a ARDEFA recebeu e destinou mais de <strong>75 Milhões</strong> de embalagens vazias de defensivos agrícolas.</p>
+<div class="stats-box">
+<h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem;">
+<i class="fas fa-chart-line"></i> Números que Transformam
+                        </h3>
+<div class="stats-grid">
+<div class="stat-item">
+<i class="fas fa-map-marked-alt stat-icon"></i><span class="stat-number">95</span>
+<span class="stat-label">Municípios Atendidos</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-handshake stat-icon"></i><span class="stat-number">15</span>
+<span class="stat-label">Empresas Associadas</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-building stat-icon"></i><span class="stat-number">99</span>
+<span class="stat-label">Unidades (Filiais) ARDEFA</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-recycle stat-icon"></i><span class="stat-number">+75Mi</span>
+<span class="stat-label">Embalagens Processadas</span>
+</div>
+</div>
+</div>
+<p>A <strong>ARDEFA atua em 95 municípios</strong> e está entre as principais associações do Paraná. A Associação tem como associadas 15 empresas, que juntas possuem 99 Unidades (filiais), com sede própria localizada na <strong>PR 364 Km 07 na Linha Alvorada – Palotina – Paraná</strong>. A ARDEFA disponibiliza em seus municípios de região locais de devolução das embalagens utilizadas pelos locadores.</p>
+<p>A ARDEFA oferece também como opção de devolução de embalagens, Pontos Itinerantes, onde os produtores são atendidos por Equipes com suporte de 09 Caminhões, permitindo o recebimento e a destinação ambientalmente corretas destes materiais, evitando danos a toda sociedade.</p>
+<div class="operacao-img">
+<img alt="Operação ARDEFA" onerror="this.src='https://via.placeholder.com/800x450/2E7D32/FFFFFF?text=Opera%C3%A7%C3%A3o+ARDEFA'" src="imagens/operacao-ardefa.jpg"/>
+<img alt="Equipe ARDEFA" class="card-equipe-img" src="imagens/equipe.jpg"/><p class="operacao-caption equipe-titulo">Central de recebimento e processamento - Equipe ARDEFA em ação</p>
+</div><div class="card card-galeria-ardefa"><div class="galeria-ardefa"><figure class="galeria-item"><img alt="ARDEFA 1" class="galeria-img" src="imagens/ardefa1.jpg"/ data-caption="Nossa Frota"><figcaption>Nossa Frota</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 2" class="galeria-img" src="imagens/ardefa2.jpg"/ data-caption="Estrutura Industrial"><figcaption>Estrutura Industrial</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 3" class="galeria-img" src="imagens/ardefa3.jpg"/ data-caption="Estrutura Industrial"><figcaption>Estrutura Industrial</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 4" class="galeria-img" src="imagens/ardefa4.jpg"/ data-caption="Nossa Frota"><figcaption>Nossa Frota</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 5" class="galeria-img" src="imagens/ardefa5.jpg"/ data-caption="Escritório"><figcaption>Escritório</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 6" class="galeria-img" src="imagens/ardefa6.jpg"/ data-caption="Escritório"><figcaption>Escritório</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 0" class="galeria-img" src="imagens/ardefa0.jpg"/ data-caption="Escritório"><figcaption>Escritório</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 7" class="galeria-img" src="imagens/ardefa7.jpg"/ data-caption="Dia Campo Limpo"><figcaption>Dia Campo Limpo</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 8" class="galeria-img" src="imagens/ardefa8.jpg"/ data-caption="Equipe prêmio ACIPA"><figcaption>Equipe prêmio ACIPA</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 9" class="galeria-img" src="imagens/ardefa9.jpg"/ data-caption="Dia de Campo C.Vale"><figcaption>Dia de Campo C.Vale</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 10" class="galeria-img" src="imagens/ardefa10.jpg"/ data-caption="Dia de Campo C.Vale"><figcaption>Dia de Campo C.Vale</figcaption></figure>
+<figure class="galeria-item"><img alt="ARDEFA 11" class="galeria-img" src="imagens/ardefa11.jpg"/ data-caption="Dia de Campo C.Vale"><figcaption>Dia de Campo C.Vale</figcaption></figure></div></div>
+<div class="lei-box">
+<h3><i class="fas fa-balance-scale"></i> Lei Federal nº 9.974/00</h3>
+<p>A iniciativa nasceu com a criação da lei federal nº 9.974/00 que objetivou fomentar ações de conscientização e estímulo a reflexão sobre a conservação do meio ambiente, buscando promover a educação ambiental na comunidade onde atuamos e assim levar conhecimento a todos os segmentos da sociedade. Ação instituiu o conceito de responsabilidade compartilhada entre os agentes da cadeia produtiva sobre o processo de recolhimento e destinação final das embalagens de defensivos agrícolas e determinou os papéis específicos de cada um.</p>
+</div>
+<h3 style="color: var(--secondary); font-size: 1.8rem; margin: 2rem 0 1rem;">Parcerias Institucionais</h3>
+<p>Para tanto, contamos com convênios e apoio de órgãos públicos e privados, tais como: <strong>InpEV, SEMA, INSTITUTO DAS ÁGUAS, ADAPAR, IAP, IBAMA, POLÍCIA AMBIENTAL, PATRULHA RURAL, EMATER, IMPRENSA, UNIVERSIDADES e PREFEITURAS MUNICIPAIS</strong>.</p>
+<div class="empresas-box">
+<h3><i class="fas fa-handshake"></i> Empresas Associadas</h3>
+<ul class="empresas-list">
+<li>C.Vale</li>
+<li>I.Riedi</li>
+<li>Copacol</li>
+<li>Horizonte</li>
+<li>Copagril</li>
+<li>Agro Fortuna</li>
+<li>Souza Cruz</li>
+<li>Agro MR</li>
+<li>Contiagro</li>
+<li>Siloti</li>
+<li>Aduplan</li>
+<li>Integrada D&amp;3</li>
+<li>Agro Bickel</li>
+<li>Tertulia</li>
+<li>Agrícola Andreis</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="float-buttons"><a class="float-btn home-btn" href="index.html"><i class="fas fa-home"></i><span class="float-btn-tooltip">Voltar página inicial</span></a></div>
+<footer>
+<div class="footer-grid">
+<div class="footer-col">
+<h3>ARDEFA</h3>
+<p>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas.</p>
+<br/>
+<p>Transformando responsabilidade em preservação desde 2001.</p>
+</div>
+<div class="footer-col">
+<h3>Contato</h3>
+<ul>
+<li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
+<li><i class="fas fa-phone"></i> (44) 3649-6692</li>
+<li><i class="fas fa-envelope"></i> palotina@embalagensvazias.org.br</li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Links Rápidos</h3>
+<ul>
+<li><a href="index.html" style="color:#aaa; text-decoration:none;">Página Inicial</a></li>
+<li><a href="historia.html" style="color:#aaa; text-decoration:none;">Nossa História</a></li>
+<li><a href="index.html#calendario" style="color:#aaa; text-decoration:none;">Calendário</a></li>
+</ul>
+</div>
+</div>
+<div class="copyright">
+            © 2025 ARDEFA. Todos os direitos reservados.
         </div>
-        <nav class="header-back-home">
-            <a href="index.html" title="Voltar para a página inicial">
-                <i class="fas fa-arrow-left"></i>
-                <span>Início</span>
-            </a>
-        </nav>
-    </header>
+</footer>
+<div class="lightbox" id="lightbox">
+<span class="lightbox-close">×</span>
+<span class="lightbox-prev">❮</span>
+<span class="lightbox-next">❯</span>
+<img alt="" class="lightbox-img" src=""/>
+</div>
 
-    <!-- HERO INTERNO -->
-    <section class="hero-interno">
-        <div>
-            <h1>Nossa História</h1>
-            <p>Há mais de duas décadas, a ARDEFA atua na preservação ambiental e na sustentabilidade do campo, em parceria com o inpEV, integrando o Sistema Campo Limpo.</p>
-        </div>
-    </section>
 
-    <!-- HISTORIA SECTION -->
-    <section class="historia-section">
-        <div class="historia-grid">
-            <!-- BRASÃO -->
-            <div class="brasao-container">
-                <img src="https://via.placeholder.com/280x280/2E7D32/ffffff?text=Brasão+ARDEFA" alt="Brásão ARDEFA">
-                <div class="brasao-info">
-                    <h3>Fundação</h3>
-                    <p><strong>10 de Outubro de 2001</strong></p>
-                    <p>Palotina - Paraná</p>
-                </div>
-            </div>
 
-            <!-- CONTEUDO -->
-            <div class="conteudo-historia">
-                <h2>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas</h2>
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
 
-                <div class="texto-historia">
-                    <p>A <strong>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas – ARDEFA</strong>, foi fundada em <strong>10 de outubro de 2001</strong> é uma entidade sem fins lucrativos que representa as empresas Associadas em suas obrigações e responsabilidades na destinação final às embalagens de agrotóxicos devolvidas pelos seus clientes.</p>
 
-                    <p>O processo congrega no <strong>Sistema Campo Limpo</strong> que reúne todas as partes do segmento agrícola, canais de distribuição, indústria produtora de defensivos, agricultores e o setor público, coordenados pelo <strong>Instituto Nacional de Processamento de Embalagens Vazias (InpEV)</strong>.</p>
 
-                    <p>Juntos buscam destinar as embalagens de defensivos agrícolas, visando a preservação do meio ambiente e a saúde humana. Cada elo tem suas responsabilidades definidas pela <strong>Lei 9.974/00</strong>. De 2002 até o período atual, a ARDEFA recebeu e destinou mais de <strong>75 Milhões</strong> de embalagens vazias de defensivos agrícolas.</p>
-                </div>
 
-                <!-- STATS BOX -->
-                <div class="stats-box">
-                    <h3><i class="fas fa-chart-line"></i> Números que Transformam</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <i class="fas fa-map-marked-alt stat-icon"></i>
-                            <span class="stat-number">95</span>
-                            <span class="stat-label">Municípios Atendidos</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-handshake stat-icon"></i>
-                            <span class="stat-number">15</span>
-                            <span class="stat-label">Empresas Associadas</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-building stat-icon"></i>
-                            <span class="stat-number">99</span>
-                            <span class="stat-label">Unidades Filiais</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-recycle stat-icon"></i>
-                            <span class="stat-number">75Mi</span>
-                            <span class="stat-label">Embalagens Processadas</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="texto-historia">
-                    <p>A <strong>ARDEFA atua em 95 municípios</strong> e está entre as principais associações do Paraná. A Associação tem como associadas 15 empresas, que juntas possuem 99 Unidades (filiais), com sede própria localizada na <strong>PR 364 Km 07 na Linha Alvorada – Palotina – Paraná</strong>. A ARDEFA disponibiliza em seus municípios de região locais de devolução das embalagens utilizadas pelos locadores.</p>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const imgs = document.querySelectorAll('.galeria-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
 
-                    <p>A ARDEFA oferece também como opção de devolução de embalagens, Pontos Itinerantes, onde os produtores são atendidos por Equipes com suporte de 09 Caminhões, permitindo o recebimento e a destinação ambientalmente corretas destes materiais, evitando danos a toda sociedade.</p>
-                </div>
+  if(!lightbox || !lightboxImg) return;
 
-                <!-- LEI BOX -->
-                <div class="lei-box">
-                    <h3><i class="fas fa-balance-scale"></i> Lei Federal nº 9.974/00</h3>
-                    <p>A iniciativa nasceu com a criação da lei federal nº 9.974/00 que objetivou fomentar ações de conscientização e estímulo a reflexão sobre a conservação do meio ambiente, buscando promover a educação ambiental na comunidade onde atuamos e assim levar conhecimento a todos os segmentos da sociedade. Ação instituiu o conceito de responsabilidade compartilhada entre os agentes da cadeia produtiva sobre o processo de recolhimento e destinação final das embalagens de defensivos agrícolas e determinou os papéis específicos de cada um.</p>
-                </div>
+  imgs.forEach(img => {
+    img.addEventListener('click', function () {
+      lightboxImg.src = this.src;
+      if(lightboxCaption){
+        lightboxCaption.textContent = this.getAttribute('data-caption') || '';
+      }
+      lightbox.classList.add('active');
+    });
+  });
 
-                <!-- PARCERIAS -->
-                <h3 style="color: var(--secondary); font-size: clamp(18px, 2.5vw, 22px); margin: clamp(1.5rem, 3vw, 2rem) 0 clamp(1rem, 1.5vw, 1.5rem) 0;">Parcerias Institucionais</h3>
-                <p class="texto-historia">Para tanto, contamos com convênios e apoio de órgãos públicos e privados, tais como <strong>InpEV, SEMA, INSTITUTO DAS ÁGUAS, ADAPAR, IAP, IBAMA, POLÍCIA AMBIENTAL, PATRULHA RURAL, EMATER, IMPRENSA, UNIVERSIDADES e PREFEITURAS MUNICIPAIS</strong>.</p>
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+    }
+  });
 
-                <!-- EMPRESAS -->
-                <div class="empresas-box">
-                    <h3><i class="fas fa-handshake"></i> Empresas Associadas</h3>
-                    <ul class="empresas-list">
-                        <li>✓ C.Vale</li>
-                        <li>✓ I.Riedi</li>
-                        <li>✓ Copacol</li>
-                        <li>✓ Horizonte</li>
-                        <li>✓ Copagril</li>
-                        <li>✓ Agro Fortuna</li>
-                        <li>✓ Souza Cruz</li>
-                        <li>✓ Agro MR</li>
-                        <li>✓ Contiagro</li>
-                        <li>✓ Siloti</li>
-                        <li>✓ Aduplan</li>
-                        <li>✓ Integrada Damp3</li>
-                        <li>✓ Agro Bickel</li>
-                        <li>✓ Tertulia</li>
-                        <li>✓ Agrícola Andreis</li>
-                    </ul>
-                </div>
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      lightbox.classList.remove('active');
+    }
+  });
+});
+</script>
 
-                <!-- GALERIA -->
-                <h3 style="color: var(--primary); font-size: clamp(18px, 2.5vw, 22px); margin: clamp(1.5rem, 3vw, 2rem) 0 clamp(1rem, 1.5vw, 1.5rem) 0;">Galeria ARDEFA</h3>
-                <div class="galeria-ardefa">
-                    <img class="galeria-img" src="https://via.placeholder.com/300x200?text=ARDEFA+1" alt="ARDEFA">
-                    <img class="galeria-img" src="https://via.placeholder.com/300x200?text=ARDEFA+2" alt="ARDEFA">
-                    <img class="galeria-img" src="https://via.placeholder.com/300x200?text=ARDEFA+3" alt="ARDEFA">
-                    <img class="galeria-img" src="https://via.placeholder.com/300x200?text=ARDEFA+4" alt="ARDEFA">
-                    <img class="galeria-img" src="https://via.placeholder.com/300x200?text=ARDEFA+5" alt="ARDEFA">
-                    <img class="galeria-img" src="https://via.placeholder.com/300x200?text=ARDEFA+6" alt="ARDEFA">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FLOAT BUTTON -->
-    <div class="float-buttons">
-        <a href="index.html" class="float-btn home-btn" title="Voltar à página inicial">
-            <i class="fas fa-home"></i>
-        </a>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>ARDEFA</h3>
-                <p>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas.</p>
-                <br>
-                <p>Transformando responsabilidade em preservação desde 2001.</p>
-            </div>
-            <div class="footer-col">
-                <h3>Contato</h3>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
-                    <li><i class="fas fa-phone"></i> (44) 3649-6692</li>
-                    <li><i class="fas fa-envelope"></i> palotinaembalagensvazias@org.br</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Links Rápidos</h3>
-                <ul>
-                    <li><a href="index.html" style="color: #aaa; text-decoration: none;">Página Inicial</a></li>
-                    <li><a href="#" style="color: #aaa; text-decoration: none;">Nossa História</a></li>
-                    <li><a href="calendario_ardefa.html" style="color: #aaa; text-decoration: none;">Calendário</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            2025 ARDEFA. Todos os direitos reservados.
-        </div>
-    </footer>
-
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    </script>
 </body>
 </html>
