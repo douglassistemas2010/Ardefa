@@ -430,7 +430,7 @@ nav a:hover::after {
     background: rgba(255,255,255,0.15);
     padding: 2.5rem;
     border-radius: 20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(4px);
     border: 1px solid rgba(255,255,255,0.2);
     transition: var(--transition);
 }
@@ -502,11 +502,30 @@ nav a:hover::after {
 
 /* CALENDAR */
 .calendar {
-    background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('imagens/fundo-calendario.jpg');
+    position: relative;
+    background-image: url('imagens/fundo-calendario.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     padding: 5rem 10%;
+    overflow: hidden;
+}
+
+/* Overlay com blur suave */
+.calendar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.35);
+    z-index: 0;
+}
+
+/* Conteúdo acima do blur */
+.calendar > * {
+    position: relative;
+    z-index: 1;
 }
 
 .calendar-content {
@@ -583,7 +602,7 @@ nav a:hover::after {
     text-align: center;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     transition: var(--transition);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(4px);
 }
 
 .calendar-feature:hover {
@@ -945,8 +964,38 @@ nav a:hover::after {
 }
 
 .map-section {
-    background: var(--white);
+    position: relative;
+    background: linear-gradient(
+        180deg,
+        rgba(220,235,225,0.95) 0%,
+        rgba(200,225,205,0.9) 45%,
+        rgba(220,235,225,0.95) 100%
+    );
     padding: 5rem 10%;
+    overflow: hidden;
+}
+
+/* textura sutil para profundidade */
+.map-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+        circle at 20% 20%,
+        rgba(46,125,50,0.10),
+        transparent 60%
+    ),
+    radial-gradient(
+        circle at 80% 80%,
+        rgba(2,136,209,0.06),
+        transparent 60%
+    );
+    z-index: 0;
+}
+
+.map-section > * {
+    position: relative;
+    z-index: 1;
 }
 
 .map-content-wrapper {
@@ -2162,7 +2211,7 @@ Acessar Calendário Completo
 <i class="fas fa-phone"></i>
 <div class="map-card-text">
 <h3>Telefone</h3>
-<p>(44) 3649-6692<br/>WhatsApp: (44) 98419-1123</p>
+<p>(44) 3649-6692<br/>WhatsApp: (44) 3649-1417</p>
 </div>
 </div>
 </div>
@@ -2175,7 +2224,7 @@ Acessar Calendário Completo
 </section>
 
 <div class="float-buttons">
-<a class="float-btn whatsapp-btn" href="https://api.whatsapp.com/send?phone=5544984191123&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20ARDEFA." rel="noopener noreferrer" target="_blank">
+<a class="float-btn whatsapp-btn" href="https://api.whatsapp.com/send?phone=554436491417&text=Ol%C3%A1%2C%20venho%20em%20contato%20atrav%C3%A9s%20do%20site%20institucional%20da%20ARDEFA." rel="noopener noreferrer" target="_blank">
 <span class="float-btn-tooltip">Fale Conosco</span>
 <i class="fab fa-whatsapp"></i>
 </a>
@@ -2511,11 +2560,3 @@ new Chart(ctx, {
 </body>
 
 </html>
-/* === TEXTOS CORRIDOS === */
-.about-text p,
-.inpev-header p,
-.cl-text p,
-.calendar-text p {
-    font-family: var(--font-body);
-    font-weight: 500;
-}
