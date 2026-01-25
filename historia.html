@@ -114,20 +114,19 @@
             color: var(--white);
             padding: 0 20px;
             position: relative;
-            background: linear-gradient(135deg, var(--primary) 0%, #1B5E20 100%);
             margin-top: 70px;
         }
 
         .hero-interno h1 {
-            font-size: 4rem;
+            font-size: 2.4rem;
             margin-bottom: 1rem;
             animation: slideUp 1s ease;
         }
 
 
-@media (max-width: 768px) {
+@media (min-width: 769px) {
     .hero-interno h1 {
-        font-size: 2rem;
+        font-size: 4rem;
     }
 }
 
@@ -615,6 +614,7 @@ header.scrolled {
 
 .stats-grid{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
     gap: 2rem;
@@ -976,6 +976,10 @@ header.scrolled {
         font-size: 1.1rem;
     }
 
+    .galeria-ardefa{
+        grid-template-columns: 1fr;
+    }
+
     .galeria-img {
         height: 180px;
     }
@@ -994,6 +998,12 @@ header.scrolled {
     .header-back-home {
         display: none !important;
     }
+}
+
+.header-back-home{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
 }
 
 /* === AJUSTE LEGENDA GALERIA NO MOBILE === */
@@ -1108,7 +1118,7 @@ header.scrolled {
 <img alt="ARDEFA" class="logo-img" src="imagens/logo-ardefa.png"/><img alt="inpEV" class="inpev-logo" src="imagens/inpev-logo.png"/><img alt="Sistema Campo Limpo" class="camposlimpo-header-logo" src="imagens/campolimpo.png"/>
 </a>
 
-<nav class="header-back-home" style="display:flex;justify-content:flex-end;align-items:center;">
+<nav class="header-back-home">
   <a href="index.html" title="Voltar para a página inicial" 
      style="display:inline-flex;align-items:center;gap:0.5rem;color:#0288D1;font-size:1.1rem;text-decoration:none;">
     <i class="fas fa-arrow-left"></i>
