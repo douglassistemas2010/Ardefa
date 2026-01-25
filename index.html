@@ -8,6 +8,11 @@
 <title>ARDEFA - Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+
 <style>
 :root {
     --primary: #2E7D32;
@@ -16,13 +21,18 @@
     --light: #f4f7f6;
     --white: #ffffff;
     --transition: all 0.3s ease;
+
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
@@ -34,6 +44,12 @@ body {
     color: var(--dark);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/* TIPOGRAFIA MODERNA - MANTÉM TODOS OS GRADIENTES */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
 }
 
 section {
@@ -205,6 +221,9 @@ nav a:hover::after {
 }
 
 .cta-button {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.01em;
     display: inline-block;
     padding: 1.2rem 3rem;
     background: linear-gradient(135deg, var(--secondary), #0277BD);
@@ -326,7 +345,7 @@ nav a:hover::after {
     padding: 5rem 10%;
     display: flex;
     align-items: center;
-    gap: 4rem;
+    gap: 1.5rem; /* Reduzido conforme solicitado */
     flex-wrap: wrap;
     background: var(--white);
 }
@@ -368,6 +387,9 @@ nav a:hover::after {
 }
 
 .about-history-btn {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.01em;
     display: inline-block;
     margin-top: 2rem;
     padding: 1rem 2.5rem;
@@ -436,7 +458,8 @@ nav a:hover::after {
 .partners-carousel {
     display: flex;
     align-items: center;
-    gap: 4rem;
+    justify-content: flex-start !important; /* Força o alinhamento no início */
+    gap: 10px !important; /* Espaçamento fixo e pequeno de 10px */
     animation: scroll 30s linear infinite;
     width: max-content;
     margin-top: 2rem;
@@ -453,12 +476,12 @@ nav a:hover::after {
 
 .partner-logo {
     flex-shrink: 0;
-    width: 180px;
+    width: 140px; /* Reduzido de 180px para 140px */
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem; /* Reduzido de 1rem para 0.5rem */
     background: var(--white);
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
@@ -520,6 +543,9 @@ nav a:hover::after {
 }
 
 .calendar-btn {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.01em;
     display: inline-flex;
     align-items: center;
     gap: 15px;
@@ -868,6 +894,26 @@ nav a:hover::after {
 }
 
 @media (max-width: 768px) {
+
+    .inpev-cards {
+        gap: 15px;
+    }
+
+    .inpev-card {
+        padding: 1.8rem 1.3rem;
+    }
+
+
+    .inpev-ribbon {
+        font-size: 0.55rem;
+        width: 105px;
+        left: -22px;
+        padding: 5px 0;
+        letter-spacing: 0.6px;
+        transform: rotate(-45deg);
+        transform-origin: left center;
+    }
+
     .chart-container {
         padding: 0 10px;
         max-width: 100%;
@@ -884,6 +930,15 @@ nav a:hover::after {
 }
 
 @media (max-width: 480px) {
+    .chart-container canvas {
+        max-height: 220px;
+    }
+
+    .impact-section p {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+
     .chart-container canvas {
         max-height: 250px;
     }
@@ -1109,6 +1164,9 @@ nav a:hover::after {
 }
 
 .float-btn-tooltip {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
     position: absolute;
     right: 75px;
     background: var(--dark);
@@ -1135,6 +1193,9 @@ nav a:hover::after {
 }
 
 .float-btn:hover .float-btn-tooltip {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
     opacity: 1;
     visibility: visible;
 }
@@ -1499,6 +1560,26 @@ footer {
 }
 
 @media (max-width: 768px) {
+
+    .inpev-cards {
+        gap: 15px;
+    }
+
+    .inpev-card {
+        padding: 1.8rem 1.3rem;
+    }
+
+
+    .inpev-ribbon {
+        font-size: 0.55rem;
+        width: 105px;
+        left: -22px;
+        padding: 5px 0;
+        letter-spacing: 0.6px;
+        transform: rotate(-45deg);
+        transform-origin: left center;
+    }
+
     /* 1. Ajuste Geral de Espaçamento */
     section {
         padding: 3rem 5%; /* Reduz o padding lateral excessivo */
@@ -1697,6 +1778,15 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .chart-container canvas {
+        max-height: 220px;
+    }
+
+    .impact-section p {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+
     /* Ajustes para telas muito pequenas (celulares estreitos) */
     .impact-pack-grid {
         grid-template-columns: 1fr !important; /* 1 coluna apenas */
@@ -1806,7 +1896,7 @@ footer {
     <button class="cl-step-btn active" data-step="1">1<br><span>Entrega</span></button>
     <button class="cl-step-btn" data-step="2">2<br><span>Triagem</span></button>
     <button class="cl-step-btn" data-step="3">3<br><span>Separação</span></button>
-    <button class="cl-step-btn" data-step="4">4<br><span>Armazenamento</span></button>
+    <button class="cl-step-btn" data-step="4">4<br><span>Armazenar</span></button>
     <button class="cl-step-btn" data-step="5">5<br><span>Destinação</span></button>
   </div>
 
@@ -2077,7 +2167,7 @@ Acessar Calendário Completo
 </div>
 </div>
 <div style="text-align: center; margin-top: 2rem;">
-<a class="map-directions-btn" href="https://www.google.com/maps/dir//Rodovia+PR+364,+Linha+Alvorada,+Palotina+-+PR" rel="noopener noreferrer" target="_blank">
+<a class="map-directions-btn" href="https://maps.app.goo.gl/sNCZdCWMjjmZjaWQA" rel="noopener noreferrer" target="_blank">
 <i class="fas fa-directions"></i> Abrir no Google Maps
 </a>
 </div>
@@ -2421,3 +2511,11 @@ new Chart(ctx, {
 </body>
 
 </html>
+/* === TEXTOS CORRIDOS === */
+.about-text p,
+.inpev-header p,
+.cl-text p,
+.calendar-text p {
+    font-family: var(--font-body);
+    font-weight: 500;
+}

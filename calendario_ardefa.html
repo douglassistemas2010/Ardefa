@@ -1,421 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<style>
-
-        :root {
-            --primary: #2E7D32;
-            --secondary: #0288D1;
-            --dark: #1a1a1a;
-            --light: #f4f7f6;
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            padding-top: 100px;
-            padding-bottom: 100px;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px; /* Espaço entre as logos */
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .logo-img { height: 50px; width: auto; }
-
-        .logo-secondary {
-            height: 50px;
-            width: auto;
-        }
-
-        .logo-unified {
-            height: 50px;
-            width: auto;
-        }
-
-        /* keep existing */
-        .logo-secondary {
-            height: 50px; /* Um pouco menor para equilíbrio visual */
-            width: auto;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 20px;
-        }
-
-        .page-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .page-title h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { opacity: 0.9; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); }
-        }
-
-        .page-title p {
-            color: var(--secondary);
-            font-weight: 700;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .page-title p::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .table-wrapper {
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            overflow-x: auto;
-            border: 1px solid rgba(0,0,0,0.05);
-            margin-top: 2rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 900px;
-        }
-
-        thead {
-            background: linear-gradient(135deg, var(--primary), #1B5E20);
-            color: var(--white);
-        }
-
-        th {
-            padding: 1.5rem;
-            text-align: left;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
-
-        td {
-            padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95rem;
-        }
-
-        tr:last-child td { border-bottom: none; }
-
-        tr:hover {
-            background-color: #FFF3E0 !important; /* Laranja bem claro */
-            border-left: 4px solid #FF9800; /* Borda laranja */
-            transition: var(--transition);
-        }
-
-        .badge {
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-
-        .badge-equipe1 { background: #E8F5E9; color: #2E7D32; border: 1px solid #2E7D32; }
-        .badge-equipe2 { background: #E3F2FD; color: #0288D1; border: 1px solid #0288D1; }
-
-        /* Floating Buttons */
-        .floating-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 2000;
-        }
-
-        .float-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-back { background: linear-gradient(135deg, var(--primary), #1B5E20); }
-        .btn-share { background: linear-gradient(135deg, var(--secondary), #0277BD); }
-
-        .float-btn:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-        }
-
-        /* Tooltip Styles */
-        .float-btn {
-            position: relative;
-        }
-
-        .float-btn::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            right: 75px;
-            background: var(--dark);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            pointer-events: none;
-        }
-
-        .float-btn::after {
-            content: '';
-            position: absolute;
-            right: 65px;
-            border: 8px solid transparent;
-            border-left-color: var(--dark);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            pointer-events: none;
-        }
-
-        .float-btn:hover::before,
-        .float-btn:hover::after {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-5px);
-        }
-
-        /* Highlight and Pulse Animation */
-        .row-highlight {
-            background-color: rgba(46, 125, 50, 0.1) !important;
-            border-left: 5px solid var(--primary);
-            animation: pulseHighlight 2s infinite;
-        }
-
-        @keyframes pulseHighlight {
-            0% { background-color: rgba(46, 125, 50, 0.1); }
-            50% { background-color: rgba(46, 125, 50, 0.25); }
-            100% { background-color: rgba(46, 125, 50, 0.1); }
-        }
-
-        .row-highlight td {
-            font-weight: 600;
-        }
-
-        /* Print/PDF Optimization */
-        @media print {
-            .floating-container, header {
-                display: none !important;
-            }
-            body {
-                padding: 0 !important;
-                background: white;
-            }
-            .container {
-                margin: 0 !important;
-                max-width: 100% !important;
-                padding: 0 !important;
-            }
-            .table-wrapper {
-                box-shadow: none !important;
-                border: none !important;
-            }
-            table {
-                min-width: auto !important;
-            }
-            th, td {
-                padding: 8px !important;
-                font-size: 10px !important;
-            }
-            .badge {
-                border: 1px solid #ccc !important;
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .page-title h1 { font-size: 2rem; }
-            .page-title p { font-size: 1rem; letter-spacing: 2px; }
-            .container { padding: 0 10px; }
-            .logo-img { height: 50px; width: auto; }
-        }
-    
-
-/* ===== EXTENSÕES HEADER / FOOTER ===== */
-
-/* === HEADER BACK HOME (VALIDADO) === */
-.header-back-home a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #0288D1;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.header-back-home a i::before {
-    display: inline-block;
-    animation: pulseArrow 2s infinite;
-}
-
-@keyframes pulseArrow {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(-4px); }
-    100% { transform: translateX(0); }
-}
-
-/* === FOOTER PADRÃO === */
-footer {
-    background: #000;
-    color: #fff;
-}
-
-
-
-/* === AJUSTE FINAL: REMOVER ESPAÇO EM BRANCO APÓS RODAPÉ === */
-html, body {
-    margin: 0;
-    padding: 0;
-}
-
-footer {
-    margin-bottom: 0;
-}
-
-
-/* === TAMANHO DAS LOGOS DO RODAPÉ (IGUAL HISTÓRIA) === */
-
-
-
-/* FOOTER */
-        footer {
-            background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
-            color: #aaa;
-            padding: 4rem 10% 1rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-col h3 { 
-            color: var(--white); 
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-col ul { 
-            list-style: none; 
-        }
-
-        .footer-col li { 
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-col i { 
-            margin-right: 10px; 
-            color: var(--secondary);
-        }
-
-        .copyright {
-            text-align: center;
-            border-top: 1px solid #333;
-            padding-top: 2rem;
-            font-size: 0.9rem;
-        }
-
-        
-
-/* === CORREÇÃO: HEADER NÃO DEVE CORTAR SCROLL === */
-html, body {
-    overflow-x: hidden;
-}
-
-body {
-    padding-top: 0;
-}
-
-header {
-    position: relative;
-}
-
-</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário ARDEFA - 1º Semestre 2026</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
-</head>
-<body>
-    <header>
-<style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+    <style>
         :root {
             --primary: #2E7D32;
             --secondary: #0288D1;
@@ -424,57 +21,85 @@ header {
             --white: #ffffff;
             --shadow: 0 4px 15px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            background-color: var(--light);
+background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
-            padding-top: 100px;
-            padding-bottom: 100px;
+            /* Ajuste para não cortar conteúdo sob o header fixo */
+            padding-top: 90px; 
+            
+            overflow-x: hidden; /* Previne rolagem horizontal na página inteira */
         }
 
+        /* ================= HEADER (PADRÃO HISTORIA.HTML) ================= */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 5%;
+            background: linear-gradient(180deg, #f0f0f0 0%, #eaeaea 100%);
+            padding: 0.7rem 5%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 30px; /* Espaço entre as logos */
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espaço entre logos */
+            text-decoration: none;
         }
 
         .logo-img { height: 50px; width: auto; }
+        .inpev-logo { height: 52px; width: auto; }
+        .camposlimpo-header-logo { height: 48px; width: auto; }
 
-        .logo-secondary {
-            height: 50px;
-            width: auto;
+        .header-back-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
         }
 
-        .logo-unified {
-            height: 50px;
-            width: auto;
+        .header-back-home a:hover {
+            background: rgba(2, 136, 209, 0.1);
         }
 
-        /* keep existing */
-        .logo-secondary {
-            height: 50px; /* Um pouco menor para equilíbrio visual */
-            width: auto;
+        .header-back-home a i {
+            animation: pulseArrow 2s infinite;
         }
 
+        @keyframes pulseArrow {
+            0% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(-4px); opacity: 0.7; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ================= LAYOUT PRINCIPAL ================= */
         .container {
             max-width: 1200px;
             margin: 2rem auto;
@@ -489,6 +114,7 @@ header {
 
         .page-title h1 {
             font-size: 3rem;
+            font-family: var(--font-display);
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -507,6 +133,7 @@ header {
 
         .page-title p {
             color: var(--secondary);
+            font-family: var(--font-display);
             font-weight: 700;
             font-size: 1.4rem;
             text-transform: uppercase;
@@ -527,19 +154,22 @@ header {
             border-radius: 2px;
         }
 
+        /* ================= TABELA RESPONSIVA (CARD VIEW) ================= */
         .table-wrapper {
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            overflow-x: auto;
+            /* Importante: overflow hidden para não rolar, vamos ajustar via CSS */
+            overflow: hidden; 
             border: 1px solid rgba(0,0,0,0.05);
             margin-top: 2rem;
+            width: 100%;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 900px;
+            /* Removido min-width fixo para permitir responsividade */
         }
 
         thead {
@@ -549,6 +179,7 @@ header {
 
         th {
             padding: 1.5rem;
+            font-family: var(--font-display);
             text-align: left;
             font-weight: 700;
             text-transform: uppercase;
@@ -558,18 +189,20 @@ header {
 
         td {
             padding: 1.2rem 1.5rem;
+            font-family: var(--font-body);
             border-bottom: 1px solid #f0f0f0;
             font-size: 0.95rem;
+            vertical-align: middle;
         }
 
         tr:last-child td { border-bottom: none; }
 
-        tr:hover {
-            background-color: #FFF3E0 !important; /* Laranja bem claro */
-            border-left: 4px solid #FF9800; /* Borda laranja */
+        tbody tr:hover {
+            background-color: #E8F5E9 !important;
             transition: var(--transition);
         }
 
+        /* Badges */
         .badge {
             padding: 0.5rem 1rem;
             border-radius: 50px;
@@ -577,12 +210,26 @@ header {
             font-weight: 800;
             text-transform: uppercase;
             display: inline-block;
+            white-space: nowrap;
         }
 
         .badge-equipe1 { background: #E8F5E9; color: #2E7D32; border: 1px solid #2E7D32; }
         .badge-equipe2 { background: #E3F2FD; color: #0288D1; border: 1px solid #0288D1; }
 
-        /* Floating Buttons */
+        /* Highlight Row */
+        .row-highlight {
+            background-color: rgba(46, 125, 50, 0.1) !important;
+            border-left: 5px solid var(--primary);
+            animation: pulseHighlight 2s infinite;
+        }
+
+        @keyframes pulseHighlight {
+            0% { background-color: rgba(46, 125, 50, 0.1); }
+            50% { background-color: rgba(46, 125, 50, 0.25); }
+            100% { background-color: rgba(46, 125, 50, 0.1); }
+        }
+
+        /* ================= BOTÕES FLUTUANTES ================= */
         .floating-container {
             position: fixed;
             bottom: 30px;
@@ -607,6 +254,7 @@ header {
             transition: var(--transition);
             border: none;
             cursor: pointer;
+            position: relative;
         }
 
         .btn-back { background: linear-gradient(135deg, var(--primary), #1B5E20); }
@@ -617,11 +265,7 @@ header {
             box-shadow: 0 12px 30px rgba(0,0,0,0.3);
         }
 
-        /* Tooltip Styles */
-        .float-btn {
-            position: relative;
-        }
-
+        /* Tooltip */
         .float-btn::before {
             content: attr(data-tooltip);
             position: absolute;
@@ -659,114 +303,12 @@ header {
             transform: translateX(-5px);
         }
 
-        /* Highlight and Pulse Animation */
-        .row-highlight {
-            background-color: rgba(46, 125, 50, 0.1) !important;
-            border-left: 5px solid var(--primary);
-            animation: pulseHighlight 2s infinite;
-        }
-
-        @keyframes pulseHighlight {
-            0% { background-color: rgba(46, 125, 50, 0.1); }
-            50% { background-color: rgba(46, 125, 50, 0.25); }
-            100% { background-color: rgba(46, 125, 50, 0.1); }
-        }
-
-        .row-highlight td {
-            font-weight: 600;
-        }
-
-        /* Print/PDF Optimization */
-        @media print {
-            .floating-container, header {
-                display: none !important;
-            }
-            body {
-                padding: 0 !important;
-                background: white;
-            }
-            .container {
-                margin: 0 !important;
-                max-width: 100% !important;
-                padding: 0 !important;
-            }
-            .table-wrapper {
-                box-shadow: none !important;
-                border: none !important;
-            }
-            table {
-                min-width: auto !important;
-            }
-            th, td {
-                padding: 8px !important;
-                font-size: 10px !important;
-            }
-            .badge {
-                border: 1px solid #ccc !important;
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .page-title h1 { font-size: 2rem; }
-            .page-title p { font-size: 1rem; letter-spacing: 2px; }
-            .container { padding: 0 10px; }
-            .logo-img { height: 50px; width: auto; }
-        }
-    
-
-/* ===== EXTENSÕES HEADER / FOOTER ===== */
-
-/* === HEADER BACK HOME (VALIDADO) === */
-.header-back-home a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #0288D1;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.header-back-home a i::before {
-    display: inline-block;
-    animation: pulseArrow 2s infinite;
-}
-
-@keyframes pulseArrow {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(-4px); }
-    100% { transform: translateX(0); }
-}
-
-/* === FOOTER PADRÃO === */
-footer {
-    background: #000;
-    color: #fff;
-}
-
-
-
-/* === AJUSTE FINAL: REMOVER ESPAÇO EM BRANCO APÓS RODAPÉ === */
-html, body {
-    margin: 0;
-    padding: 0;
-}
-
-footer {
-    margin-bottom: 0;
-}
-
-
-/* === TAMANHO DAS LOGOS DO RODAPÉ (IGUAL HISTÓRIA) === */
-
-
-
-/* FOOTER */
+        /* ================= FOOTER ================= */
         footer {
             background: linear-gradient(135deg, #212121 0%, var(--dark) 100%);
             color: #aaa;
             padding: 4rem 10% 1rem;
+            margin-top: 3rem;
         }
 
         .footer-grid {
@@ -779,21 +321,13 @@ footer {
         .footer-col h3 { 
             color: var(--white); 
             margin-bottom: 1.5rem;
+            font-family: var(--font-display);
             font-size: 1.3rem;
         }
 
-        .footer-col ul { 
-            list-style: none; 
-        }
-
-        .footer-col li { 
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-col i { 
-            margin-right: 10px; 
-            color: var(--secondary);
-        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.8rem; font-family: var(--font-body); }
+        .footer-col i { margin-right: 10px; color: var(--secondary); }
 
         .copyright {
             text-align: center;
@@ -802,39 +336,98 @@ footer {
             font-size: 0.9rem;
         }
 
-        
+        /* ================= RESPONSIVIDADE (MOBILE MAGIC) ================= */
+        @media (max-width: 900px) {
+            /* Ajustes Gerais */
+            .container { padding: 0 10px; }
+            .page-title h1 { font-size: 2rem; }
+            .page-title p { font-size: 1rem; }
+            
+            /* Ajustes Header Mobile */
+            header { padding: 0.8rem 3%; flex-wrap: wrap; gap: 10px; justify-content: center; }
+            .logo { justify-content: center; width: 100%; margin-bottom: 5px; }
+            .header-back-home { width: 100%; display: flex; justify-content: center; }
+            
+            /* Tamanhos logos mobile */
+            .logo-img { height: 40px; }
+            .inpev-logo { height: 42px; }
+            .camposlimpo-header-logo { height: 38px; }
 
-/* === CORREÇÃO: HEADER NÃO DEVE CORTAR SCROLL === */
-html, body {
-    overflow-x: hidden;
-}
+            /* --- MÁGICA DA TABELA SEM ROLAGEM HORIZONTAL --- */
+            /* Transforma linhas em cards */
+            thead { display: none; } /* Esconde o cabeçalho da tabela */
+            
+            table, tbody, tr, td { display: block; width: 100%; }
+            
+            tr {
+                margin-bottom: 1.5rem;
+                background: #fff;
+                border: 1px solid #eee;
+                border-radius: 12px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+                overflow: hidden; /* Garante bordas arredondadas */
+            }
 
-body {
-    padding-top: 0;
-}
+            td {
+                text-align: right; /* Conteúdo à direita */
+                padding-left: 50%; /* Espaço para o rótulo */
+                position: relative;
+                border-bottom: 1px solid #f0f0f0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+            }
+            
+            /* Inserção automática dos títulos via CSS */
+            td::before {
+                content: attr(data-label); /* Pega o texto do atributo data-label */
+                font-weight: 700;
+                color: var(--primary);
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                text-align: left;
+            }
 
-header {
-    position: relative;
-}
+            /* Específico para celular */
+            .badge { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
+            
+            /* Ajuste destaque */
+            .row-highlight { border-left: 5px solid var(--primary); border-top: none; border-bottom: none; }
+        }
 
-</style>
+        @media print {
+            .floating-container, header, .header-back-home { display: none !important; }
+            body { padding: 0 !important; background: white; }
+            .container { margin: 0 !important; max-width: 100% !important; padding: 0 !important; }
+            .table-wrapper { box-shadow: none !important; border: none !important; }
+            /* Na impressão, volta a ser tabela normal */
+            table { display: table !important; width: 100% !important; }
+            thead { display: table-header-group !important; }
+            tbody { display: table-row-group !important; }
+            tr { display: table-row !important; border: none !important; box-shadow: none !important; }
+            td { display: table-cell !important; text-align: left !important; border-bottom: 1px solid #ccc !important; }
+            td::before { content: none !important; }
+            .badge { border: 1px solid #ccc !important; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
 
-<div class="header-inner" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
-  <div class="header-left" style="display:flex;align-items:center;gap:1.5rem;">
-    <img src="imagens/logo-ardefa.png" alt="ARDEFA" style="max-height:55px;width:auto;">
-    <img src="imagens/inpev-logo.png" alt="inpEV" style="max-height:45px;width:auto;">
-    <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" style="max-height:45px;width:auto;">
-  </div>
+    <header>
+        <div class="logo">
+            <img src="imagens/logo-ardefa.png" alt="ARDEFA" class="logo-img">
+            <img src="imagens/inpev-logo.png" alt="inpEV" class="inpev-logo">
+            <img src="imagens/campolimpo.png" alt="Sistema Campo Limpo" class="camposlimpo-header-logo">
+        </div>
 
-  <div class="header-back-home">
-    <a href="index.html" title="Voltar para a página inicial">
-      <i class="fas fa-arrow-left"></i>
-      <span>Início</span>
-    </a>
-  </div>
-</div>
-
-</header>
+        <nav class="header-back-home">
+            <a href="index.html" title="Voltar para a página inicial">
+                <i class="fas fa-arrow-left"></i>
+                <span>Início</span>
+            </a>
+        </nav>
+    </header>
 
     <div class="container">
         <div class="page-title">
@@ -856,1626 +449,1626 @@ header {
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>02/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">02/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>02/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TUPASSI - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">02/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TUPASSI - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>03/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">03/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>03/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C VALE/AGROPAR</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">03/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C VALE/AGROPAR</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>04/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">04/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>04/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">04/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>05/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ENCANTADO - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">05/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ENCANTADO - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>05/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ENCANTADO - I.RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">05/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ENCANTADO - I.RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>06/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NICE  - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">06/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NICE - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>06/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BARREIRO - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">06/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BARREIRO - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>09/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">09/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>09/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ITAIPULANDIA - I.RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">09/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ITAIPULANDIA - I.RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>10/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">10/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>10/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO PEDRO DO IGUAÇU - COOATOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">10/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO PEDRO DO IGUAÇU - COOATOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>11/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">11/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>11/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO LUIZ DO OESTE - COOATOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">11/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO LUIZ DO OESTE - COOATOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>12/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TOLEDO - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">12/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TOLEDO - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>12/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TOLEDO - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">12/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TOLEDO - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>13/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">13/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>13/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>VILA NOVA - COOATOL/CVALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">13/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>VILA NOVA - COOATOL/CVALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>16/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>S J DAS PALMEIRAS - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">16/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>S J DAS PALMEIRAS - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>16/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">16/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>17/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SUB-SEDE STA HEL - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">17/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SUB-SEDE STA HEL - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>17/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SUB-SEDE STA HEL - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">17/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SUB-SEDE STA HEL - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>18/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PORTO MENDES - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">18/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PORTO MENDES - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>18/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PORTO MENDES - SOUZA CRUZ</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">18/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PORTO MENDES - SOUZA CRUZ</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>19/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">19/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>19/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARGARIDA - A. HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">19/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARGARIDA - A. HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>20/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>IGUIPORÃ - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">20/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>IGUIPORÃ - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>20/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>IGUIPORÃ - AGRICOLA HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">20/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>IGUIPORÃ - AGRICOLA HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>23/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BELA VISTA - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">23/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BELA VISTA - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>23/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BELA VISTA - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">23/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BELA VISTA - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>24/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BELA VISTA - INTEGRADA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">24/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BELA VISTA - INTEGRADA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>24/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - INTEGRADA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">24/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - INTEGRADA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>25/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">25/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>25/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARACAJU - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">25/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARACAJU - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>26/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">26/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>26/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">26/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>27/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">27/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>27/03/2027</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">27/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>30/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">30/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>30/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO CLEMENTE - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">30/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO CLEMENTE - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>31/03/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ENTRE RIOS - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">31/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ENTRE RIOS - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>31/03/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CONCORDIA OESTE - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">31/03/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CONCORDIA OESTE - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>01/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">01/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>01/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">01/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>02/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">02/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>02/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - INTEGRADA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">02/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - INTEGRADA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>EQUIPE 1</strong></td>
-                        <td>06/04/2026</td>
-                        <td><span class="badge badge-equipe2">SEGUNDA</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PAULISTANEA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">06/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PAULISTANEA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>EQUIPE 1</strong></td>
-                        <td>07/04/2026</td>
-                        <td><span class="badge badge-equipe2">TERÇA</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ALTO PIQUiRI - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">07/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ALTO PIQUiRI - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>EQUIPE 1</strong></td>
-                        <td>08/04/2026</td>
-                        <td><span class="badge badge-equipe2">QUARTA</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BRASILANDIA - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">08/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BRASILANDIA - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>EQUIPE 1</strong></td>
-                        <td>09/04/2026</td>
-                        <td><span class="badge badge-equipe2">QUINTA</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO FRANCISCO - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">09/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO FRANCISCO - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>EQUIPE 1</strong></td>
-                        <td>10/04/2026</td>
-                        <td><span class="badge badge-equipe2">SEXTA</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BRAGANTINA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">10/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BRAGANTINA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>13/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>06:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COLETA ESPECIAL  - GOIERÊ</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">13/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">06:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>COLETA ESPECIAL - GOIERÊ</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>13/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>06:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COLETA ESPECIAL  - GOIERÊ</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">13/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">06:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>COLETA ESPECIAL - GOIERÊ</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>14/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">14/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVA AURORA - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>14/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TUPASSI - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">14/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TUPASSI - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>15/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">15/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>15/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BRASILANDIA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">15/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BRASILANDIA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>16/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">16/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>16/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">16/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>17/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">17/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>17/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">17/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>20/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>JESUITAS - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">20/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>JESUITAS - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>20/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td></td>
-                        <td>nan</td>
-                        <td><strong>nan</strong></td>
-                        <td></td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">20/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída"></td>
+                        <td data-label="Início">nan</td>
+                        <td data-label="Local"><strong>nan</strong></td>
+                        <td data-label="Encerramento"></td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>22/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ENCANTADO - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">22/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ENCANTADO - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>22/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ENCANTADO - I.RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">22/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ENCANTADO - I.RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>23/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NICE  - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">23/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NICE - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>23/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BARREIRO - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">23/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BARREIRO - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>24/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COMUM. STO ANT. - PAV. COMUNITARIO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">24/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>COMUM. STO ANT. - PAV. COMUNITARIO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>24/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>VILA FLORESTA - PAV. COMUNITARIO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">24/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>VILA FLORESTA - PAV. COMUNITARIO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>27/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TOLEDO - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">27/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TOLEDO - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>27/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CANDEIA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">27/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CANDEIA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>NAN</strong></td>
-                        <td>28/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PEROLA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">28/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PEROLA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>28/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PEROLA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">28/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PEROLA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>29/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARIPA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">29/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARIPA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>29/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARIPA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">29/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARIPA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>30/04/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVA STA ROSA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">30/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVA STA ROSA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>30/04/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SANTA FÉ - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">30/04/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SANTA FÉ - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>04/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PALMITOLANDIA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">04/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PALMITOLANDIA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>04/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PALMITOPOLIS - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">04/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PALMITOPOLIS - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>05/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>JOTAESSE - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">05/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>JOTAESSE - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>05/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>UNIVERSO - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">05/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>UNIVERSO - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>06/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">06/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>06/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CARAJAS - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">06/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CARAJAS - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>07/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>IRACEMA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">07/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>IRACEMA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>07/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>IRACEMA - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">07/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>IRACEMA - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>08/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td></td>
-                        <td>nan</td>
-                        <td><strong>nan</strong></td>
-                        <td></td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">08/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída"></td>
+                        <td data-label="Início">nan</td>
+                        <td data-label="Local"><strong>nan</strong></td>
+                        <td data-label="Encerramento"></td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>08/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td></td>
-                        <td>nan</td>
-                        <td><strong>nan</strong></td>
-                        <td></td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">08/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída"></td>
+                        <td data-label="Início">nan</td>
+                        <td data-label="Local"><strong>nan</strong></td>
+                        <td data-label="Encerramento"></td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>11/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PATO BRAGADO - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">11/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PATO BRAGADO - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>11/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">11/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>EXT. EXPER. COPAGRIL - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>12/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>QUATRO PONTES - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">12/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>QUATRO PONTES - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>12/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>QUATRO PONTES - AGRIC. HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">12/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>QUATRO PONTES - AGRIC. HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>13/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVO SARANDI - AGRIC. HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">13/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVO SARANDI - AGRIC. HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>13/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BOM JARDIM - AGRIC. HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">13/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BOM JARDIM - AGRIC. HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>14/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO ROQUE - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">14/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO ROQUE - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>14/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CURVADO - PAVILH. COMUNITARIO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">14/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CURVADO - PAVILH. COMUNITARIO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>15/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVO HORIZONTE - PAVILH. COMUNITARIO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">15/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVO HORIZONTE - PAVILH. COMUNITARIO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>15/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVO TRÊS PASSOS - PAVILH. COMUNITARIO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">15/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVO TRÊS PASSOS - PAVILH. COMUNITARIO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>18/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PAULISTANEA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">18/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PAULISTANEA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>18/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td></td>
-                        <td>nan</td>
-                        <td><strong>nan</strong></td>
-                        <td></td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">18/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída"></td>
+                        <td data-label="Início">nan</td>
+                        <td data-label="Local"><strong>nan</strong></td>
+                        <td data-label="Encerramento"></td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>19/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ALTO PIQUiRI - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">19/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ALTO PIQUiRI - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>19/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td></td>
-                        <td>nan</td>
-                        <td><strong>nan</strong></td>
-                        <td></td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">19/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída"></td>
+                        <td data-label="Início">nan</td>
+                        <td data-label="Local"><strong>nan</strong></td>
+                        <td data-label="Encerramento"></td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>20/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BRASILANDIA - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">20/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BRASILANDIA - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>20/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td></td>
-                        <td>nan</td>
-                        <td><strong>nan</strong></td>
-                        <td></td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">20/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída"></td>
+                        <td data-label="Início">nan</td>
+                        <td data-label="Local"><strong>nan</strong></td>
+                        <td data-label="Encerramento"></td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>21/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">21/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>21/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">21/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>22/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">22/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>22/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">22/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>25/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>JESUITAS - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">25/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>JESUITAS - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>27/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>FORMOSA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">27/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>FORMOSA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>28/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>JOTAESSE - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">28/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>JOTAESSE - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>29/05/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TERRA NOVA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">29/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TERRA NOVA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>29/05/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BRASILANDIA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">29/05/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BRASILANDIA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>01/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVO SOBRADINHO - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">01/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVO SOBRADINHO - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>01/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">01/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARGARIDA - UNID. L S JOÃO</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>02/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>M.C.RONDON - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">02/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>M.C.RONDON - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>02/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">02/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>M.C.RONDON - AGRO BICKEL LTDA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>03/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TERRA ROXA - C.VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">03/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TERRA ROXA - C.VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>03/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TERRA ROXA - I.RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">03/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TERRA ROXA - I.RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>05/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SANTA RITA/T. ROXA - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">05/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SANTA RITA/T. ROXA - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>05/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SANTA RITA/T. ROXA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">05/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SANTA RITA/T. ROXA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>08/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BELA VISTA - C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">08/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BELA VISTA - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>08/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BELA VISTA - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">08/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BELA VISTA - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>09/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BELA VISTA - INTEGRADA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">09/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BELA VISTA - INTEGRADA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>09/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - INTEGRADA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">09/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - INTEGRADA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>10/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">10/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>OLIVEIRA CASTRO - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>10/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARACAJU - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">10/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARACAJU - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>11/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">11/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>11/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">11/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>12/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>GUAIRA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">12/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>GUAIRA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>12/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">12/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>BAIRRO CATARINENSE - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>15/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">15/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SEDE-ALVORADA CVEL - I.RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>15/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:45</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TOLEDO - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">15/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:45</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TOLEDO - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>16/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">16/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>VILA IPIRANGA - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>16/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>TOLEDO - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">16/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>TOLEDO - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>17/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">17/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO PEDRO DO IGUAÇU - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>17/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO PEDRO DO IGUAÇU - COOATOL/ C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">17/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO PEDRO DO IGUAÇU - COOATOL/ C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>18/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">18/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO LUIZ DO OESTE - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>18/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SÃO LUIZ DO OESTE - COOATOL/C VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">18/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SÃO LUIZ DO OESTE - COOATOL/C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>19/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>VILA NOVA - COOATOL/CVALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">19/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>VILA NOVA - COOATOL/CVALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>19/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CANDEIA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">19/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CANDEIA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>22/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COMUNID. STO ANTONIO - SALÃO DA IGREJA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">22/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>COMUNID. STO ANTONIO - SALÃO DA IGREJA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>22/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>COM.S.JOSE/CAFELANDIA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">22/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>COM.S.JOSE/CAFELANDIA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>23/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CAMPINA - CAFELAND. - SALÃO DA IGREJA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">23/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CAMPINA - CAFELAND. - SALÃO DA IGREJA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>23/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">23/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CENTRAL STA CRUZ - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>24/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>CARAJAS - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">24/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>CARAJAS - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>24/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>FORMOSA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">24/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>FORMOSA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>25/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>IRACEMA - COPACOL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">25/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>IRACEMA - COPACOL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>25/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>IRACEMA - I RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">25/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>IRACEMA - I RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>26/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">26/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>26/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">26/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>ASSIS CHATEUBRIAND - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>29/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - COPAGRIL</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">29/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - COPAGRIL</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEGUNDA</strong></td>
-                        <td>29/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:00</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEGUNDA</strong></td>
+                        <td data-label="Data">29/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:00</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - AGRICOLA ANDREIS </strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>30/06/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">30/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - AGRIC. HORIZONTE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>TERÇA</strong></td>
-                        <td>30/06/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>07:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MERCEDES - INTEGRADA</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>TERÇA</strong></td>
+                        <td data-label="Data">30/06/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">07:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MERCEDES - INTEGRADA</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>01/07/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PEROLA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">01/07/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PEROLA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUARTA</strong></td>
-                        <td>01/07/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:20</td>
-                        <td>09:00Hs</td>
-                        <td><strong>PEROLA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUARTA</strong></td>
+                        <td data-label="Data">01/07/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:20</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>PEROLA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>02/07/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARIPA - C. VALE</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">02/07/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARIPA - C. VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>QUINTA</strong></td>
-                        <td>02/07/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:30</td>
-                        <td>09:00Hs</td>
-                        <td><strong>MARIPA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>QUINTA</strong></td>
+                        <td data-label="Data">02/07/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:30</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>MARIPA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>03/07/2026</td>
-                        <td><span class="badge badge-equipe1">EQUIPE 1</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>NOVA STA ROSA - I. RIEDI</strong></td>
-                        <td>16:30</td>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">03/07/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe1">EQUIPE 1</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>NOVA STA ROSA - I. RIEDI</strong></td>
+                        <td data-label="Encerramento">16:30</td>
                     </tr>
 
                     <tr>
-                        <td><strong>SEXTA</strong></td>
-                        <td>03/07/2026</td>
-                        <td><span class="badge badge-equipe2">EQUIPE 2</span></td>
-                        <td>08:15</td>
-                        <td>09:00Hs</td>
-                        <td><strong>SANTA FÉ - C VALE</strong></td>
-                        <td>16:30</td>
-                    </tr>                </tbody>
+                        <td data-label="Dia"><strong>SEXTA</strong></td>
+                        <td data-label="Data">03/07/2026</td>
+                        <td data-label="Equipe"><span class="badge badge-equipe2">EQUIPE 2</span></td>
+                        <td data-label="Saída">08:15</td>
+                        <td data-label="Início">09:00Hs</td>
+                        <td data-label="Local"><strong>SANTA FÉ - C VALE</strong></td>
+                        <td data-label="Encerramento">16:30</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -2491,57 +2084,64 @@ header {
 
     <script>
         async function sharePage() {
-            const element = document.querySelector('.container');
-            
-            // Feedback visual de carregamento
+            const element = document.querySelector('.table-wrapper'); // Focar apenas na tabela para o PDF
             const btn = document.querySelector('.btn-share');
             const originalContent = btn.innerHTML;
+            
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             try {
                 const opt = {
-                    margin: [10, 10],
-                    filename: 'Calendario_ARDEFA_2026.pdf',
+                    margin: [10, 10, 10, 10],
+                    filename: 'Calendario_ARDEFA_1Semestre_2026.pdf',
                     image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: { scale: 2, useCORS: true, logging: false },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
                 };
 
-                // Gerar o PDF
-                const worker = html2pdf().set(opt).from(element);
-                const pdfBlob = await worker.output('blob');
+                // Clonar o elemento para remover classes que atrapalham o PDF (como scroll e box-shadow)
+                const clone = element.cloneNode(true);
+                clone.style.boxShadow = 'none';
+                clone.style.overflow = 'visible';
+                clone.style.height = 'auto';
                 
+                // Adicionar título ao PDF
+                const title = document.createElement('h2');
+                title.innerText = "Calendário ARDEFA - 1º Semestre 2026";
+                title.style.textAlign = 'center';
+                title.style.marginBottom = '20px';
+                title.style.fontFamily = 'Arial, sans-serif';
+                
+                const container = document.createElement('div');
+                container.appendChild(title);
+                container.appendChild(clone);
+
+                const worker = html2pdf().set(opt).from(container);
+                const pdfBlob = await worker.output('blob');
+
                 const file = new File([pdfBlob], 'Calendario_ARDEFA_2026.pdf', { type: 'application/pdf' });
 
-                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                if (navigator.share && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         files: [file],
-                        title: 'Calendário ARDEFA 2026',
-                        text: 'Confira o calendário de recebimento da ARDEFA para o 1º semestre de 2026.'
+                        title: 'Calendário ARDEFA',
+                        text: 'Confira o calendário de recebimento ARDEFA para o 1º semestre de 2026.'
                     });
                 } else {
-                    // Fallback: Download direto
                     const url = URL.createObjectURL(pdfBlob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = 'Calendario_ARDEFA_2026.pdf';
+                    a.download = file.name;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
-                    
-                    if (!navigator.share) {
-                        alert('PDF gerado com sucesso! O compartilhamento direto não é suportado neste navegador, por isso o arquivo foi baixado.');
-                    } else {
-                        alert('PDF gerado! O compartilhamento de arquivos foi bloqueado ou não é suportado, o download foi iniciado.');
-                    }
+                    alert('PDF baixado com sucesso!');
                 }
-            } catch (error) {
-                console.error('Erro detalhado:', error);
-                alert('Erro ao gerar PDF. O arquivo será baixado no formato padrão.');
-                // Fallback final caso o blob falhe
-                html2pdf().set({ margin: 10, filename: 'Calendario_ARDEFA.pdf' }).from(element).save();
+            } catch (e) {
+                console.error("Erro ao gerar PDF:", e);
+                alert('Ocorreu um erro ao gerar o PDF. Tente novamente.');
             } finally {
                 btn.innerHTML = originalContent;
                 btn.disabled = false;
@@ -2565,6 +2165,7 @@ header {
                     
                     const diff = Math.abs(rowDate - today);
                     
+                    // Priorizar datas futuras ou iguais se a diferença for pequena
                     if (diff < minDiff) {
                         minDiff = diff;
                         nearestRow = row;
@@ -2574,40 +2175,44 @@ header {
 
             if (nearestRow) {
                 nearestRow.classList.add('row-highlight');
-                // Removido scrollIntoView para manter a página no topo ao carregar
+                // Se for mobile, talvez rolar suavemente até perto
+                if (window.innerWidth < 768) {
+                    // nearestRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }
         }
 
         window.addEventListener('DOMContentLoaded', highlightNearestDate);
     </script>
-<footer>
-<div class="footer-grid">
-<div class="footer-col">
-<h3>ARDEFA</h3>
-<p>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas.</p>
-<br/>
-<p>Transformando responsabilidade em preservação desde 2001.</p>
-</div>
-<div class="footer-col">
-<h3>Contato</h3>
-<ul>
-<li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
-<li><i class="fas fa-phone"></i> (44) 3649-6692</li>
-<li><i class="fas fa-envelope"></i> palotina@embalagensvazias.org.br</li>
-</ul>
-</div>
-<div class="footer-col">
-<h3>Links Rápidos</h3>
-<ul>
-<li><a href="index.html" style="color:#aaa; text-decoration:none;">Página Inicial</a></li>
-<li><a href="historia.html" style="color:#aaa; text-decoration:none;">Nossa História</a></li>
-<li><a href="index.html#calendario" style="color:#aaa; text-decoration:none;">Calendário</a></li>
-</ul>
-</div>
-</div>
-<div class="copyright">
-            © 2025 ARDEFA. Todos os direitos reservados.
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>ARDEFA</h3>
+                <p>Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas.</p>
+                <br/>
+                <p>Transformando responsabilidade em preservação desde 2001.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
+                    <li><i class="fas fa-phone"></i> (44) 3649-6692</li>
+                    <li><i class="fas fa-envelope"></i> palotina@embalagensvazias.org.br</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="index.html" style="color:#aaa; text-decoration:none;">Página Inicial</a></li>
+                    <li><a href="historia.html" style="color:#aaa; text-decoration:none;">Nossa História</a></li>
+                    <li><a href="#" style="color:#aaa; text-decoration:none;">Calendário</a></li>
+                </ul>
+            </div>
         </div>
-</footer>
+        <div class="copyright">
+            © 2026 ARDEFA. Todos os direitos reservados.
+        </div>
+    </footer>
 </body>
 </html>
