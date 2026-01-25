@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
 
     <style>
         :root {
@@ -415,7 +415,18 @@ background-color: var(--light);
             td::before { content: none !important; }
             .badge { border: 1px solid #ccc !important; -webkit-print-color-adjust: exact; }
         }
-    </style>
+    
+/* === EFEITO DE CLIQUE BOTÃO FLUTUANTE (ORIGINAL) === */
+.float-btn.btn-share {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.float-btn.btn-share:active {
+    transform: scale(0.92);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.6);
+}
+
+</style>
 </head>
 <body>
 
@@ -2079,9 +2090,9 @@ background-color: var(--light);
     </div>
 
     <div class="floating-container">
-        <button class="float-btn btn-share" onclick="sharePage()" data-tooltip="Compartilhar Calendário">
-            <i class="fas fa-share-alt"></i>
-        </button>
+        <button class="float-btn btn-share" data-tooltip="Compartilhar" onclick="shareCalendarLink()">
+    <i class="fas fa-share-alt"></i>
+</button>
         <a href="index.html" class="float-btn btn-back" data-tooltip="Voltar ao Início">
             <i class="fas fa-home"></i>
         </a>
@@ -2238,5 +2249,22 @@ async function sharePage() {
             © 2026 ARDEFA. Todos os direitos reservados.
         </div>
     </footer>
+
+<script>
+function shareCalendarLink() {
+    const url = window.location.href;
+    const title = 'Calendário ARDEFA';
+    const text = '📅 Confira o calendário oficial de recebimento de embalagens da ARDEFA. Informação sempre atualizada.';
+
+    if (navigator.share) {
+        navigator.share({ title, text, url });
+    } else {
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Link do calendário copiado com sucesso!');
+        });
+    }
+}
+</script>
+
 </body>
 </html>
