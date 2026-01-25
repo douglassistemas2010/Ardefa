@@ -922,21 +922,49 @@ nav a:hover::after {
         padding: 1.8rem 1.3rem;
     }
 
-
     .inpev-ribbon {
-        font-size: 0.55rem;
-        width: 105px;
-        left: -22px;
-        padding: 5px 0;
-        letter-spacing: 0.6px;
-        transform: rotate(-45deg);
-        transform-origin: left center;
+        font-size: 0.65rem;
+        width: 120px;
+        top: 12px;
+        left: -28px;
+        padding: 6px 0;
+        letter-spacing: 0.8px;
+        transform: rotate(-42deg);
+        transform-origin: center center;
+        box-shadow: 0 8px 20px rgba(255,152,0,0.5), inset 0 1px 0 rgba(255,255,255,0.35);
     }
+
+
+@media (max-width: 768px) and (min-width: 481px) {
+    .inpev-ribbon {
+        font-size: 0.7rem;
+        width: 130px;
+        top: 14px;
+        left: -30px;
+    }
+}
 
     .chart-container {
         padding: 0 10px;
         max-width: 100%;
     }
+
+@media (max-width: 480px) {
+    .inpev-ribbon {
+        font-size: 0.6rem;
+        width: 110px;
+        top: 10px;
+        left: -26px;
+        padding: 5px 0;
+        letter-spacing: 0.6px;
+        transform: rotate(-43deg);
+    }
+    
+    .inpev-card {
+        padding: 2rem 1.2rem;
+        min-height: 280px;
+    }
+}
 
     .chart-container canvas {
         max-height: 300px;
@@ -1619,15 +1647,7 @@ footer {
     }
 
 
-    .inpev-ribbon {
-        font-size: 0.55rem;
-        width: 105px;
-        left: -22px;
-        padding: 5px 0;
-        letter-spacing: 0.6px;
-        transform: rotate(-45deg);
-        transform-origin: left center;
-    }
+    
 
     /* 1. Ajuste Geral de Espaçamento */
     section {
@@ -1742,10 +1762,7 @@ footer {
         line-height: 1.6;
     }
 
-    .inpev-ribbon {
-        font-size: 0.7rem;
-        width: 140px;
-    }
+    
 
     /* Correção do Grid de Impacto (Pack) */
     .impact-pack-grid {
@@ -2560,3 +2577,5 @@ new Chart(ctx, {
 </body>
 
 </html>
+
+

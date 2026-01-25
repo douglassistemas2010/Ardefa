@@ -594,65 +594,93 @@ header.scrolled {
 }
 
 
-/* === NÚMEROS QUE TRANSFORMAM — EFEITO VIDRO === */
+
+/* === NÚMEROS QUE TRANSFORMAM – CARDS SEPARADOS === */
 .stats-box{
-    background: rgba(255,255,255,0.35);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.45);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.4);
-    transition: all 0.4s ease;
-    padding: 1.8rem 2rem;
     margin: 2rem 0;
 }
 
-.stats-box:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 35px 70px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.6);
+.stats-box h3{
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .stats-grid{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 2rem;
-    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
 }
 
 .stat-item{
-    flex: 1;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 160px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+}
+
+.stat-item:hover::before{
+    transform: scaleX(1);
 }
 
 .stat-icon{
-    display: block;
-    font-size: 2rem;
-    color: #0288D1;
-    margin-bottom: 0.4rem;
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-icon{
+    transform: scale(1.15);
+    color: var(--primary);
 }
 
 .stat-number{
-    font-size: 2.6rem;
+    font-size: 3rem;
     font-weight: 900;
     background: linear-gradient(135deg, #2E7D32, #0288D1);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    min-height: 3.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 0.5rem;
+    line-height: 1;
 }
 
 .stat-label{
-    font-weight: 700;
-    color: #0D2A4A;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 
@@ -673,18 +701,16 @@ header.scrolled {
 
 @media (max-width: 768px) {
     .stats-grid {
-        flex-wrap: wrap;
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
     
     .stat-item {
-        flex: 0 0 calc(50% - 0.5rem);
-        min-width: auto;
+        padding: 1.5rem 1rem;
     }
     
     .stat-number {
-        font-size: 1.8rem;
-        min-height: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .stat-label {
@@ -692,7 +718,7 @@ header.scrolled {
     }
     
     .stat-icon {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }/* === AJUSTE TÍTULO EQUIPE ARDEFA === */
 .equipe-titulo{
@@ -984,8 +1010,12 @@ header.scrolled {
         height: 180px;
     }
 
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
     .stat-number {
-        font-size: 1.6rem;
+        font-size: 2.5rem;
     }
 
     .historia-section {
@@ -1152,10 +1182,10 @@ header.scrolled {
 <p>O processo congrega no <strong>Sistema Campo Limpo</strong> que reúne todas as partes do segmento agrícola, canais de distribuição, indústria produtora de defensivos, agricultores e o setor público, coordenados pelo <strong>Instituto Nacional de Processamento de Embalagens Vazias (InpEV)</strong>.</p>
 <p>Juntos buscam destinar as embalagens de defensivos agrícolas, visando a preservação do meio ambiente e a saúde humana. Cada elo tem suas responsabilidades definidas pela <strong>Lei 9.974/00</strong>. De 2002 até o período atual, a ARDEFA recebeu e destinou mais de <strong>75 Milhões</strong> de embalagens vazias de defensivos agrícolas.</p>
 <div class="stats-box">
-<h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem;">
-<i class="fas fa-chart-line"></i> Números que Transformam
-                        </h3>
-<div class="stats-grid">
+                    <h3>
+                        <i class="fas fa-chart-line"></i> Números que Transformam
+                    </h3>
+                    <div class="stats-grid">
 <div class="stat-item">
 <i class="fas fa-map-marked-alt stat-icon"></i><span class="stat-number">95</span>
 <span class="stat-label">Municípios Atendidos</span>
