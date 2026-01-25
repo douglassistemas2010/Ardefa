@@ -2089,128 +2089,58 @@ background-color: var(--light);
 
     <script>
         
+
 async function sharePage() {
     const btn = document.querySelector('.btn-share');
     const originalContent = btn.innerHTML;
-    
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     btn.disabled = true;
 
     try {
-        // Criar container temporário para o PDF
-        const pdfContainer = document.createElement('div');
-        pdfContainer.style.width = '100%';
-        pdfContainer.style.padding = '20px';
-        pdfContainer.style.fontFamily = 'Inter, Arial, sans-serif';
-        pdfContainer.style.backgroundColor = '#ffffff';
-        
-        // Adicionar título
-        const title = document.createElement('h1');
-        title.innerHTML = 'Calendário ARDEFA - 1º Semestre 2026';
-        title.style.textAlign = 'center';
-        title.style.color = '#2E7D32';
-        title.style.marginBottom = '20px';
-        title.style.fontSize = '24px';
-        title.style.fontWeight = 'bold';
-        pdfContainer.appendChild(title);
+        // Clonar área VISÍVEL do calendário
+        const source = document.querySelector('.container');
+        const clone = source.cloneNode(true);
 
-        // Criar tabela simplificada para PDF
-        const table = document.createElement('table');
-        table.style.width = '100%';
-        table.style.borderCollapse = 'collapse';
-        table.style.fontSize = '10px';
-        
-        // Cabeçalho da tabela
-        const thead = document.createElement('thead');
-        thead.innerHTML = `
-            <tr style="background-color: #2E7D32; color: white;">
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Dia</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Data</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Equipe</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Saída</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Início</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Local</th>
-                <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Encerramento</th>
-            </tr>
-        `;
-        table.appendChild(thead);
+        // Wrapper temporário no DOM (necessário para html2canvas)
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'fixed';
+        wrapper.style.left = '-9999px';
+        wrapper.style.top = '0';
+        wrapper.style.width = '1200px';
+        wrapper.style.background = '#ffffff';
+        wrapper.appendChild(clone);
+        document.body.appendChild(wrapper);
 
-        // Corpo da tabela - clonar dados da tabela original
-        const tbody = document.createElement('tbody');
-        const originalRows = document.querySelectorAll('tbody tr');
-        
-        originalRows.forEach((row, index) => {
-            const cells = row.querySelectorAll('td');
-            if (cells.length > 0) {
-                const newRow = document.createElement('tr');
-                
-                if (index % 2 === 0) {
-                    newRow.style.backgroundColor = '#f9f9f9';
-                }
-                
-                cells.forEach(cell => {
-                    const newCell = document.createElement('td');
-                    newCell.style.padding = '6px 8px';
-                    newCell.style.border = '1px solid #ddd';
-                    newCell.style.fontSize = '9px';
-                    
-                    const badge = cell.querySelector('.badge');
-                    if (badge) {
-                        newCell.textContent = badge.textContent;
-                        newCell.style.fontWeight = 'bold';
-                        if (badge.classList.contains('badge-equipe1')) {
-                            newCell.style.color = '#2E7D32';
-                        } else if (badge.classList.contains('badge-equipe2')) {
-                            newCell.style.color = '#0288D1';
-                        }
-                    } else {
-                        newCell.textContent = cell.textContent.trim();
-                    }
-                    
-                    newRow.appendChild(newCell);
-                });
-                
-                tbody.appendChild(newRow);
-            }
+        // Forçar layout de tabela (evita quebra mobile)
+        wrapper.querySelectorAll('table').forEach(t => {
+            t.style.display = 'table';
+            t.style.width = '100%';
         });
-        
-        table.appendChild(tbody);
-        pdfContainer.appendChild(table);
-
-        // Rodapé
-        const footer = document.createElement('div');
-        footer.style.marginTop = '20px';
-        footer.style.textAlign = 'center';
-        footer.style.fontSize = '10px';
-        footer.style.color = '#666';
-        footer.innerHTML = `
-            <p>ARDEFA - Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas</p>
-            <p>Rodovia PR 364, Linha Alvorada - Palotina/PR | (44) 3649-6692</p>
-        `;
-        pdfContainer.appendChild(footer);
+        wrapper.querySelectorAll('thead').forEach(e => e.style.display = 'table-header-group');
+        wrapper.querySelectorAll('tbody').forEach(e => e.style.display = 'table-row-group');
+        wrapper.querySelectorAll('tr').forEach(e => e.style.display = 'table-row');
+        wrapper.querySelectorAll('td, th').forEach(e => e.style.display = 'table-cell');
 
         const opt = {
             margin: [10, 10, 10, 10],
             filename: 'Calendario_ARDEFA_1Semestre_2026.pdf',
-            image: { type: 'jpeg', quality: 0.95 },
-            html2canvas: { 
-                scale: 2, 
-                useCORS: true, 
-                logging: false,
-                letterRendering: true,
-                allowTaint: true
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff'
             },
-            jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'landscape',
-                compress: true
-            },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'landscape'
+            }
         };
 
-        const worker = html2pdf().set(opt).from(pdfContainer);
+        const worker = html2pdf().set(opt).from(wrapper);
         const pdfBlob = await worker.output('blob');
+
+        document.body.removeChild(wrapper);
 
         const file = new File([pdfBlob], 'Calendario_ARDEFA_2026.pdf', { type: 'application/pdf' });
 
@@ -2232,13 +2162,14 @@ async function sharePage() {
             alert('PDF baixado com sucesso!');
         }
     } catch (e) {
-        console.error("Erro ao gerar PDF:", e);
-        alert('Ocorreu um erro ao gerar o PDF. Tente novamente.');
+        console.error('Erro ao gerar PDF:', e);
+        alert('Erro ao gerar o PDF.');
     } finally {
         btn.innerHTML = originalContent;
         btn.disabled = false;
     }
 }
+
 
 
         function highlightNearestDate() {
