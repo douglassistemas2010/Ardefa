@@ -989,12 +989,10 @@ header.scrolled {
     }
 }
 
-/* === MOBILE: MANTER LINK INÍCIO VISÍVEL === */
+/* === MOBILE: OCULTAR LINK INÍCIO (APENAS DESKTOP) === */
 @media (max-width: 768px) {
-    nav { display: none; }
-
     .header-back-home {
-        display: flex !important;
+        display: none !important;
     }
 }
 
@@ -1067,6 +1065,32 @@ header.scrolled {
 /* === TRANSIÇÃO SUAVE DA LEGENDA === */
 .galeria-item figcaption{
     transition: background 0.3s ease;
+}
+
+
+/* === AJUSTE BOTÃO FLUTUANTE PARA iOS / MOBILE === */
+@media (max-width: 768px) {
+    .float-buttons {
+        bottom: 22px;
+        right: 18px;
+        gap: 12px;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .float-btn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+    }
+
+    .float-btn i {
+        font-size: 1.3rem;
+    }
+
+    /* Remove tooltip no mobile (não funciona bem no touch/iOS) */
+    .float-btn-tooltip {
+        display: none;
+    }
 }
 
 </style>
