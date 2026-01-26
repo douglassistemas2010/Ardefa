@@ -615,8 +615,8 @@ header.scrolled {
 
 .stat-item{
     background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 16px;
     border: 1px solid rgba(255,255,255,0.5);
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
@@ -1133,6 +1133,211 @@ header.scrolled {
     }
 }
 
+
+/* === CARDS DE LOGOS – PARCEIROS ASSOCIADOS (GLASS EFFECT) === */
+.empresas-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+}
+
+.empresas-list li{
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.empresas-list li:hover{
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 14px 38px rgba(0,0,0,0.18);
+}
+
+.empresas-list img{
+    max-height: 60px;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* MOBILE */
+@media (max-width: 768px){
+    .empresas-list{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .empresas-list li{
+        min-height: 85px;
+        padding: 14px;
+    }
+
+    .empresas-list img{
+        max-height: 48px;
+    }
+}
+
+
+/* === REMOVER ÍCONE/✓ ANTES DAS LOGOS === */
+.empresas-list li::before{
+    content: none !important;
+}
+
+
+/* === FUNDO COM IMAGEM + BLUR NO CARD GERAL DE EMPRESAS ASSOCIADAS === */
+.empresas-box{
+    position: relative;
+    overflow: hidden;
+}
+
+.empresas-box::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('imagens/fundosite.jpg') center center / cover no-repeat;
+    filter: blur(8px);
+    transform: scale(1.1);
+    z-index: 0;
+}
+
+.empresas-box::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.35);
+    z-index: 1;
+}
+
+/* garante que o conteúdo fique acima do fundo */
+.empresas-box > *{
+    position: relative;
+    z-index: 2;
+}
+
+
+/* === TÍTULO EMPRESAS ASSOCIADAS – BRANCO COM SOMBRA SUAVE === */
+.empresas-titulo{
+    color: #ffffff;
+    text-shadow:
+        0 2px 6px rgba(0,0,0,0.55),
+        0 0 14px rgba(0,0,0,0.35);
+}
+.empresas-titulo i{
+    color: #ffffff;
+}
+
+
+/* === AJUSTE FINAL TÍTULO EMPRESAS ASSOCIADAS === */
+.empresas-titulo{
+    color: #ffffff !important;
+    text-shadow:
+        0 3px 8px rgba(0,0,0,0.75),
+        0 0 20px rgba(0,0,0,0.55);
+}
+
+.empresas-titulo i{
+    color: #ffffff !important;
+    text-shadow:
+        0 3px 8px rgba(0,0,0,0.75),
+        0 0 20px rgba(0,0,0,0.55);
+}
+
+
+/* === CARD RESPONSÁVEIS – MODERNO / VERDE CLARO === */
+.responsaveis-card{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+.responsavel-item{
+    background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+    border-radius: 18px;
+    padding: 1.8rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    box-shadow: 0 10px 32px rgba(46,125,50,0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.responsavel-item:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 16px 42px rgba(46,125,50,0.28);
+}
+
+.responsavel-icon{
+    font-size: 2.6rem;
+    color: #2E7D32;
+    animation: pulseIcon 2.5s infinite;
+}
+
+@keyframes pulseIcon{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.08); }
+    100%{ transform: scale(1); }
+}
+
+.responsavel-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.responsavel-info strong{
+    font-size: 1.05rem;
+    color: #1B5E20;
+}
+
+.responsavel-info span{
+    font-size: 0.95rem;
+    color: #2E7D32;
+}
+
+.whats-link{
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1B5E20;
+    text-decoration: none;
+    background: rgba(37,211,102,0.15);
+    padding: 6px 12px;
+    border-radius: 20px;
+    width: fit-content;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.whats-link i{
+    color: #25D366;
+    font-size: 1.1rem;
+}
+
+.whats-link:hover{
+    background: rgba(37,211,102,0.25);
+    transform: translateX(4px);
+}
+
+/* MOBILE */
+@media (max-width: 768px){
+    .responsavel-item{
+        padding: 1.4rem;
+    }
+
+    .responsavel-icon{
+        font-size: 2.2rem;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -1187,25 +1392,55 @@ header.scrolled {
                     </h3>
                     <div class="stats-grid">
 <div class="stat-item">
-<i class="fas fa-map-marked-alt stat-icon"></i><span class="stat-number">95</span>
+<i class="fas fa-map-marked-alt stat-icon"></i><span class="stat-number">27</span>
 <span class="stat-label">Municípios Atendidos</span>
 </div>
 <div class="stat-item">
-<i class="fas fa-handshake stat-icon"></i><span class="stat-number">15</span>
+<i class="fas fa-handshake stat-icon"></i><span class="stat-number">16</span>
 <span class="stat-label">Empresas Associadas</span>
 </div>
 <div class="stat-item">
-<i class="fas fa-building stat-icon"></i><span class="stat-number">99</span>
+<i class="fas fa-building stat-icon"></i><span class="stat-number">97</span>
 <span class="stat-label">Unidades (Filiais) ARDEFA</span>
 </div>
 <div class="stat-item">
 <i class="fas fa-recycle stat-icon"></i><span class="stat-number">+75Mi</span>
 <span class="stat-label">Embalagens Processadas</span>
 </div>
+<div class="stat-item">
+<i class="fas fa-users stat-icon"></i><span class="stat-number">17</span>
+<span class="stat-label">Funcionários</span>
 </div>
 </div>
-<p>A <strong>ARDEFA atua em 95 municípios</strong> e está entre as principais associações do Paraná. A Associação tem como associadas 15 empresas, que juntas possuem 99 Unidades (filiais), com sede própria localizada na <strong>PR 364 Km 07 na Linha Alvorada – Palotina – Paraná</strong>. A ARDEFA disponibiliza em seus municípios de região locais de devolução das embalagens utilizadas pelos locadores.</p>
-<p>A ARDEFA oferece também como opção de devolução de embalagens, Pontos Itinerantes, onde os produtores são atendidos por Equipes com suporte de 09 Caminhões, permitindo o recebimento e a destinação ambientalmente corretas destes materiais, evitando danos a toda sociedade.</p>
+</div>
+<p>A <strong>ARDEFA atua em 27 municípios</strong> e está entre as principais associações do Paraná. A Associação tem como associadas <strong>16 empresas</strong>, que juntas possuem <strong>97 Unidades (filiais)</strong>, com sede própria localizada na <strong>PR 364 Km 07 na Linha Alvorada – Palotina – Paraná</strong>. A ARDEFA disponibiliza em seus municípios de região locais de devolução das embalagens utilizadas pelos locadores.</p>
+<p>A ARDEFA oferece também como opção de devolução de embalagens, Pontos Itinerantes, onde os produtores são atendidos por Equipes com suporte de <strong>02 Caminhões</strong>, permitindo o recebimento e a destinação ambientalmente corretas destes materiais, evitando danos a toda sociedade.</p>
+
+
+<div class="responsaveis-card">
+  <div class="responsavel-item">
+    <i class="fas fa-user-tie responsavel-icon"></i>
+    <div class="responsavel-info">
+      <strong>Gerente Responsável</strong>
+      <span>Eliseu Lopes Dos Santos</span>
+      <a class="whats-link" href="https://wa.me/5544984191123" target="_blank">
+        <i class="fab fa-whatsapp"></i> Fale comigo
+      </a>
+    </div>
+  </div>
+
+  <div class="responsavel-item">
+    <i class="fas fa-user-check responsavel-icon"></i>
+    <div class="responsavel-info">
+      <strong>Responsável Técnico</strong>
+      <span>Olivio Meneghel</span>
+      <a class="whats-link" href="https://wa.me/5544984191127" target="_blank">
+        <i class="fab fa-whatsapp"></i> Fale comigo
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <!-- OPERAÇÃO ARDEFA -->
 <div class="operacao-img">
@@ -1236,30 +1471,34 @@ header.scrolled {
 <figure class="galeria-item"><img alt="ARDEFA 9" class="galeria-img" src="imagens/ardefa9.jpg"/><figcaption>Dia de Campo C.Vale</figcaption></figure>
 <figure class="galeria-item"><img alt="ARDEFA 10" class="galeria-img" src="imagens/ardefa10.jpg"/><figcaption>Dia de Campo C.Vale</figcaption></figure>
 <figure class="galeria-item"><img alt="ARDEFA 11" class="galeria-img" src="imagens/ardefa11.jpg"/><figcaption>Dia de Campo C.Vale</figcaption></figure></div></div>
-<div class="lei-box">
-<h3><i class="fas fa-balance-scale"></i> Lei Federal nº 9.974/00</h3>
-<p>A iniciativa nasceu com a criação da lei federal nº 9.974/00 que objetivou fomentar ações de conscientização e estímulo a reflexão sobre a conservação do meio ambiente, buscando promover a educação ambiental na comunidade onde atuamos e assim levar conhecimento a todos os segmentos da sociedade. Ação instituiu o conceito de responsabilidade compartilhada entre os agentes da cadeia produtiva sobre o processo de recolhimento e destinação final das embalagens de defensivos agrícolas e determinou os papéis específicos de cada um.</p>
+
+
+
+  
 </div>
+
 <h3 style="color: var(--secondary); font-size: 1.8rem; margin: 2rem 0 1rem;">Parcerias Institucionais</h3>
-<p>Para tanto, contamos com convênios e apoio de órgãos públicos e privados, tais como: <strong>InpEV, SEMA, INSTITUTO DAS ÁGUAS, ADAPAR, IAP, IBAMA, POLÍCIA AMBIENTAL, PATRULHA RURAL, EMATER, IMPRENSA, UNIVERSIDADES e PREFEITURAS MUNICIPAIS</strong>.</p>
+<p>Para tanto, contamos com convênios e apoio de órgãos públicos e privados, tais como: <strong>inpEV, órgãos públicos de meio ambiente, Patrulha Rural, veículos de imprensa, universidades, escolas e prefeituras municipais</strong>.</p>
 <div class="empresas-box">
-<h3><i class="fas fa-handshake"></i> Empresas Associadas</h3>
+<h3 class="empresas-titulo"><i class="fas fa-handshake"></i> Empresas Associadas</h3>
 <ul class="empresas-list">
-<li>C.Vale</li>
-<li>I.Riedi</li>
-<li>Copacol</li>
-<li>Horizonte</li>
-<li>Copagril</li>
-<li>Agro Fortuna</li>
-<li>Souza Cruz</li>
-<li>Agro MR</li>
-<li>Contiagro</li>
-<li>Siloti</li>
-<li>Aduplan</li>
-<li>Integrada D&amp;3</li>
-<li>Agro Bickel</li>
-<li>Tertulia</li>
-<li>Agrícola Andreis</li>
+<li><img src="imagens/associados/cvale.png" alt="C.Vale"></li>
+<li><img src="imagens/associados/aduplan.png" alt="Aduplan"></li>
+<li><img src="imagens/associados/agrobickel.png" alt="Agro Bickel"></li>
+<li><img src="imagens/associados/agromr.png" alt="Agro MR"></li>
+<li><img src="imagens/associados/andreis.png" alt="Agrícola Andreis"></li>
+<li><img src="imagens/associados/contiagro.png" alt="Contiagro"></li>
+<li><img src="imagens/associados/copacol.png" alt="Copacol"></li>
+<li><img src="imagens/associados/copagril.png" alt="Copagril"></li>
+
+<li><img src="imagens/associados/fortuna.png" alt="Agro Fortuna"></li>
+<li><img src="imagens/associados/horizonte.png" alt="Horizonte"></li>
+<li><img src="imagens/associados/integrada.png" alt="Integrada Cooperativa Agroindustrial"></li>
+<li><img src="imagens/associados/iriedi.png" alt="I. Riedi"></li>
+<li><img src="imagens/associados/siloti.png" alt="Siloti"></li>
+<li><img src="imagens/associados/souzacruz.png" alt="Souza Cruz"></li>
+<li><img src="imagens/associados/tertulia.png" alt="Tertúlia"></li>
+<li><img src="imagens/associados/d3.png" alt="Integrada D&3"></li>
 </ul>
 </div>
 </div>
@@ -1281,6 +1520,14 @@ header.scrolled {
 <li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
 <li><i class="fas fa-phone"></i> (44) 3649-6692</li>
 <li><i class="fas fa-envelope"></i> palotina@embalagensvazias.org.br</li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
 </ul>
 </div>
 <div class="footer-col">
@@ -1289,6 +1536,14 @@ header.scrolled {
 <li><a href="index.html" style="color:#aaa; text-decoration:none;">Página Inicial</a></li>
 <li><a href="historia.html" style="color:#aaa; text-decoration:none;">Nossa História</a></li>
 <li><a href="index.html#calendario" style="color:#aaa; text-decoration:none;">Calendário</a></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
 </ul>
 </div>
 </div>
