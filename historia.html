@@ -14,6 +14,11 @@
 <meta content="44999186911" name="developer-contact"/>
 <title>História ARDEFA - Nossa Trajetória</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts - Tipografia Padrão -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/>
+
 <style>
         :root {
             --primary: #2E7D32;
@@ -23,13 +28,22 @@
             --white: #ffffff;
             --shadow: 0 4px 15px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            letter-spacing: -0.02em;
         }
 
         body {
@@ -567,9 +581,13 @@ header.scrolled {
 }
 
 
-/* === FUNDO HERO HISTÓRIA COM IMAGEM (REAPLICADO) === */
+/* === FUNDO HERO HISTÓRIA COM LAZY LOAD === */
 .hero-interno{
     position: relative;
+    background-color: #1a1a1a; /* fallback */
+}
+
+.hero-interno.loaded{
     background: url('imagens/historia_fundo.jpeg') center center / cover no-repeat;
 }
 
@@ -1361,6 +1379,16 @@ header.scrolled {
     height:28px;
 }
 
+
+@media (max-width: 768px) {
+    .empresas-list li,
+    .stat-item {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(255,255,255,0.95) !important;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -1653,5 +1681,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if(e.key === 'ArrowLeft') showPrev();
   });
 });
+
+// Lazy load hero background
+window.addEventListener('load', () => {
+    const hero = document.querySelector('.hero-interno');
+    if(hero){
+        hero.classList.add('loaded');
+    }
+});
+
 </script></body>
 </html>
