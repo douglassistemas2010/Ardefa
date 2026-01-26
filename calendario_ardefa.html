@@ -1835,85 +1835,7 @@ background-color: var(--light);
 <script>
         
 
-async function sharePage() {
-    const btn = document.querySelector('.btn-share');
-    const originalContent = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-    btn.disabled = true;
 
-    try {
-        // Clonar área VISÍVEL do calendário
-        const source = document.querySelector('.container');
-        const clone = source.cloneNode(true);
-
-        // Wrapper temporário no DOM (necessário para html2canvas)
-        const wrapper = document.createElement('div');
-        wrapper.style.position = 'fixed';
-        wrapper.style.left = '-9999px';
-        wrapper.style.top = '0';
-        wrapper.style.width = '1200px';
-        wrapper.style.background = '#ffffff';
-        wrapper.appendChild(clone);
-        document.body.appendChild(wrapper);
-
-        // Forçar layout de tabela (evita quebra mobile)
-        wrapper.querySelectorAll('table').forEach(t => {
-            t.style.display = 'table';
-            t.style.width = '100%';
-        });
-        wrapper.querySelectorAll('thead').forEach(e => e.style.display = 'table-header-group');
-        wrapper.querySelectorAll('tbody').forEach(e => e.style.display = 'table-row-group');
-        wrapper.querySelectorAll('tr').forEach(e => e.style.display = 'table-row');
-        wrapper.querySelectorAll('td, th').forEach(e => e.style.display = 'table-cell');
-
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: 'Calendario_ARDEFA_1Semestre_2026.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: '#ffffff'
-            },
-            jsPDF: {
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'landscape'
-            }
-        };
-
-        const worker = html2pdf().set(opt).from(wrapper);
-        const pdfBlob = await worker.output('blob');
-
-        document.body.removeChild(wrapper);
-
-        const file = new File([pdfBlob], 'Calendario_ARDEFA_2026.pdf', { type: 'application/pdf' });
-
-        if (navigator.share && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-                files: [file],
-                title: 'Calendário ARDEFA',
-                text: 'Confira o calendário de recebimento ARDEFA para o 1º semestre de 2026.'
-            });
-        } else {
-            const url = URL.createObjectURL(pdfBlob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = file.name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            alert('PDF baixado com sucesso!');
-        }
-    } catch (e) {
-        console.error('Erro ao gerar PDF:', e);
-        alert('Erro ao gerar o PDF.');
-    } finally {
-        btn.innerHTML = originalContent;
-        btn.disabled = false;
-    }
-}
 
 
 
@@ -1983,13 +1905,7 @@ async function sharePage() {
         </div>
 </footer>
 <script>
-function shareCalendarLink() {
-    const url = window.location.href;
-    const title = 'Calendário ARDEFA';
-    const text = '📅 Confira o calendário oficial de recebimento de embalagens da ARDEFA. Informação sempre atualizada.';
-
-    if (navigator.share) {
-        navigator.share({ title, text, url });
+);
     } else {
         navigator.clipboard.writeText(url).then(() => {
             alert('Link do calendário copiado com sucesso!');
@@ -1997,5 +1913,184 @@ function shareCalendarLink() {
     }
 }
 </script>
+
+<script>
+async function shareCalendarLink() {
+    const btn = document.querySelector('.btn-share');
+    const originalContent = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+    btn.style.cursor = 'not-allowed';
+    
+    try {
+        const url = window.location.href;
+        const title = 'Calendário ARDEFA - 1º Semestre 2026';
+        const text = '📅 Confira o calendário oficial de recebimento de embalagens da ARDEFA. Informação sempre atualizada para agricultores do Oeste do Paraná.';
+        
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        if (navigator.share) {
+            await navigator.share({ title, text, url });
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #388E3C)';
+        } else {
+            await navigator.clipboard.writeText(url);
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #388E3C)';
+            
+            const tooltip = document.createElement('div');
+            tooltip.textContent = 'Link copiado!';
+            tooltip.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#2E7D32;color:white;padding:1rem 2rem;border-radius:12px;font-weight:600;font-size:1.1rem;box-shadow:0 10px 40px rgba(0,0,0,0.3);z-index:99999;animation:fadeInOut 2s ease;';
+            
+            const style = document.createElement('style');
+            style.textContent = '@keyframes fadeInOut{0%{opacity:0;transform:translate(-50%,-50%) scale(0.8);}20%{opacity:1;transform:translate(-50%,-50%) scale(1);}80%{opacity:1;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(-50%,-50%) scale(0.8);}}';
+            document.head.appendChild(style);
+            document.body.appendChild(tooltip);
+            
+            setTimeout(() => {
+                document.body.removeChild(tooltip);
+                document.head.removeChild(style);
+            }, 2000);
+        }
+        
+        setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.style.background = '';
+            btn.disabled = false;
+            btn.style.cursor = 'pointer';
+        }, 1500);
+        
+    } catch (error) {
+        console.error('Erro ao compartilhar:', error);
+        btn.innerHTML = '<i class="fas fa-times"></i>';
+        btn.style.background = 'linear-gradient(135deg, #f44336, #c62828)';
+        alert('Não foi possível compartilhar. Tente novamente.');
+        
+        setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.style.background = '';
+            btn.disabled = false;
+            btn.style.cursor = 'pointer';
+        }, 2000);
+    }
+}
+</script>
+
+
+<script>
+async function shareCalendarLink() {
+    const btn = document.querySelector('.btn-share');
+    const originalContent = btn.innerHTML;
+
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+    btn.style.cursor = 'not-allowed';
+
+    try {
+        const url = window.location.href;
+
+        const mensagem = `📅 *Calendário ARDEFA - 1º Semestre 2026*
+
+Confira os locais e datas de recebimento de embalagens vazias de defensivos agrícolas na sua região!
+
+🌱 Sistema Campo Limpo
+♻️ Sustentabilidade no campo
+📍 Oeste do Paraná
+
+Acesse: ${url}
+
+*ARDEFA - Compromisso com o meio ambiente desde 2001*`;
+
+        await new Promise(resolve => setTimeout(resolve, 400));
+
+        if (navigator.share) {
+            await navigator.share({
+                title: 'Calendário ARDEFA 2026',
+                text: mensagem,
+                url: url
+            });
+
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #388E3C)';
+
+            setTimeout(() => restoreBtn(), 1500);
+
+        } else {
+            await navigator.clipboard.writeText(mensagem);
+
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #388E3C)';
+
+            mostrarNotificacao('📋 Mensagem copiada! Cole onde quiser compartilhar.');
+
+            setTimeout(() => restoreBtn(), 1500);
+        }
+
+    } catch (error) {
+        console.error('Erro ao compartilhar:', error);
+
+        if (error.name === 'AbortError') {
+            restoreBtn();
+            return;
+        }
+
+        btn.innerHTML = '<i class="fas fa-times"></i>';
+        btn.style.background = 'linear-gradient(135deg, #f44336, #c62828)';
+
+        mostrarNotificacao('❌ Não foi possível compartilhar. Tente novamente.', true);
+
+        setTimeout(() => restoreBtn(), 2000);
+    }
+
+    function restoreBtn() {
+        btn.innerHTML = originalContent;
+        btn.style.background = '';
+        btn.disabled = false;
+        btn.style.cursor = 'pointer';
+    }
+}
+
+function mostrarNotificacao(texto, erro = false) {
+    const notif = document.createElement('div');
+    notif.textContent = texto;
+    notif.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: ${erro ? '#d32f2f' : '#2E7D32'};
+        color: white;
+        padding: 1.2rem 2.5rem;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        z-index: 99999;
+        animation: slideInOut 3s ease;
+        text-align: center;
+        max-width: 90%;
+    `;
+
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInOut {
+            0% { opacity: 0; transform: translate(-50%, -60%); }
+            15% { opacity: 1; transform: translate(-50%, -50%); }
+            85% { opacity: 1; transform: translate(-50%, -50%); }
+            100% { opacity: 0; transform: translate(-50%, -40%); }
+        }
+    `;
+
+    document.head.appendChild(style);
+    document.body.appendChild(notif);
+
+    setTimeout(() => {
+        document.body.removeChild(notif);
+        document.head.removeChild(style);
+    }, 3000);
+}
+</script>
+
 </body>
 </html>
