@@ -1888,7 +1888,7 @@ background-color: var(--light);
 <ul>
 <li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
 <li><i class="fas fa-phone"></i> (44) 3649-1417</li>
-<li><i class="fas fa-envelope"></i> palotina@embalagensvazias.org.br</li>
+<li><i class="fas fa-envelope"></i> <a href="mailto:palotina@embalagensvazias.org.br" style="color:#aaa;text-decoration:none;">palotina@embalagensvazias.org.br</a></li>
 </ul>
 </div>
 <div class="footer-col">
@@ -1903,8 +1903,17 @@ background-color: var(--light);
 <div class="copyright">
             © 2026 ARDEFA. Todos os direitos reservados.
         </div>
+
+<div class="footer-developer" style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:#888;text-align:center;display:flex;justify-content:center;align-items:center;gap:0.4rem;flex-wrap:wrap;">
+  <span>Desenvolvido por Douglas</span>
+  <a href="https://wa.me/5544999186911" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.25rem;color:#25D366;text-decoration:none;transition:all 0.3s ease;" title="Entre em contato via WhatsApp">
+    <i class="fab fa-whatsapp" style="font-size:1.1rem;"></i>
+    <span style="font-size:0.85rem;">(44) 99918-6911</span>
+  </a>
+</div>
+
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 );
     } else {
         navigator.clipboard.writeText(url).then(() => {
@@ -2079,18 +2088,4 @@ function mostrarNotificacao(texto, erro = false) {
             15% { opacity: 1; transform: translate(-50%, -50%); }
             85% { opacity: 1; transform: translate(-50%, -50%); }
             100% { opacity: 0; transform: translate(-50%, -40%); }
-        }
-    `;
-
-    document.head.appendChild(style);
-    document.body.appendChild(notif);
-
-    setTimeout(() => {
-        document.body.removeChild(notif);
-        document.head.removeChild(style);
-    }, 3000);
-}
-</script>
-
-</body>
-</html>
+ 
