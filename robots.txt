@@ -1,35 +1,82 @@
 # robots.txt para ARDEFA
-# Desenvolvedor: Douglas Araujo Gomes - (44) 99918-6911
+# Associação Regional Oeste Paranaense de Distribuidores de Defensivos Agrícolas
 
+# Permite acesso a todos os bots
 User-agent: *
 Allow: /
-Allow: /index.html
-Allow: /historia.html
-Allow: /imagens/
 
-# Bloquear arquivos desnecessários
-Disallow: /cgi-bin/
-Disallow: /*.php$
+# Bloqueia acesso a diretórios administrativos e arquivos temporários
 Disallow: /admin/
+Disallow: /private/
+Disallow: /backup/
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: *.php$
+Disallow: /cgi-bin/
 
-# Permitir todos os bots principais
+# Permite acesso às imagens (importante para Google Images)
+Allow: /imagens/
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.gif
+Allow: *.webp
+Allow: *.svg
+
+# Permite acesso aos recursos CSS e JavaScript
+Allow: *.css
+Allow: *.js
+
+# Sitemap
+Sitemap: https://www.ardefa.com.br/sitemap.xml
+
+# Bots específicos - configuração otimizada
+
+# Google
 User-agent: Googlebot
 Allow: /
 
 User-agent: Googlebot-Image
 Allow: /imagens/
 
+# Bing
 User-agent: Bingbot
 Allow: /
 
+# Yahoo
 User-agent: Slurp
 Allow: /
 
-User-agent: DuckDuckBot
+# Yandex
+User-agent: Yandex
 Allow: /
 
+# Baidu
 User-agent: Baiduspider
 Allow: /
 
-# Sitemap
-Sitemap: https://www.ardefa.com.br/sitemap.xml
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Crawl-delay para evitar sobrecarga do servidor
+Crawl-delay: 1
+
+# Bloqueia bots maliciosos e scrapers conhecidos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
