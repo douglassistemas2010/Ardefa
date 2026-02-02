@@ -841,15 +841,50 @@ header.scrolled {
 
 
 @media (max-width: 768px) {
+    .lightbox-img{
+        max-width: 95%;
+        max-height: 80%;
+    }
+    
     .lightbox-prev, .lightbox-next {
-        font-size: 2rem;
-        padding: 0 10px;
+        font-size: 2.5rem;
+        padding: 10px 15px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .lightbox-prev {
+        left: 10px;
+    }
+    
+    .lightbox-next {
+        right: 10px;
     }
     
     .lightbox-close {
-        font-size: 2rem;
+        font-size: 2.5rem;
         top: 10px;
-        right: 15px;
+        right: 10px;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+    
+    .lightbox-caption {
+        bottom: 20px;
+        font-size: 0.85rem;
+        padding: 10px 20px;
+        max-width: 85%;
     }
 }
 
@@ -1612,7 +1647,7 @@ header.scrolled {
 <ul>
 <li><i class="fas fa-map-marker-alt"></i> Rodovia PR 364, Linha Alvorada - Palotina/PR</li>
 <li><i class="fas fa-phone"></i> (44) 3649-1417</li>
-<li><i class="fas fa-envelope"></i> <a href="mailto:palotina@embalagensvazias.org.br" style="color:#aaa;text-decoration:none;">palotina@embalagensvazias.org.br</a></li>
+<li><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection#c1b1a0adaeb5a8afa081a4aca3a0ada0a6a4afb2b7a0bba8a0b2efaeb3a6efa3b3" style="color:#aaa;text-decoration:none;"><span class="__cf_email__" data-cfemail="9eeefff2f1eaf7f0ffdefbf3fcfff2fff9fbf0ede8ffe4f7ffedb0f1ecf9b0fcec">[email&#160;protected]</span></a></li>
 </ul>
 </div>
 <div class="footer-col">
@@ -1652,7 +1687,7 @@ header.scrolled {
 <img alt="" class="lightbox-img" src=""/>
 <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 document.addEventListener('DOMContentLoaded', function () {
   const galleryImages = document.querySelectorAll('.galeria-img');
   const lightbox = document.getElementById('lightbox');
@@ -1698,13 +1733,43 @@ document.addEventListener('DOMContentLoaded', function () {
   prevBtn.addEventListener('click', showPrev);
 
   lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox){
+    if(e.target === lightbox) {
       closeLightbox();
     }
   });
 
-  document.addEventListener('keydown', function(e){
-    if(!lightbox.classList.contains('active')) return;
-    if(e.key === 'Escape') closeLightbox();
-    if(e.key === 'ArrowRight') showNext();
-    if(e.key === 'ArrowL
+  // Navegação por teclado
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+
+  // Suporte a gestos touch para mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, false);
+  
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, false);
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchEndX < touchStartX - swipeThreshold) {
+      showNext(); // Swipe left = próxima
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+      showPrev(); // Swipe right = anterior
+    }
+  }
+});
+</script>
+</body>
+</html> 
